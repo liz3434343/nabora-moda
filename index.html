@@ -1,243 +1,1316 @@
-// PRODUCTOS POR DEFECTO (si no hay nada guardado en localStorage)
-const productosDefault = [
-  {n:"Top Poliéster Blanco",p:"$20",i:"top-blanco.jpg"},
-  {n:"Chaqueta Cuero Vegano",p:"$40",i:"chaqueta-cuero.jpg"},
-  {n:"Pantalón de Tela",p:"$30",i:"pantalon-tela.jpg"},
-  {n:"Gafas Negras",p:"$20",i:"gafas-negras.jpg"},
-  {n:"Botas Cortas",p:"$50",i:"botas-cortas.jpg"},
-  {n:"Boina",p:"$15",i:"boina.jpg"},
-  {n:"Bufanda de Seda",p:"$20",i:"bufanda-seda.jpg"},
-  {n:"Falda Bordada Hojas",p:"$34",i:"falda-hojas.jpg"},
-  {n:"Botas Largas Tacón",p:"$75",i:"botas-largas.jpg"},
-  {n:"Top Gris Bordado",p:"$35",i:"top-bordado.jpg"},
-  {n:"Cartera de Perlas",p:"$250",i:"cartera-perlas.jpg"},
-  {n:"Cartera Perlas + Cuero",p:"$350",i:"cartera-cuero.jpg"}
-];
-
-// CARGAR PRODUCTOS (desde localStorage o los de defecto)
-const productos = JSON.parse(localStorage.getItem('nabora_productos') || 'null') || productosDefault;
-
-// RENDERIZAR PRODUCTOS
-document.getElementById('grid').innerHTML = productos.map(p => `
-  <div class="producto">
-    <div class="producto-img">
-      <img src="${p.i.startsWith('data:') ? p.i : 'img/' + p.i}" alt="${p.n}" loading="lazy">
-    </div>
-    <div class="producto-info">
-      <h3 class="producto-nombre">${p.n}</h3>
-      <p class="producto-precio">${p.p}</p>
-      <button class="btn-comprar">Comprar</button>
-    </div>
-  </div>
-`).join('');
-
-// CARRUSEL
-let slideActual = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.hero-dots button');
-function irASlide(n){
-  slides.forEach(s => s.classList.remove('active'));
-  dots.forEach(d => d.classList.remove('active'));
-  slides[n].classList.add('active');
-  dots[n].classList.add('active');
-  slideActual = n;
-}
-setInterval(() => {
-  slideActual = (slideActual + 1) % slides.length;
-  irASlide(slideActual);
-}, 5000);
-
-// TABS
-function cambiarTab(e, id){
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-  e.target.classList.add('active');
-  document.getElementById(id).classList.add('active');
-}
-
-// MENÚ MÓVIL
-document.getElementById('menuToggle').onclick = () => {
-  document.getElementById('nav').classList.toggle('open');
-};
-
-// CHAT
-const WORKER = "https://nabora-ai.lizzzzzzzzzzzznabiiiiiiiiiiiii.workers.dev/";
-const chatWin = document.getElementById('chatWindow');
-const chatToggle = document.getElementById('chatToggle');
-chatToggle.onclick = () => {
-  chatWin.classList.add('open');
-  chatToggle.style.display = 'none';
-};
-document.getElementById('chatClose').onclick = () => {
-  chatWin.classList.remove('open');
-  chatToggle.style.display = 'flex';
-};
-document.getElementById('userInput').addEventListener('keypress', e => {
-  if (e.key === 'Enter') sendMessage();
-});
-function addMsg(text, sender){
-  const chat = document.getElementById('chat');
-  const m = document.createElement('div');
-  m.className = 'message ' + sender;
-  m.innerHTML = '<div class="bubble">' + text + '</div>';
-  chat.appendChild(m);
-  chat.scrollTop = chat.scrollHeight;
-  return m.querySelector('.bubble');
-}
-async function sendMessage(){
-  const input = document.getElementById('userInput');
-  const text = input.value.trim();
-  if (!text) return;
-  addMsg(text, 'user');
-  input.value = '';
-  const bubble = addMsg('...', 'bot');
-  try {
-    const r = await fetch(WORKER, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({message: text})
-    });
-    const data = await r.json();
-    bubble.textContent = data.answer || data.response || 'Lo siento, no pude responder.';
-  } catch(e) {
-    bubble.textContent = '⚠️ Error de conexión.';
-    console.error(e);
-  }
-}
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin NABORA</title>
+
+<title>NABORA — Colección Otoño 2026</title>
+
 <style>
-:root{--f:#F5EFE6;--n:#1A1A1A;--a:#8B7355;--b:#FFF;--g:#E8E0D5}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Georgia,serif;background:var(--f);color:var(--n);padding:20px}
-.login{max-width:400px;margin:80px auto;background:var(--b);padding:40px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.1)}
-.login h1{letter-spacing:5px;margin-bottom:30px;font-weight:400}
-.login input{width:100%;padding:12px;border:1px solid var(--g);margin-bottom:15px;font-size:14px;font-family:inherit;background:var(--f)}
-.login button{width:100%;padding:14px;background:var(--n);color:var(--b);letter-spacing:2px;text-transform:uppercase;font-size:13px}
-.panel{max-width:900px;margin:0 auto;display:none}
-.panel.on{display:block}
-.panel h1{letter-spacing:4px;margin-bottom:24px;font-weight:400;text-align:center}
-.card{background:var(--b);padding:20px;margin-bottom:16px;display:grid;grid-template-columns:100px 1fr;gap:16px;align-items:center}
-.card img{width:100%;height:100px;object-fit:cover;background:var(--g)}
-.card input{width:100%;padding:8px;border:1px solid var(--g);font-family:inherit;margin-bottom:8px;font-size:14px;background:var(--f)}
-.card .del{background:#c0392b;color:white;padding:8px 16px;font-size:12px;letter-spacing:1px}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0;justify-content:center}
-.actions button{padding:12px 24px;background:var(--n);color:var(--b);font-size:13px;letter-spacing:2px;text-transform:uppercase}
-.actions button.alt{background:var(--a)}
-.actions button.exit{background:#c0392b}
-.info{text-align:center;font-size:12px;color:#888;margin-top:20px}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Georgia,"Times New Roman",serif;
+    background:#f6f1e9;
+    color:#191714;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 6%;
+    background:rgba(246,241,233,.96);
+    border-bottom:1px solid #ddd4c8;
+    backdrop-filter:blur(12px);
+}
+
+.logo{
+    font-size:25px;
+    letter-spacing:8px;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+nav a{
+    color:#191714;
+    text-decoration:none;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    letter-spacing:1.5px;
+}
+
+nav a:hover{
+    opacity:.5;
+}
+
+.cart{
+    cursor:pointer;
+    font-family:Arial,sans-serif;
+    font-size:12px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:700px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:80px 20px;
+    background:
+    linear-gradient(rgba(246,241,233,.70),rgba(246,241,233,.90)),
+    radial-gradient(circle at center,#d8c6af,#f6f1e9 60%);
+}
+
+.hero-small{
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    letter-spacing:5px;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:clamp(60px,11vw,130px);
+    font-weight:normal;
+    letter-spacing:15px;
+}
+
+.hero-season{
+    font-size:25px;
+    letter-spacing:5px;
+    margin-top:10px;
+}
+
+.hero p{
+    max-width:600px;
+    margin:30px auto;
+    font-family:Arial,sans-serif;
+    color:#706960;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.hero-button{
+    display:inline-block;
+    padding:16px 35px;
+    background:#191714;
+    color:white;
+    text-decoration:none;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    letter-spacing:2px;
+    transition:.3s;
+}
+
+.hero-button:hover{
+    transform:translateY(-4px);
+    background:#463d34;
+}
+
+/* =========================
+   TITLES
+========================= */
+
+.section{
+    padding:100px 7%;
+}
+
+.section-title{
+    text-align:center;
+    font-size:45px;
+    font-weight:normal;
+}
+
+.section-subtitle{
+    text-align:center;
+    color:#756e66;
+    font-family:Arial,sans-serif;
+    font-size:13px;
+    margin-top:15px;
+    margin-bottom:50px;
+}
+
+/* =========================
+   COLLECTION INTRO
+========================= */
+
+.collection-intro{
+    text-align:center;
+    padding:100px 20px 50px;
+}
+
+.collection-intro .mini{
+    font-family:Arial,sans-serif;
+    letter-spacing:4px;
+    font-size:10px;
+    margin-bottom:20px;
+}
+
+.collection-intro h2{
+    font-size:50px;
+    font-weight:normal;
+}
+
+.collection-intro p{
+    max-width:650px;
+    margin:20px auto;
+    color:#716a62;
+    font-family:Arial,sans-serif;
+    line-height:1.8;
+}
+
+/* =========================
+   FILTERS
+========================= */
+
+.filters{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:45px;
+}
+
+.filter{
+    padding:11px 20px;
+    background:transparent;
+    border:1px solid #cfc5b8;
+    cursor:pointer;
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:1px;
+    transition:.25s;
+}
+
+.filter:hover,
+.filter.active{
+    background:#191714;
+    color:white;
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.products{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+}
+
+.product{
+    background:#fffdf9;
+    border:1px solid #ded5c9;
+    overflow:hidden;
+    transition:.35s;
+    position:relative;
+}
+
+.product:hover{
+    transform:translateY(-7px);
+    box-shadow:0 18px 45px rgba(0,0,0,.10);
+}
+
+.product-image{
+    height:300px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#eee4d8,#d8c7b3);
+    font-size:70px;
+    position:relative;
+}
+
+.product-badge{
+    position:absolute;
+    top:12px;
+    left:12px;
+    background:#191714;
+    color:white;
+    padding:7px 10px;
+    font-family:Arial,sans-serif;
+    font-size:8px;
+    letter-spacing:1px;
+}
+
+.product-info{
+    padding:20px;
+}
+
+.product-category{
+    font-family:Arial,sans-serif;
+    color:#8b8176;
+    font-size:9px;
+    letter-spacing:2px;
+    margin-bottom:8px;
+}
+
+.product h3{
+    font-size:19px;
+    font-weight:normal;
+    line-height:1.3;
+    margin-bottom:10px;
+}
+
+.product-description{
+    color:#756e66;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    line-height:1.6;
+    min-height:52px;
+}
+
+.price{
+    font-family:Arial,sans-serif;
+    font-size:16px;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+.product-button{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    border:none;
+    background:#191714;
+    color:white;
+    cursor:pointer;
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    letter-spacing:1.5px;
+    transition:.25s;
+}
+
+.product-button:hover{
+    background:#4a4036;
+}
+
+/* =========================
+   HANDBAGS
+========================= */
+
+.handbags{
+    background:#1a1714;
+    color:white;
+}
+
+.handbags .section-subtitle{
+    color:#bdb4aa;
+}
+
+.handbag-grid{
+    max-width:1050px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:30px;
+}
+
+.handbag{
+    background:#24201c;
+    border:1px solid #4a433c;
+    transition:.35s;
+    overflow:hidden;
+}
+
+.handbag:hover{
+    transform:translateY(-8px);
+    border-color:#b8a795;
+}
+
+.handbag-image{
+    height:400px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:radial-gradient(circle,#4a4035,#201c18);
+    font-size:100px;
+}
+
+.handbag-info{
+    padding:30px;
+}
+
+.handbag-label{
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    letter-spacing:3px;
+    color:#b9aa99;
+}
+
+.handbag h3{
+    font-size:27px;
+    font-weight:normal;
+    margin:12px 0;
+}
+
+.handbag p{
+    color:#c9c0b7;
+    font-family:Arial,sans-serif;
+    font-size:12px;
+    line-height:1.8;
+}
+
+.handbag-price{
+    font-family:Arial,sans-serif;
+    font-size:20px;
+    margin-top:18px;
+}
+
+.handbag button{
+    margin-top:20px;
+    padding:13px 22px;
+    background:white;
+    color:#191714;
+    border:none;
+    cursor:pointer;
+    font-family:Arial,sans-serif;
+    font-size:9px;
+    letter-spacing:1px;
+}
+
+/* =========================
+   ASSISTANT
+========================= */
+
+.ai{
+    padding:100px 20px;
+}
+
+.chat-box{
+    max-width:760px;
+    margin:auto;
+    background:white;
+    border:1px solid #ddd5ca;
+    box-shadow:0 20px 60px rgba(0,0,0,.08);
+}
+
+.chat-header{
+    padding:20px;
+    background:#191714;
+    color:white;
+    font-family:Arial,sans-serif;
+    font-size:11px;
+    letter-spacing:2px;
+}
+
+.messages{
+    height:350px;
+    overflow-y:auto;
+    padding:25px;
+    font-family:Arial,sans-serif;
+}
+
+.message{
+    max-width:80%;
+    padding:13px 16px;
+    margin-bottom:15px;
+    line-height:1.6;
+    font-size:13px;
+}
+
+.bot{
+    background:#f0e9df;
+    margin-right:auto;
+}
+
+.user{
+    background:#191714;
+    color:white;
+    margin-left:auto;
+}
+
+.chat-input{
+    display:flex;
+    border-top:1px solid #ddd5ca;
+}
+
+.chat-input input{
+    flex:1;
+    border:none;
+    outline:none;
+    padding:18px;
+    font-family:Arial,sans-serif;
+}
+
+.chat-input button{
+    border:none;
+    background:#191714;
+    color:white;
+    padding:0 25px;
+    cursor:pointer;
+}
+
+/* =========================
+   CART DRAWER
+========================= */
+
+.cart-panel{
+    position:fixed;
+    right:-420px;
+    top:0;
+    width:390px;
+    max-width:90%;
+    height:100vh;
+    background:#fffdf9;
+    z-index:3000;
+    box-shadow:-10px 0 40px rgba(0,0,0,.15);
+    transition:.4s;
+    padding:30px;
+    overflow-y:auto;
+}
+
+.cart-panel.open{
+    right:0;
+}
+
+.cart-panel h2{
+    font-weight:normal;
+    font-size:28px;
+    margin-bottom:25px;
+}
+
+.close-cart{
+    float:right;
+    border:none;
+    background:none;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.cart-item{
+    padding:15px 0;
+    border-bottom:1px solid #ddd5ca;
+}
+
+.cart-item h4{
+    font-weight:normal;
+    font-size:15px;
+}
+
+.cart-item p{
+    font-family:Arial,sans-serif;
+    font-size:12px;
+    margin-top:7px;
+}
+
+.cart-total{
+    margin-top:30px;
+    font-family:Arial,sans-serif;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.checkout{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    background:#191714;
+    color:white;
+    cursor:pointer;
+    letter-spacing:1px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    background:#191714;
+    color:#bdb5ac;
+    text-align:center;
+    padding:45px;
+    font-family:Arial,sans-serif;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .handbag-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    nav ul{
+        display:none;
+    }
+
+    .products{
+        grid-template-columns:1fr;
+    }
+
+    .section{
+        padding:70px 5%;
+    }
+
+    .hero h1{
+        letter-spacing:8px;
+    }
+
+    .hero-season{
+        font-size:18px;
+    }
+
+    .handbag-image{
+        height:300px;
+    }
+}
+
 </style>
 </head>
+
 <body>
 
-<div class="login" id="login">
-  <h1>NABORA</h1>
-  <p style="margin-bottom:20px;font-size:13px;color:#888">Panel de Administración</p>
-  <input type="password" id="pass" placeholder="Contraseña" onkeypress="if(event.key==='Enter')entrar()">
-  <button onclick="entrar()">Entrar</button>
-  <p id="error" style="color:#c0392b;margin-top:15px;font-size:13px"></p>
+<!-- =========================
+     NAV
+========================= -->
+
+<nav>
+
+<div class="logo">NABORA</div>
+
+<ul>
+<li><a href="#inicio">INICIO</a></li>
+<li><a href="#coleccion">COLECCIÓN</a></li>
+<li><a href="#carteras">CARTERAS</a></li>
+<li><a href="#asistente">NABORA AI</a></li>
+</ul>
+
+<div class="cart" onclick="openCart()">
+🛍️ CARRITO (<span id="cartCount">0</span>)
 </div>
 
-<div class="panel" id="panel">
-  <h1>Panel NABORA</h1>
-  <div class="actions">
-    <button class="alt" onclick="agregar()">+ Agregar Producto</button>
-    <button onclick="guardar()">💾 Guardar Cambios</button>
-    <button class="exit" onclick="salir()">Salir</button>
-  </div>
-  <div id="lista"></div>
-  <div class="actions">
-    <button onclick="guardar()">💾 Guardar Cambios</button>
-  </div>
-  <p class="info">Los cambios se guardan en este navegador.</p>
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="inicio">
+
+<div>
+
+<div class="hero-small">
+NABORA PRESENTA
 </div>
 
-<script src="admin.js"></script>
-</body>
-</html>
-// CONTRASEÑA (cámbiala por la que quieras)
-const PASSWORD = "nabora2026";
+<h1>NABORA</h1>
 
-const productosDefault = [
-  {n:"Top Poliéster Blanco",p:"$20",i:"top-blanco.jpg"},
-  {n:"Chaqueta Cuero Vegano",p:"$40",i:"chaqueta-cuero.jpg"},
-  {n:"Pantalón de Tela",p:"$30",i:"pantalon-tela.jpg"},
-  {n:"Gafas Negras",p:"$20",i:"gafas-negras.jpg"},
-  {n:"Botas Cortas",p:"$50",i:"botas-cortas.jpg"},
-  {n:"Boina",p:"$15",i:"boina.jpg"},
-  {n:"Bufanda de Seda",p:"$20",i:"bufanda-seda.jpg"},
-  {n:"Falda Bordada Hojas",p:"$34",i:"falda-hojas.jpg"},
-  {n:"Botas Largas Tacón",p:"$75",i:"botas-largas.jpg"},
-  {n:"Top Gris Bordado",p:"$35",i:"top-bordado.jpg"},
-  {n:"Cartera de Perlas",p:"$250",i:"cartera-perlas.jpg"},
-  {n:"Cartera Perlas + Cuero",p:"$350",i:"cartera-cuero.jpg"}
+<div class="hero-season">
+COLECCIÓN OTOÑO 2026
+</div>
+
+<p>
+Una colección inspirada en la elegancia,
+la textura y los tonos de otoño.
+Descubre piezas seleccionadas para expresar
+tu estilo y tu esencia.
+</p>
+
+<a href="#coleccion" class="hero-button">
+DESCUBRIR COLECCIÓN
+</a>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     INTRO
+========================= -->
+
+<section class="collection-intro">
+
+<div class="mini">
+BY NABORA · AUTUMN 2026
+</div>
+
+<h2>Otoño 2026</h2>
+
+<p>
+Una interpretación contemporánea del otoño:
+texturas suaves, tonos profundos, siluetas elegantes
+y accesorios diseñados para completar cada look.
+</p>
+
+</section>
+
+
+<!-- =========================
+     PRODUCTOS
+========================= -->
+
+<section class="section" id="coleccion">
+
+<h2 class="section-title">
+LA COLECCIÓN
+</h2>
+
+<p class="section-subtitle">
+Piezas seleccionadas · Otoño 2026 by NABORA
+</p>
+
+
+<div class="filters">
+
+<button class="filter active" onclick="filterProducts('all',this)">
+TODOS
+</button>
+
+<button class="filter" onclick="filterProducts('ropa',this)">
+ROPA
+</button>
+
+<button class="filter" onclick="filterProducts('accesorios',this)">
+ACCESORIOS
+</button>
+
+<button class="filter" onclick="filterProducts('calzado',this)">
+CALZADO
+</button>
+
+</div>
+
+
+<div class="products" id="products"></div>
+
+</section>
+
+
+<!-- =========================
+     CARTERAS
+========================= -->
+
+<section class="section handbags" id="carteras">
+
+<h2 class="section-title">
+CARTERAS NABORA
+</h2>
+
+<p class="section-subtitle">
+Dos piezas especiales de la colección Otoño 2026.
+</p>
+
+
+<div class="handbag-grid">
+
+
+<div class="handbag">
+
+<div class="handbag-image">
+👜
+</div>
+
+<div class="handbag-info">
+
+<div class="handbag-label">
+NABORA EXCLUSIVE
+</div>
+
+<h3>
+Cartera de piedras marrones
+</h3>
+
+<p>
+Una cartera de carácter sofisticado,
+decorada con piedras en tonos marrones
+que aportan profundidad y elegancia.
+Una pieza pensada para elevar looks
+de día y de noche.
+</p>
+
+<div class="handbag-price">
+$250
+</div>
+
+<button onclick="addToCart('Cartera de piedras marrones',250)">
+AÑADIR AL CARRITO
+</button>
+
+</div>
+
+</div>
+
+
+<div class="handbag">
+
+<div class="handbag-image">
+🤎👜
+</div>
+
+<div class="handbag-info">
+
+<div class="handbag-label">
+NABORA SIGNATURE
+</div>
+
+<h3>
+Cartera de perlas con cuero vegano
+</h3>
+
+<p>
+Una combinación entre cuero vegano
+y delicadas perlas de cristal.
+Una pieza elegante y contemporánea
+creada para convertirse en el punto
+focal de cualquier outfit.
+</p>
+
+<div class="handbag-price">
+$350
+</div>
+
+<button onclick="addToCart('Cartera de perlas con cuero vegano',350)">
+AÑADIR AL CARRITO
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     IA
+========================= -->
+
+<section class="ai" id="asistente">
+
+<h2 class="section-title">
+NABORA AI
+</h2>
+
+<p class="section-subtitle">
+Tu asistente personal de moda.
+</p>
+
+
+<div class="chat-box">
+
+<div class="chat-header">
+NABORA ✦ PERSONAL STYLIST
+</div>
+
+
+<div class="messages" id="messages">
+
+<div class="message bot">
+Hola ✨ Soy NABORA.
+<br><br>
+Puedo ayudarte a elegir un outfit,
+combinar colores, carteras, zapatos
+y prendas de la colección Otoño 2026.
+</div>
+
+</div>
+
+
+<div class="chat-input">
+
+<input
+id="userInput"
+type="text"
+placeholder="Pregúntale algo a NABORA..."
+onkeydown="if(event.key==='Enter') sendMessage()"
+>
+
+<button onclick="sendMessage()">
+ENVIAR
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     CARRITO
+========================= -->
+
+<div class="cart-panel" id="cartPanel">
+
+<button class="close-cart" onclick="closeCart()">
+×
+</button>
+
+<h2>
+Tu carrito
+</h2>
+
+<div id="cartItems">
+Tu carrito está vacío.
+</div>
+
+<div class="cart-total">
+Total: $<span id="cartTotal">0</span>
+</div>
+
+<button class="checkout" onclick="checkout()">
+FINALIZAR PEDIDO
+</button>
+
+</div>
+
+
+<footer>
+
+NABORA
+
+<br><br>
+
+COLECCIÓN OTOÑO 2026 · BY NABORA
+
+</footer>
+
+
+<script>
+
+/* =========================
+   PRODUCTOS
+========================= */
+
+const products = [
+
+{
+name:"Poliéster blanco",
+price:20,
+category:"ropa",
+icon:"🤍",
+description:"Pieza blanca minimalista y versátil para crear looks limpios y sofisticados."
+},
+
+{
+name:"Chaqueta de cuero vegano",
+price:40,
+category:"ropa",
+icon:"🧥",
+description:"Chaqueta de cuero vegano ideal para aportar estructura y carácter al look."
+},
+
+{
+name:"Pantalón de tela",
+price:30,
+category:"ropa",
+icon:"👖",
+description:"Pantalón de corte elegante y cómodo, perfecto para combinar con tonos otoñales."
+},
+
+{
+name:"Gafas negras",
+price:20,
+category:"accesorios",
+icon:"🕶️",
+description:"Accesorio clásico que aporta un toque moderno y sofisticado."
+},
+
+{
+name:"Botas cortas",
+price:50,
+category:"calzado",
+icon:"🥾",
+description:"Botas cortas perfectas para looks casuales y urbanos de otoño."
+},
+
+{
+name:"Boina",
+price:15,
+category:"accesorios",
+icon:"🧢",
+description:"Una boina elegante para complementar tus outfits de temporada."
+},
+
+{
+name:"Bufanda de seda",
+price:20,
+category:"accesorios",
+icon:"🧣",
+description:"Bufanda ligera de seda para aportar textura y elegancia."
+},
+
+{
+name:"Falda con estampado de hojas de otoño",
+price:34,
+category:"ropa",
+icon:"🍂",
+description:"Falda inspirada en las hojas de otoño, diseñada para destacar en cualquier look."
+},
+
+{
+name:"Botas largas con tacón estilo otoño",
+price:75,
+category:"calzado",
+icon:"👢",
+description:"Botas largas con tacón que combinan elegancia y la esencia de la temporada."
+},
+
+{
+name:"Top gris con estampado de hojas de otoño",
+price:35,
+category:"ropa",
+icon:"🩶",
+description:"Top gris con detalles inspirados en hojas otoñales."
+}
+
 ];
 
-let productos = JSON.parse(localStorage.getItem('nabora_productos') || 'null') || [...productosDefault];
 
-function entrar(){
-  const p = document.getElementById('pass').value;
-  if (p === PASSWORD){
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('panel').classList.add('on');
-    render();
-  } else {
-    document.getElementById('error').textContent = 'Contraseña incorrecta';
-  }
+let cart=[];
+
+
+/* =========================
+   MOSTRAR PRODUCTOS
+========================= */
+
+function displayProducts(category="all"){
+
+const container=document.getElementById("products");
+
+container.innerHTML="";
+
+const filtered=
+category==="all"
+?products
+:products.filter(p=>p.category===category);
+
+
+filtered.forEach(product=>{
+
+const card=document.createElement("article");
+
+card.className="product";
+
+card.innerHTML=`
+
+<div class="product-image">
+
+<span class="product-badge">
+OTOÑO 2026
+</span>
+
+${product.icon}
+
+</div>
+
+<div class="product-info">
+
+<div class="product-category">
+${product.category}
+</div>
+
+<h3>
+${product.name}
+</h3>
+
+<p class="product-description">
+${product.description}
+</p>
+
+<div class="price">
+$${product.price}
+</div>
+
+<button
+class="product-button"
+onclick="addToCart('${product.name}',${product.price})"
+>
+AÑADIR AL CARRITO
+</button>
+
+</div>
+`;
+
+container.appendChild(card);
+
+});
+
 }
 
-function salir(){
-  location.reload();
+
+displayProducts();
+
+
+/* =========================
+   FILTROS
+========================= */
+
+function filterProducts(category,button){
+
+document
+.querySelectorAll(".filter")
+.forEach(btn=>btn.classList.remove("active"));
+
+button.classList.add("active");
+
+displayProducts(category);
+
 }
 
-function render(){
-  document.getElementById('lista').innerHTML = productos.map((p, i) => `
-    <div class="card">
-      <div>
-        <img src="${p.i.startsWith('data:') ? p.i : 'img/' + p.i}" alt="">
-        <input type="file" accept="image/*" onchange="cambiarFoto(event, ${i})" style="margin-top:6px;font-size:11px;padding:4px">
-      </div>
-      <div>
-        <input type="text" value="${p.n}" placeholder="Nombre" onchange="editar(${i},'n',this.value)">
-        <input type="text" value="${p.p}" placeholder="Precio" onchange="editar(${i},'p',this.value)">
-        <button class="del" onclick="borrar(${i})">Eliminar</button>
-      </div>
-    </div>
-  `).join('');
+
+/* =========================
+   CARRITO
+========================= */
+
+function addToCart(name,price){
+
+cart.push({
+name:name,
+price:price
+});
+
+updateCart();
+
+openCart();
+
 }
 
-function editar(i, campo, valor){
-  productos[i][campo] = valor;
+
+function updateCart(){
+
+document.getElementById("cartCount").textContent=
+cart.length;
+
+
+const container=
+document.getElementById("cartItems");
+
+
+if(cart.length===0){
+
+container.innerHTML=
+"Tu carrito está vacío.";
+
+}else{
+
+container.innerHTML="";
+
+cart.forEach((item,index)=>{
+
+const div=
+document.createElement("div");
+
+div.className="cart-item";
+
+div.innerHTML=`
+
+<h4>${item.name}</h4>
+
+<p>$${item.price}</p>
+
+<button
+onclick="removeFromCart(${index})"
+style="
+margin-top:8px;
+border:none;
+background:none;
+cursor:pointer;
+font-size:11px;
+"
+>
+Eliminar
+</button>
+
+`;
+
+container.appendChild(div);
+
+});
+
 }
 
-function borrar(i){
-  if (confirm('¿Eliminar este producto?')){
-    productos.splice(i, 1);
-    render();
-  }
+
+const total=
+cart.reduce((sum,item)=>sum+item.price,0);
+
+document.getElementById("cartTotal").textContent=
+total;
+
 }
 
-function agregar(){
-  productos.push({n:"Nuevo Producto",p:"$0",i:"placeholder.jpg"});
-  render();
+
+function removeFromCart(index){
+
+cart.splice(index,1);
+
+updateCart();
+
 }
 
-function cambiarFoto(e, i){
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    productos[i].i = reader.result;
-    render();
-  };
-  reader.readAsDataURL(file);
+
+function openCart(){
+
+document
+.getElementById("cartPanel")
+.classList.add("open");
+
 }
 
-function guardar(){
-  localStorage.setItem('nabora_productos', JSON.stringify(productos));
-  alert('✅ Cambios guardados. Ve a la página principal para verlos.');
+
+function closeCart(){
+
+document
+.getElementById("cartPanel")
+.classList.remove("open");
+
 }
+
+
+function checkout(){
+
+if(cart.length===0){
+
+alert("Tu carrito está vacío.");
+
+return;
+
+}
+
+alert(
+"✨ Gracias por elegir NABORA. " +
+"El sistema de pedidos estará disponible próximamente."
+);
+
+}
+
+
+/* =========================
+   ASISTENTE
+========================= */
+
+function sendMessage(){
+
+const input=
+document.getElementById("userInput");
+
+const messages=
+document.getElementById("messages");
+
+const text=
+input.value.trim();
+
+if(!text)return;
+
+
+const user=
+document.createElement("div");
+
+user.className="message user";
+
+user.textContent=text;
+
+messages.appendChild(user);
+
+input.value="";
+
+
+setTimeout(()=>{
+
+const bot=
+document.createElement("div");
+
+bot.className="message bot";
+
+const lower=text.toLowerCase();
+
+let response=
+"✨ Para crear tu look puedo ayudarte a combinar prendas de la colección Otoño 2026.";
+
+
+if(lower.includes("cartera")){
+
+response=
+"👜 Para un look elegante, la cartera de perlas con cuero vegano de $350 puede convertirse en el punto focal del outfit. Para algo más sofisticado y cálido, la cartera de piedras marrones de $250 combina muy bien con tonos tierra.";
+
+}
+
+
+else if(lower.includes("otoño")){
+
+response=
+"🍂 Para otoño te recomiendo combinar la chaqueta de cuero vegano de $40 con el pantalón de tela de $30, las botas cortas de $50 y la bufanda de seda de $20.";
+
+}
+
+
+else if(lower.includes("fiesta")){
+
+response=
+"✨ Para una fiesta puedes combinar la falda con estampado de hojas de otoño de $34, el top gris de $35, las botas largas con tacón de $75 y la cartera de perlas con cuero vegano de $350.";
+
+}
+
+
+else if(lower.includes("casual")){
+
+response=
+"🤎 Para un look casual puedes combinar la chaqueta de cuero vegano, el pantalón de tela, las botas cortas y las gafas negras.";
+
+}
+
+
+bot.innerHTML=response;
+
+messages.appendChild(bot);
+
+messages.scrollTop=
+messages.scrollHeight;
+
+},600);
+
+
+messages.scrollTop=
+messages.scrollHeight;
+
+}
+
+</script>
+
+</body>
+</html>
+```
