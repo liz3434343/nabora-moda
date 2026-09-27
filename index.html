@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -23,10 +22,6 @@ body{
 button,input,textarea,select{
     font-family:Arial,sans-serif;
 }
-
-/* =========================
-   NAVBAR
-========================= */
 
 nav{
     height:75px;
@@ -76,10 +71,6 @@ nav{
     background:#191613;
     color:white;
 }
-
-/* =========================
-   CARRUSEL
-========================= */
 
 .hero{
     height:calc(100vh - 75px);
@@ -222,10 +213,6 @@ nav{
     background:white;
 }
 
-/* =========================
-   BANNER
-========================= */
-
 .collection-banner{
     background:#191613;
     color:white;
@@ -246,10 +233,6 @@ nav{
     color:#c5bbb2;
 }
 
-/* =========================
-   SECCIONES
-========================= */
-
 .section{
     padding:90px 6%;
 }
@@ -267,10 +250,6 @@ nav{
     font:10px Arial;
     letter-spacing:3px;
 }
-
-/* =========================
-   FILTROS
-========================= */
 
 .filters{
     display:flex;
@@ -293,10 +272,6 @@ nav{
     background:#191613;
     color:white;
 }
-
-/* =========================
-   PRODUCTOS
-========================= */
 
 .products{
     max-width:1250px;
@@ -383,10 +358,6 @@ nav{
     background:#514840;
 }
 
-/* =========================
-   CARTERAS
-========================= */
-
 .bags{
     background:#191613;
     color:white;
@@ -455,10 +426,6 @@ nav{
     cursor:pointer;
 }
 
-/* =========================
-   IA
-========================= */
-
 .ai-section{
     padding:100px 20px;
 }
@@ -521,10 +488,6 @@ nav{
     cursor:pointer;
 }
 
-/* =========================
-   CARRITO
-========================= */
-
 .cart{
     position:fixed;
     z-index:4000;
@@ -576,10 +539,6 @@ nav{
     font:bold 17px Arial;
 }
 
-/* =========================
-   ADMIN MODAL
-========================= */
-
 .admin-modal{
     display:none;
     position:fixed;
@@ -624,8 +583,6 @@ nav{
     cursor:pointer;
 }
 
-/* LOGIN */
-
 .admin-login{
     max-width:400px;
     margin:40px auto;
@@ -666,8 +623,6 @@ nav{
     font:11px Arial;
 }
 
-/* PANEL */
-
 .admin-panel{
     display:none;
 }
@@ -692,8 +647,6 @@ nav{
     font:11px/1.6 Arial;
     margin-bottom:18px;
 }
-
-/* CARRUSEL ADMIN */
 
 .carousel-editor{
     display:grid;
@@ -727,7 +680,36 @@ nav{
     font-size:10px;
 }
 
-/* EDITOR PRODUCTO */
+.bulk-upload{
+    border:2px dashed #cfc3b9;
+    padding:25px;
+    text-align:center;
+    margin-bottom:20px;
+    background:#faf7f2;
+}
+
+.bulk-upload strong{
+    display:block;
+    margin-bottom:8px;
+    font-size:16px;
+}
+
+.bulk-upload p{
+    margin-bottom:15px;
+}
+
+.bulk-upload input{
+    width:100%;
+    padding:12px;
+    background:white;
+    border:1px solid #ccc;
+}
+
+.bulk-status{
+    margin-top:12px;
+    font:11px Arial;
+    color:#6d625a;
+}
 
 .product-editor{
     border:1px solid #ddd4ca;
@@ -810,8 +792,6 @@ nav{
     margin-bottom:15px;
 }
 
-/* FOOTER */
-
 footer{
     padding:40px;
     text-align:center;
@@ -820,8 +800,6 @@ footer{
     font:10px Arial;
     letter-spacing:2px;
 }
-
-/* RESPONSIVE */
 
 @media(max-width:1050px){
 
@@ -832,6 +810,10 @@ footer{
 }
 
 @media(max-width:700px){
+
+    nav{
+        padding:0 4%;
+    }
 
     .nav-links{
         display:none;
@@ -861,15 +843,15 @@ footer{
         font-size:18px;
     }
 
+    .admin-window{
+        padding:18px;
+    }
+
 }
 </style>
 </head>
 
 <body>
-
-<!-- =========================
-     NAVBAR
-========================= -->
 
 <nav>
 
@@ -896,10 +878,6 @@ ADMIN
 
 </nav>
 
-
-<!-- =========================
-     INICIO / CARRUSEL
-========================= -->
 
 <section class="hero" id="inicio">
 
@@ -939,10 +917,6 @@ DESCUBRIR COLECCIÓN
 </section>
 
 
-<!-- =========================
-     BANNER
-========================= -->
-
 <section class="collection-banner">
 
 <h2>COLECCIÓN OTOÑO 2026</h2>
@@ -951,10 +925,6 @@ DESCUBRIR COLECCIÓN
 
 </section>
 
-
-<!-- =========================
-     PRODUCTOS
-========================= -->
 
 <section class="section" id="productos">
 
@@ -998,10 +968,6 @@ onclick="filterProducts('carteras',this)">
 </section>
 
 
-<!-- =========================
-     CARTERAS
-========================= -->
-
 <section class="section bags" id="carteras">
 
 <h2 class="section-title">
@@ -1043,7 +1009,7 @@ $250
 </div>
 
 <button class="bag-button"
-onclick="addToCart('Cartera de piedras marrones',250)">
+onclick="addBagToCart('Cartera de piedras marrones',250)">
 AÑADIR AL CARRITO
 </button>
 
@@ -1081,7 +1047,7 @@ $350
 </div>
 
 <button class="bag-button"
-onclick="addToCart('Cartera de perlas con cuero vegano',350)">
+onclick="addBagToCart('Cartera de perlas con cuero vegano',350)">
 AÑADIR AL CARRITO
 </button>
 
@@ -1093,10 +1059,6 @@ AÑADIR AL CARRITO
 
 </section>
 
-
-<!-- =========================
-     NABORA AI
-========================= -->
 
 <section class="ai-section" id="asistente">
 
@@ -1143,10 +1105,6 @@ ENVIAR
 </section>
 
 
-<!-- =========================
-     CARRITO
-========================= -->
-
 <div class="cart" id="cart">
 
 <button class="close-cart" onclick="closeCart()">
@@ -1166,10 +1124,6 @@ TOTAL: $<span id="cartTotal">0</span>
 </div>
 
 
-<!-- =========================
-     ADMIN
-========================= -->
-
 <div class="admin-modal" id="adminModal">
 
 <div class="admin-window">
@@ -1187,8 +1141,6 @@ onclick="closeAdmin()">
 
 </div>
 
-
-<!-- LOGIN -->
 
 <div class="admin-login" id="adminLogin">
 
@@ -1216,12 +1168,8 @@ ENTRAR AL PANEL
 </div>
 
 
-<!-- PANEL -->
-
 <div class="admin-panel" id="adminPanel">
 
-
-<!-- CARRUSEL -->
 
 <div class="admin-box">
 
@@ -1242,7 +1190,41 @@ id="carouselEditor">
 </div>
 
 
-<!-- PRODUCTOS -->
+<div class="admin-box">
+
+<h3>
+📸 CARGAR MUCHAS FOTOS
+</h3>
+
+<div class="bulk-upload">
+
+<strong>
+Carga tus 15 fotos de una sola vez
+</strong>
+
+<p>
+Selecciona todas las imágenes que quieras.
+NABORA las asignará automáticamente a los
+productos que todavía no tengan fotografía.
+</p>
+
+<input
+type="file"
+id="bulkPhotos"
+accept="image/*"
+multiple
+onchange="bulkUploadImages(event)"
+>
+
+<div class="bulk-status"
+id="bulkStatus">
+Ninguna foto seleccionada.
+</div>
+
+</div>
+
+</div>
+
 
 <div class="admin-box">
 
@@ -1253,7 +1235,6 @@ id="carouselEditor">
 <p>
 Aquí puedes cambiar el nombre, categoría,
 precio, descripción e imagen de cada producto.
-Los visitantes no pueden editar esta información.
 </p>
 
 <button class="add-product"
@@ -1265,8 +1246,6 @@ onclick="addProduct()">
 
 </div>
 
-
-<!-- CARTERAS -->
 
 <div class="admin-box">
 
@@ -1310,8 +1289,6 @@ onchange="changeBagImage(2,event)"
 </div>
 
 
-<!-- FOOTER -->
-
 <footer>
 
 NABORA · COLECCIÓN OTOÑO 2026 · BY NABORA
@@ -1322,7 +1299,7 @@ NABORA · COLECCIÓN OTOÑO 2026 · BY NABORA
 <script>
 
 /* =====================================================
-   PRODUCTOS INICIALES
+   PRODUCTOS
 ===================================================== */
 
 const defaultProducts = [
@@ -1427,22 +1404,20 @@ image:""
 
 
 /* =====================================================
-   CARGAR DATOS
+   DATOS
 ===================================================== */
 
-let products = JSON.parse(
-localStorage.getItem("NABORA_PRODUCTS")
-);
+let products =
+JSON.parse(localStorage.getItem("NABORA_PRODUCTS")) || null;
 
 if(!Array.isArray(products)){
-    products = defaultProducts;
+    products = JSON.parse(JSON.stringify(defaultProducts));
     saveProducts();
 }
 
 
-let carouselImages = JSON.parse(
-localStorage.getItem("NABORA_CAROUSEL")
-);
+let carouselImages =
+JSON.parse(localStorage.getItem("NABORA_CAROUSEL")) || null;
 
 if(!Array.isArray(carouselImages) ||
 carouselImages.length !== 4){
@@ -1455,7 +1430,7 @@ saveCarousel();
 
 
 /* =====================================================
-   GUARDAR
+   GUARDAR PRODUCTOS
 ===================================================== */
 
 function saveProducts(){
@@ -1466,6 +1441,11 @@ JSON.stringify(products)
 );
 
 }
+
+
+/* =====================================================
+   GUARDAR CARRUSEL
+===================================================== */
 
 function saveCarousel(){
 
@@ -1478,37 +1458,108 @@ JSON.stringify(carouselImages)
 
 
 /* =====================================================
+   COMPRESOR
+===================================================== */
+
+function compressImage(file,maxWidth,quality){
+
+return new Promise(function(resolve,reject){
+
+const reader = new FileReader();
+
+reader.onload = function(e){
+
+const img = new Image();
+
+img.onload = function(){
+
+let width = img.width;
+let height = img.height;
+
+if(width > maxWidth){
+
+height = height * (maxWidth / width);
+width = maxWidth;
+
+}
+
+const canvas =
+document.createElement("canvas");
+
+canvas.width = width;
+canvas.height = height;
+
+const ctx =
+canvas.getContext("2d");
+
+ctx.drawImage(
+img,
+0,
+0,
+width,
+height
+);
+
+resolve(
+canvas.toDataURL(
+"image/jpeg",
+quality
+)
+);
+
+};
+
+img.onerror = reject;
+
+img.src = e.target.result;
+
+};
+
+reader.onerror = reject;
+
+reader.readAsDataURL(file);
+
+});
+
+}
+
+
+/* =====================================================
    CARRUSEL
 ===================================================== */
 
-let currentSlide=0;
+let currentSlide = 0;
 
 function renderCarousel(){
 
-const slides=document.getElementById("slides");
-const dots=document.getElementById("dots");
+const slides =
+document.getElementById("slides");
 
-slides.innerHTML="";
-dots.innerHTML="";
+const dots =
+document.getElementById("dots");
+
+slides.innerHTML = "";
+dots.innerHTML = "";
 
 for(let i=0;i<4;i++){
 
-const slide=document.createElement("div");
+const slide =
+document.createElement("div");
 
-slide.className="slide";
+slide.className = "slide";
 
-if(i===currentSlide){
-    slide.classList.add("active");
+if(i === currentSlide){
+slide.classList.add("active");
 }
 
 if(carouselImages[i]){
 
-slide.innerHTML=
+slide.innerHTML =
 `<img src="${carouselImages[i]}" alt="NABORA">`;
 
 }else{
 
-slide.innerHTML=
+slide.innerHTML =
 `
 <div class="no-slide-image">
 FOTO ${i+1} · SUBIR DESDE ADMIN
@@ -1519,17 +1570,17 @@ FOTO ${i+1} · SUBIR DESDE ADMIN
 
 slides.appendChild(slide);
 
+const dot =
+document.createElement("button");
 
-const dot=document.createElement("button");
+dot.className = "dot";
 
-dot.className="dot";
-
-if(i===currentSlide){
-    dot.classList.add("active");
+if(i === currentSlide){
+dot.classList.add("active");
 }
 
-dot.onclick=function(){
-    goToSlide(i);
+dot.onclick = function(){
+goToSlide(i);
 };
 
 dots.appendChild(dot);
@@ -1541,7 +1592,7 @@ dots.appendChild(dot);
 
 function goToSlide(index){
 
-currentSlide=index;
+currentSlide = index;
 
 renderCarousel();
 
@@ -1552,8 +1603,8 @@ function nextSlide(){
 
 currentSlide++;
 
-if(currentSlide>=4){
-    currentSlide=0;
+if(currentSlide >= 4){
+currentSlide = 0;
 }
 
 renderCarousel();
@@ -1565,19 +1616,14 @@ function previousSlide(){
 
 currentSlide--;
 
-if(currentSlide<0){
-    currentSlide=3;
+if(currentSlide < 0){
+currentSlide = 3;
 }
 
 renderCarousel();
 
 }
 
-
-/*
-   AUTOMÁTICO
-   CADA 4 SEGUNDOS
-*/
 
 setInterval(function(){
 
@@ -1587,37 +1633,40 @@ nextSlide();
 
 
 /* =====================================================
-   ADMIN DEL CARRUSEL
+   EDITOR CARRUSEL
 ===================================================== */
 
 function renderCarouselEditor(){
 
-const editor=
+const editor =
 document.getElementById("carouselEditor");
 
-editor.innerHTML="";
+if(!editor)return;
+
+editor.innerHTML = "";
 
 for(let i=0;i<4;i++){
 
-const card=document.createElement("div");
+const card =
+document.createElement("div");
 
-card.className="carousel-card";
+card.className = "carousel-card";
 
-let preview="";
+let preview = "";
 
 if(carouselImages[i]){
 
-preview=
+preview =
 `<img src="${carouselImages[i]}" alt="">`;
 
 }else{
 
-preview=
+preview =
 `<span>Sin foto</span>`;
 
 }
 
-card.innerHTML=`
+card.innerHTML = `
 
 <strong>Foto ${i+1}</strong>
 
@@ -1640,21 +1689,19 @@ editor.appendChild(card);
 }
 
 
-function uploadCarousel(index,event){
+async function uploadCarousel(index,event){
 
-const file=event.target.files[0];
+const file =
+event.target.files[0];
 
 if(!file)return;
 
+try{
 
-/*
-   Comprimir imagen para evitar errores
-   con almacenamiento del navegador.
-*/
+const result =
+await compressImage(file,1200,0.75);
 
-compressImage(file,1200,0.8,function(result){
-
-carouselImages[index]=result;
+carouselImages[index] = result;
 
 saveCarousel();
 
@@ -1662,66 +1709,132 @@ renderCarousel();
 
 renderCarouselEditor();
 
-});
+}catch(error){
+
+alert("No se pudo cargar la imagen.");
+
+}
 
 }
 
 
 /* =====================================================
-   COMPRESOR DE IMAGEN
+   CARGAR MUCHAS FOTOS
 ===================================================== */
 
-function compressImage(file,maxWidth,quality,callback){
+async function bulkUploadImages(event){
 
-const reader=new FileReader();
+const files =
+Array.from(event.target.files || []);
 
-reader.onload=function(e){
+const status =
+document.getElementById("bulkStatus");
 
-const img=new Image();
+if(!files.length){
 
-img.onload=function(){
+status.textContent =
+"Ninguna foto seleccionada.";
 
-let width=img.width;
-let height=img.height;
-
-if(width>maxWidth){
-
-height=
-height*(maxWidth/width);
-
-width=maxWidth;
+return;
 
 }
 
-const canvas=document.createElement("canvas");
 
-canvas.width=width;
-canvas.height=height;
+/*
+   Busca primero productos sin imagen.
+*/
 
-const ctx=canvas.getContext("2d");
+let availableIndexes = [];
 
-ctx.drawImage(
-img,
-0,
-0,
-width,
-height
-);
+products.forEach(function(product,index){
 
-callback(
-canvas.toDataURL(
-"image/jpeg",
-quality
-)
-);
+if(!product.image){
 
-};
+availableIndexes.push(index);
 
-img.src=e.target.result;
+}
 
-};
+});
 
-reader.readAsDataURL(file);
+
+if(availableIndexes.length === 0){
+
+status.textContent =
+"Todos los productos ya tienen una foto. Agrega más productos si necesitas cargar más imágenes.";
+
+return;
+
+}
+
+
+let loaded = 0;
+let skipped = 0;
+
+status.textContent =
+"Cargando fotos...";
+
+
+for(let i=0;i<files.length;i++){
+
+if(i >= availableIndexes.length){
+
+skipped =
+files.length - i;
+
+break;
+
+}
+
+const file = files[i];
+
+if(!file.type.startsWith("image/")){
+
+continue;
+
+}
+
+try{
+
+const image =
+await compressImage(file,1000,0.72);
+
+const productIndex =
+availableIndexes[i];
+
+products[productIndex].image =
+image;
+
+loaded++;
+
+status.textContent =
+`Cargando ${loaded} de ${files.length}...`;
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+saveProducts();
+
+renderProducts();
+
+renderProductEditors();
+
+
+status.textContent =
+`✅ ${loaded} foto(s) cargada(s) correctamente.` +
+(skipped
+?
+` ${skipped} foto(s) no se asignaron porque no quedan productos sin foto.`
+:
+"");
+
+
+event.target.value = "";
 
 }
 
@@ -1732,37 +1845,35 @@ reader.readAsDataURL(file);
 
 function renderProducts(category="todos"){
 
-const container=
+const container =
 document.getElementById("products");
 
-container.innerHTML="";
+container.innerHTML = "";
 
 products.forEach(function(product,index){
 
 if(
-category!=="todos" &&
-product.category!==category
+category !== "todos" &&
+product.category !== category
 ){
 return;
 }
 
-
-const card=
+const card =
 document.createElement("div");
 
-card.className="product";
+card.className = "product";
 
-
-let imageHTML="";
+let imageHTML = "";
 
 if(product.image){
 
-imageHTML=
-`<img src="${product.image}" alt="">`;
+imageHTML =
+`<img src="${product.image}" alt="${escapeAttribute(product.name)}">`;
 
 }else{
 
-imageHTML=
+imageHTML =
 `
 <div class="placeholder">
 📷<br><br>
@@ -1772,8 +1883,7 @@ FOTO DEL PRODUCTO
 
 }
 
-
-card.innerHTML=`
+card.innerHTML = `
 
 <div class="product-image">
 ${imageHTML}
@@ -1782,7 +1892,7 @@ ${imageHTML}
 <div class="product-info">
 
 <div class="product-category">
-${product.category.toUpperCase()}
+${escapeHTML(product.category.toUpperCase())}
 </div>
 
 <h3 class="product-name">
@@ -1815,7 +1925,8 @@ container.appendChild(card);
 
 function filterProducts(category,button){
 
-document.querySelectorAll(".filter")
+document
+.querySelectorAll(".filter")
 .forEach(function(btn){
 
 btn.classList.remove("active");
@@ -1830,24 +1941,27 @@ renderProducts(category);
 
 
 /* =====================================================
-   EDITOR DE PRODUCTOS
+   EDITORES
 ===================================================== */
 
 function renderProductEditors(){
 
-const container=
+const container =
 document.getElementById("productEditors");
 
-container.innerHTML="";
+if(!container)return;
+
+container.innerHTML = "";
 
 products.forEach(function(product,index){
 
-const editor=
+const editor =
 document.createElement("div");
 
-editor.className="product-editor";
+editor.className =
+"product-editor";
 
-editor.innerHTML=`
+editor.innerHTML = `
 
 <h4>
 Producto ${index+1}
@@ -1894,7 +2008,6 @@ Carteras
 
 </select>
 
-
 <label class="form-label">
 Precio
 </label>
@@ -1905,9 +2018,8 @@ type="number"
 min="0"
 step="0.01"
 id="productPrice${index}"
-value="${product.price}"
+value="${Number(product.price)}"
 >
-
 
 <label class="form-label">
 Descripción
@@ -1917,7 +2029,6 @@ Descripción
 class="form-textarea"
 id="productDescription${index}"
 >${escapeHTML(product.description)}</textarea>
-
 
 <label class="form-label">
 Imagen del producto
@@ -1942,7 +2053,6 @@ type="file"
 accept="image/*"
 onchange="uploadProductImage(${index},event)"
 >
-
 
 <div class="editor-buttons">
 
@@ -1975,24 +2085,24 @@ container.appendChild(editor);
 
 function saveProduct(index){
 
-const name=
+const name =
 document.getElementById(
 "productName"+index
 ).value.trim();
 
-const category=
+const category =
 document.getElementById(
 "productCategory"+index
 ).value;
 
-const price=
+const price =
 Number(
 document.getElementById(
 "productPrice"+index
 ).value
 );
 
-const description=
+const description =
 document.getElementById(
 "productDescription"+index
 ).value.trim();
@@ -2000,25 +2110,28 @@ document.getElementById(
 
 if(!name){
 
-alert("Escribe un nombre para el producto.");
+alert(
+"Escribe un nombre para el producto."
+);
 
 return;
 
 }
 
-if(isNaN(price) || price<0){
+if(isNaN(price) || price < 0){
 
-alert("Escribe un precio válido.");
+alert(
+"Escribe un precio válido."
+);
 
 return;
 
 }
 
-
-products[index].name=name;
-products[index].category=category;
-products[index].price=price;
-products[index].description=description;
+products[index].name = name;
+products[index].category = category;
+products[index].price = price;
+products[index].description = description;
 
 saveProducts();
 
@@ -2026,24 +2139,30 @@ renderProducts();
 
 renderProductEditors();
 
-alert("✅ Producto guardado correctamente.");
+alert(
+"✅ Producto guardado correctamente."
+);
 
 }
 
 
 /* =====================================================
-   IMAGEN PRODUCTO
+   FOTO INDIVIDUAL
 ===================================================== */
 
-function uploadProductImage(index,event){
+async function uploadProductImage(index,event){
 
-const file=event.target.files[0];
+const file =
+event.target.files[0];
 
 if(!file)return;
 
-compressImage(file,1000,0.8,function(result){
+try{
 
-products[index].image=result;
+const result =
+await compressImage(file,1000,0.72);
+
+products[index].image = result;
 
 saveProducts();
 
@@ -2051,9 +2170,17 @@ renderProducts();
 
 renderProductEditors();
 
-alert("📸 Imagen actualizada.");
+alert(
+"📸 Imagen actualizada."
+);
 
-});
+}catch(error){
+
+alert(
+"No se pudo cargar la imagen."
+);
+
+}
 
 }
 
@@ -2072,7 +2199,8 @@ category:"ropa",
 
 price:0,
 
-description:"Escribe aquí la descripción del producto.",
+description:
+"Escribe aquí la descripción del producto.",
 
 image:""
 
@@ -2093,7 +2221,7 @@ renderProductEditors();
 
 function deleteProduct(index){
 
-const confirmed=
+const confirmed =
 confirm(
 "¿Seguro que quieres eliminar este producto?"
 );
@@ -2117,23 +2245,27 @@ renderProductEditors();
 
 function renderBagImages(){
 
-const bag1=
+const bag1 =
 localStorage.getItem("NABORA_BAG_1");
 
-const bag2=
+const bag2 =
 localStorage.getItem("NABORA_BAG_2");
 
 
 if(bag1){
 
-document.getElementById("bagPhoto1").innerHTML=
+document.getElementById(
+"bagPhoto1"
+).innerHTML =
 `<img src="${bag1}" alt="Cartera">`;
 
 }
 
 if(bag2){
 
-document.getElementById("bagPhoto2").innerHTML=
+document.getElementById(
+"bagPhoto2"
+).innerHTML =
 `<img src="${bag2}" alt="Cartera">`;
 
 }
@@ -2141,13 +2273,17 @@ document.getElementById("bagPhoto2").innerHTML=
 }
 
 
-function changeBagImage(number,event){
+async function changeBagImage(number,event){
 
-const file=event.target.files[0];
+const file =
+event.target.files[0];
 
 if(!file)return;
 
-compressImage(file,1200,0.8,function(result){
+try{
+
+const result =
+await compressImage(file,1200,0.72);
 
 localStorage.setItem(
 "NABORA_BAG_"+number,
@@ -2156,9 +2292,17 @@ result
 
 renderBagImages();
 
-alert("📸 Foto de cartera actualizada.");
+alert(
+"📸 Foto de cartera actualizada."
+);
 
-});
+}catch(error){
+
+alert(
+"No se pudo cargar la foto."
+);
+
+}
 
 }
 
@@ -2175,11 +2319,11 @@ document
 
 document
 .getElementById("adminPassword")
-.value="";
+.value = "";
 
 document
 .getElementById("loginError")
-.textContent="";
+.textContent = "";
 
 }
 
@@ -2195,21 +2339,17 @@ document
 
 function loginAdmin(){
 
-const password=
+const password =
 document.getElementById(
 "adminPassword"
 ).value;
 
 
-/*
-   CONTRASEÑA ADMIN
-*/
-
-if(password==="NaboraAdmin2026!"){
+if(password === "NaboraAdmin2026!"){
 
 document
 .getElementById("adminLogin")
-.style.display="none";
+.style.display = "none";
 
 document
 .getElementById("adminPanel")
@@ -2223,7 +2363,7 @@ renderProductEditors();
 
 document
 .getElementById("loginError")
-.textContent=
+.textContent =
 "❌ Contraseña incorrecta.";
 
 }
@@ -2235,12 +2375,13 @@ document
    CARRITO
 ===================================================== */
 
-let cart=[];
+let cart = [];
 
 
 function addToCart(index){
 
-const product=products[index];
+const product =
+products[index];
 
 cart.push({
 
@@ -2257,37 +2398,58 @@ openCart();
 }
 
 
+function addBagToCart(name,price){
+
+cart.push({
+
+name:name,
+
+price:Number(price)
+
+});
+
+updateCart();
+
+openCart();
+
+}
+
+
 function updateCart(){
 
 document
 .getElementById("cartCount")
-.textContent=cart.length;
+.textContent =
+cart.length;
 
-const box=
-document.getElementById("cartItems");
+const box =
+document.getElementById(
+"cartItems"
+);
 
-if(cart.length===0){
+if(cart.length === 0){
 
-box.innerHTML=
+box.innerHTML =
 "Tu carrito está vacío.";
 
 document
 .getElementById("cartTotal")
-.textContent="0.00";
+.textContent =
+"0.00";
 
 return;
 
 }
 
-let total=0;
+let total = 0;
 
-box.innerHTML="";
+box.innerHTML = "";
 
 cart.forEach(function(item,index){
 
-total+=item.price;
+total += item.price;
 
-box.innerHTML+=`
+box.innerHTML += `
 
 <div class="cart-item">
 
@@ -2315,7 +2477,7 @@ Eliminar
 
 document
 .getElementById("cartTotal")
-.textContent=
+.textContent =
 total.toFixed(2);
 
 }
@@ -2354,74 +2516,96 @@ document
 
 function sendMessage(){
 
-const input=
-document.getElementById("userInput");
+const input =
+document.getElementById(
+"userInput"
+);
 
-const text=
+const text =
 input.value.trim();
 
 if(!text)return;
 
-const messages=
-document.getElementById("messages");
+const messages =
+document.getElementById(
+"messages"
+);
 
-messages.innerHTML+=
+messages.innerHTML +=
 `
 <div class="message user">
 ${escapeHTML(text)}
 </div>
 `;
 
-input.value="";
+input.value = "";
 
-
-let answer=
+let answer =
 "✨ Puedo ayudarte a crear un outfit. Dime para qué ocasión necesitas tu look.";
 
-
-const question=
+const question =
 text.toLowerCase();
 
 
 if(question.includes("fiesta")){
 
-answer=
+answer =
 "✨ Para una fiesta te recomiendo la falda con estampado de hojas de otoño, el top gris, las botas largas con tacón y la cartera de perlas.";
 
 }
 
 else if(question.includes("casual")){
 
-answer=
+answer =
 "🤎 Para un look casual puedes combinar la chaqueta de cuero vegano, el pantalón de tela, las gafas negras y las botas cortas.";
 
 }
 
 else if(question.includes("otoño")){
 
-answer=
+answer =
 "🍂 Para otoño puedes combinar tonos marrones, grises, negros, beige y blanco. La bufanda de seda y las botas largas quedan perfectas.";
 
 }
 
 else if(question.includes("cartera")){
 
-answer=
+answer =
 "👜 La cartera de perlas con cuero vegano es ideal para ocasiones elegantes. La cartera de piedras marrones combina muy bien con tonos neutros.";
+
+}
+
+else if(
+question.includes("zapato") ||
+question.includes("botas")
+){
+
+answer =
+"👢 Para tus zapatos puedes elegir las botas cortas para un look casual o las botas largas con tacón para un look más elegante.";
+
+}
+
+else if(
+question.includes("accesorio") ||
+question.includes("gafas")
+){
+
+answer =
+"🕶️ Puedes completar el look con las gafas negras, la boina o la bufanda de seda.";
 
 }
 
 
 setTimeout(function(){
 
-messages.innerHTML+=
+messages.innerHTML +=
 `
 <div class="message bot">
 ${answer}
 </div>
 `;
 
-messages.scrollTop=
+messages.scrollTop =
 messages.scrollHeight;
 
 },500);
@@ -2430,16 +2614,21 @@ messages.scrollHeight;
 
 
 /* =====================================================
-   SEGURIDAD
+   SEGURIDAD HTML
 ===================================================== */
 
 function escapeHTML(text){
 
 return String(text)
+
 .replace(/&/g,"&amp;")
+
 .replace(/</g,"&lt;")
+
 .replace(/>/g,"&gt;")
+
 .replace(/"/g,"&quot;")
+
 .replace(/'/g,"&#039;");
 
 }
@@ -2454,7 +2643,7 @@ return escapeHTML(text)
 
 
 /* =====================================================
-   INICIAR
+   INICIO
 ===================================================== */
 
 renderCarousel();
@@ -2467,4 +2656,3 @@ renderBagImages();
 
 </body>
 </html>
-```
