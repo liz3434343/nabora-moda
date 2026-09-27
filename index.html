@@ -4,713 +4,713 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>NABORA — Colección Otoño 2026</title>
 
 <style>
+
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
 html{
-  scroll-behavior:smooth;
+scroll-behavior:smooth;
 }
 
 body{
-  background:#f7f2eb;
-  color:#171411;
-  font-family:Georgia,"Times New Roman",serif;
+background:#f7f2eb;
+color:#171411;
+font-family:Georgia,"Times New Roman",serif;
 }
 
 /* ================= NAV ================= */
 
 nav{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  height:75px;
-  padding:0 6%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:rgba(247,242,235,.97);
-  border-bottom:1px solid #ded5ca;
+position:sticky;
+top:0;
+z-index:1000;
+height:75px;
+padding:0 6%;
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#f7f2eb;
+border-bottom:1px solid #ddd3c7;
 }
 
 .logo{
-  font-size:24px;
-  letter-spacing:7px;
+font-size:24px;
+letter-spacing:7px;
 }
 
 nav ul{
-  list-style:none;
-  display:flex;
-  gap:30px;
+display:flex;
+gap:28px;
+list-style:none;
 }
 
 nav a{
-  color:#171411;
-  text-decoration:none;
-  font-family:Arial,sans-serif;
-  font-size:11px;
-  letter-spacing:1.5px;
+text-decoration:none;
+color:#171411;
+font-family:Arial,sans-serif;
+font-size:11px;
+letter-spacing:1.5px;
 }
 
-.admin-button{
-  border:0;
-  background:#171411;
-  color:white;
-  padding:11px 16px;
-  cursor:pointer;
-  font-size:10px;
+.admin{
+background:#171411;
+color:white;
+border:0;
+padding:11px 16px;
+cursor:pointer;
+font-size:10px;
 }
 
 /* ================= PORTADA ================= */
 
 .hero{
-  height:calc(100vh - 75px);
-  min-height:620px;
-  position:relative;
-  overflow:hidden;
-  background:#dcd2c6;
+height:calc(100vh - 75px);
+min-height:600px;
+position:relative;
+overflow:hidden;
+background:#d8cec2;
 }
 
-/* FOTO DE PORTADA */
-
 .hero-image{
-  position:absolute;
-  inset:0;
-  z-index:1;
-  background:
-    linear-gradient(
-      rgba(0,0,0,.25),
-      rgba(0,0,0,.30)
-    );
+position:absolute;
+inset:0;
 }
 
 .hero-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
-.hero-placeholder{
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:#776f66;
-  font-family:Arial,sans-serif;
-  letter-spacing:2px;
-  font-size:12px;
-  background:#ddd4c9;
+.hero-empty{
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:Arial,sans-serif;
+font-size:12px;
+letter-spacing:3px;
+color:#756b61;
 }
 
-/* CONTENIDO SOBRE FOTO */
+.hero-overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.28);
+}
 
 .hero-content{
-  position:absolute;
-  inset:0;
-  z-index:3;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:white;
-  padding:30px;
-  text-shadow:0 3px 20px rgba(0,0,0,.5);
+position:absolute;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+z-index:3;
+padding:25px;
 }
 
 .hero-small{
-  font-family:Arial,sans-serif;
-  font-size:11px;
-  letter-spacing:6px;
-  margin-bottom:25px;
+font-family:Arial,sans-serif;
+font-size:11px;
+letter-spacing:6px;
+margin-bottom:25px;
 }
 
 .hero h1{
-  font-size:clamp(65px,11vw,125px);
-  font-weight:normal;
-  letter-spacing:14px;
+font-size:clamp(65px,11vw,125px);
+font-weight:normal;
+letter-spacing:14px;
 }
 
 .hero h2{
-  font-size:24px;
-  font-weight:normal;
-  letter-spacing:5px;
-  margin-top:15px;
+font-size:25px;
+font-weight:normal;
+letter-spacing:5px;
+margin-top:15px;
 }
 
 .hero p{
-  max-width:600px;
-  margin:25px auto 35px;
-  font-family:Arial,sans-serif;
-  line-height:1.8;
-  font-size:14px;
+font-family:Arial,sans-serif;
+font-size:14px;
+line-height:1.8;
+max-width:600px;
+margin:25px auto;
 }
 
 .hero-button{
-  display:inline-block;
-  background:white;
-  color:#171411;
-  padding:16px 32px;
-  text-decoration:none;
-  font-family:Arial,sans-serif;
-  font-size:10px;
-  letter-spacing:2px;
-  text-shadow:none;
+display:inline-block;
+background:white;
+color:#171411;
+padding:16px 30px;
+text-decoration:none;
+font-family:Arial,sans-serif;
+font-size:10px;
+letter-spacing:2px;
 }
 
-/* BOTÓN FOTO */
-
-.cover-upload{
-  position:absolute;
-  z-index:10;
-  left:25px;
-  bottom:25px;
+.upload-cover{
+position:absolute;
+bottom:25px;
+left:25px;
+z-index:5;
 }
 
-.cover-upload label{
-  display:inline-block;
-  background:white;
-  color:#171411;
-  padding:13px 18px;
-  cursor:pointer;
-  font-family:Arial,sans-serif;
-  font-size:10px;
-  letter-spacing:1px;
-  box-shadow:0 5px 20px rgba(0,0,0,.2);
+.upload-cover label{
+background:white;
+padding:13px 18px;
+cursor:pointer;
+font-family:Arial,sans-serif;
+font-size:10px;
+box-shadow:0 5px 20px #0003;
 }
 
-.cover-upload input{
-  display:none;
+.upload-cover input{
+display:none;
 }
 
-/* ================= CARRUSEL ================= */
+/* ================= BANNER ================= */
 
-.carousel-controls{
-  position:absolute;
-  z-index:10;
-  right:25px;
-  bottom:25px;
-  display:flex;
-  gap:8px;
+.banner{
+padding:65px 20px;
+background:#191512;
+color:white;
+text-align:center;
 }
 
-.carousel-controls button{
-  width:42px;
-  height:42px;
-  border:1px solid white;
-  background:rgba(0,0,0,.25);
-  color:white;
-  cursor:pointer;
-  font-size:20px;
+.banner h2{
+font-size:42px;
+font-weight:normal;
+letter-spacing:4px;
 }
 
-/* ================= SECCIONES ================= */
+.banner p{
+font-family:Arial,sans-serif;
+font-size:12px;
+letter-spacing:3px;
+color:#c9c0b7;
+margin-top:15px;
+}
+
+/* ================= SECCION ================= */
 
 .section{
-  padding:100px 7%;
+padding:90px 6%;
 }
 
-.section-title{
-  text-align:center;
-  font-size:45px;
-  font-weight:normal;
+.title{
+text-align:center;
+font-size:44px;
+font-weight:normal;
 }
 
-.section-subtitle{
-  text-align:center;
-  margin:15px auto 45px;
-  color:#756d64;
-  font-family:Arial,sans-serif;
-  font-size:12px;
-  letter-spacing:2px;
+.subtitle{
+text-align:center;
+font-family:Arial,sans-serif;
+font-size:11px;
+letter-spacing:3px;
+color:#81776e;
+margin:15px 0 45px;
 }
 
-/* ================= PRODUCTOS ================= */
+/* ================= FILTROS ================= */
 
 .filters{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:40px;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:10px;
+margin-bottom:45px;
 }
 
 .filter{
-  padding:11px 20px;
-  background:transparent;
-  border:1px solid #cfc5ba;
-  cursor:pointer;
-  font-size:10px;
-  letter-spacing:1px;
+padding:12px 20px;
+border:1px solid #cfc4b8;
+background:transparent;
+cursor:pointer;
+font-size:10px;
+letter-spacing:1px;
 }
 
 .filter.active,
 .filter:hover{
-  background:#171411;
-  color:white;
+background:#171411;
+color:white;
 }
 
+/* ================= PRODUCTOS ================= */
+
 .products{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:22px;
+max-width:1250px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:22px;
 }
 
 .product{
-  background:#fffdf9;
-  border:1px solid #ded5ca;
-  transition:.3s;
+background:#fffdf9;
+border:1px solid #ddd3c7;
+transition:.3s;
 }
 
 .product:hover{
-  transform:translateY(-5px);
-  box-shadow:0 15px 30px rgba(0,0,0,.1);
+transform:translateY(-6px);
+box-shadow:0 15px 35px #00000012;
 }
 
-.product-photo{
-  height:310px;
-  background:#e7ded3;
-  position:relative;
-  overflow:hidden;
+.product-image{
+height:300px;
+position:relative;
+background:#e6ddd2;
+overflow:hidden;
 }
 
-.product-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.product-image img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
-.no-photo{
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#83786e;
-  font-family:Arial,sans-serif;
-  font-size:11px;
-  text-align:center;
+.empty-photo{
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+font-family:Arial,sans-serif;
+font-size:10px;
+letter-spacing:1px;
+color:#81776e;
 }
 
-.photo-upload{
-  position:absolute;
-  bottom:12px;
-  left:50%;
-  transform:translateX(-50%);
-  background:white;
-  color:#171411;
-  padding:10px 14px;
-  cursor:pointer;
-  font-family:Arial,sans-serif;
-  font-size:9px;
-  white-space:nowrap;
+.upload-product{
+position:absolute;
+bottom:12px;
+left:50%;
+transform:translateX(-50%);
+background:white;
+padding:10px 13px;
+cursor:pointer;
+font-family:Arial,sans-serif;
+font-size:9px;
+white-space:nowrap;
+box-shadow:0 4px 12px #0002;
 }
 
-.photo-upload input{
-  display:none;
+.upload-product input{
+display:none;
 }
 
 .product-info{
-  padding:20px;
+padding:20px;
 }
 
-.category{
-  font-family:Arial,sans-serif;
-  font-size:9px;
-  letter-spacing:2px;
-  color:#8a8075;
+.product-category{
+font-family:Arial,sans-serif;
+font-size:9px;
+letter-spacing:2px;
+color:#958a80;
 }
 
 .product h3{
-  margin-top:8px;
-  font-size:17px;
-  font-weight:normal;
+font-size:17px;
+font-weight:normal;
+margin-top:8px;
 }
 
-.description{
-  margin-top:9px;
-  font-family:Arial,sans-serif;
-  font-size:11px;
-  color:#756d64;
-  line-height:1.6;
+.product-description{
+font-family:Arial,sans-serif;
+font-size:11px;
+line-height:1.6;
+color:#756d64;
+margin-top:9px;
 }
 
 .price{
-  margin-top:13px;
-  font-family:Arial,sans-serif;
-  font-weight:bold;
+font-family:Arial,sans-serif;
+font-size:17px;
+font-weight:bold;
+margin-top:13px;
 }
 
 .add{
-  width:100%;
-  margin-top:15px;
-  padding:12px;
-  border:0;
-  background:#171411;
-  color:white;
-  cursor:pointer;
-  font-size:9px;
-  letter-spacing:1px;
+width:100%;
+border:0;
+background:#171411;
+color:white;
+padding:13px;
+margin-top:15px;
+cursor:pointer;
+font-size:9px;
+letter-spacing:1px;
 }
 
 /* ================= CARTERAS ================= */
 
 .bags{
-  background:#1b1714;
-  color:white;
+background:#191512;
+color:white;
 }
 
-.bags .section-subtitle{
-  color:#bdb4aa;
+.bags .subtitle{
+color:#bdb4ab;
 }
 
 .bag-grid{
-  max-width:1050px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:30px;
+max-width:1100px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:30px;
 }
 
 .bag{
-  background:#28211d;
-  border:1px solid #4c433a;
+background:#29221e;
+border:1px solid #4d443c;
 }
 
-.bag-photo{
-  height:430px;
-  position:relative;
-  background:#3c342d;
+.bag-image{
+height:430px;
+background:#3b332d;
+position:relative;
 }
 
-.bag-photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+.bag-image img{
+width:100%;
+height:100%;
+object-fit:cover;
 }
 
 .bag-empty{
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#c2b8ae;
-  font-family:Arial,sans-serif;
-  font-size:11px;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:Arial,sans-serif;
+font-size:10px;
+color:#c1b6ac;
+}
+
+.upload-bag{
+position:absolute;
+bottom:15px;
+left:50%;
+transform:translateX(-50%);
+background:white;
+color:#171411;
+padding:11px 16px;
+cursor:pointer;
+font-family:Arial,sans-serif;
+font-size:9px;
+}
+
+.upload-bag input{
+display:none;
 }
 
 .bag-info{
-  padding:30px;
+padding:30px;
 }
 
-.bag-info small{
-  font-family:Arial,sans-serif;
-  color:#bfae9d;
-  letter-spacing:3px;
+.bag-label{
+font-family:Arial,sans-serif;
+font-size:9px;
+letter-spacing:3px;
+color:#c5ad98;
 }
 
-.bag-info h3{
-  font-size:25px;
-  font-weight:normal;
-  margin:12px 0;
+.bag h3{
+font-size:25px;
+font-weight:normal;
+margin:12px 0;
 }
 
-.bag-info p{
-  font-family:Arial,sans-serif;
-  color:#c8c0b8;
-  font-size:12px;
-  line-height:1.8;
+.bag p{
+font-family:Arial,sans-serif;
+font-size:12px;
+line-height:1.8;
+color:#c7beb7;
 }
 
 .bag-price{
-  margin-top:18px;
-  font-family:Arial,sans-serif;
-  font-size:20px;
+font-family:Arial,sans-serif;
+font-size:20px;
+margin-top:18px;
 }
 
 .bag-add{
-  margin-top:20px;
-  padding:13px 22px;
-  border:0;
-  background:white;
-  color:#171411;
-  cursor:pointer;
-}
-
-.bag-upload{
-  display:none;
-}
-
-.bag-upload-label{
-  position:absolute;
-  bottom:15px;
-  left:50%;
-  transform:translateX(-50%);
-  background:white;
-  color:#171411;
-  padding:11px 16px;
-  cursor:pointer;
-  font-family:Arial,sans-serif;
-  font-size:10px;
+margin-top:20px;
+padding:13px 20px;
+border:0;
+background:white;
+color:#171411;
+cursor:pointer;
 }
 
 /* ================= IA ================= */
 
 .ai{
-  padding:100px 20px;
+padding:100px 20px;
 }
 
 .chat{
-  max-width:720px;
-  margin:auto;
-  background:white;
-  border:1px solid #ded5ca;
+max-width:720px;
+margin:auto;
+background:white;
+border:1px solid #ddd3c7;
 }
 
 .chat-header{
-  background:#171411;
-  color:white;
-  padding:20px;
-  font-family:Arial,sans-serif;
-  font-size:11px;
-  letter-spacing:2px;
+background:#171411;
+color:white;
+padding:20px;
+font-family:Arial,sans-serif;
+font-size:11px;
+letter-spacing:2px;
 }
 
 .messages{
-  height:320px;
-  overflow-y:auto;
-  padding:25px;
-  font-family:Arial,sans-serif;
+height:320px;
+overflow-y:auto;
+padding:25px;
+font-family:Arial,sans-serif;
 }
 
 .message{
-  max-width:80%;
-  padding:13px 16px;
-  margin-bottom:14px;
-  font-size:13px;
-  line-height:1.6;
+max-width:80%;
+padding:13px 16px;
+margin-bottom:14px;
+font-size:13px;
+line-height:1.6;
 }
 
 .bot{
-  background:#f0e9df;
+background:#f0e9df;
 }
 
 .user{
-  margin-left:auto;
-  background:#171411;
-  color:white;
+margin-left:auto;
+background:#171411;
+color:white;
 }
 
 .chat-input{
-  display:flex;
-  border-top:1px solid #ddd5ca;
+display:flex;
+border-top:1px solid #ddd3c7;
 }
 
 .chat-input input{
-  flex:1;
-  border:0;
-  outline:0;
-  padding:18px;
+flex:1;
+padding:18px;
+border:0;
+outline:0;
 }
 
 .chat-input button{
-  border:0;
-  background:#171411;
-  color:white;
-  padding:0 25px;
-  cursor:pointer;
+border:0;
+background:#171411;
+color:white;
+padding:0 25px;
+cursor:pointer;
 }
 
 /* ================= CARRITO ================= */
 
 .cart{
-  position:fixed;
-  right:-400px;
-  top:0;
-  width:380px;
-  max-width:90%;
-  height:100vh;
-  background:#fffdf9;
-  z-index:4000;
-  padding:30px;
-  transition:.4s;
-  box-shadow:-10px 0 40px rgba(0,0,0,.2);
-  overflow:auto;
+position:fixed;
+top:0;
+right:-400px;
+width:380px;
+max-width:90%;
+height:100vh;
+background:#fffdf9;
+z-index:4000;
+padding:30px;
+box-shadow:-10px 0 40px #0003;
+transition:.4s;
+overflow:auto;
 }
 
 .cart.open{
-  right:0;
+right:0;
 }
 
-.cart-close{
-  float:right;
-  border:0;
-  background:none;
-  font-size:25px;
-  cursor:pointer;
+.close-cart{
+float:right;
+border:0;
+background:none;
+font-size:25px;
+cursor:pointer;
 }
 
 .cart h2{
-  font-weight:normal;
-  margin-bottom:25px;
+font-weight:normal;
+margin-bottom:25px;
 }
 
 .cart-item{
-  padding:15px 0;
-  border-bottom:1px solid #ddd5ca;
+border-bottom:1px solid #ddd3c7;
+padding:15px 0;
+font-family:Arial,sans-serif;
+font-size:12px;
+}
+
+.cart-item button{
+margin-top:7px;
+border:0;
+background:none;
+text-decoration:underline;
+cursor:pointer;
 }
 
 .total{
-  margin-top:25px;
-  font-family:Arial,sans-serif;
-  font-weight:bold;
+margin-top:25px;
+font-family:Arial,sans-serif;
+font-weight:bold;
 }
 
 /* ================= ADMIN ================= */
 
 .admin-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.7);
-  z-index:5000;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+display:none;
+position:fixed;
+inset:0;
+background:#000b;
+z-index:5000;
+align-items:center;
+justify-content:center;
+padding:20px;
 }
 
 .admin-overlay.show{
-  display:flex;
+display:flex;
 }
 
 .admin-box{
-  width:850px;
-  max-width:100%;
-  max-height:90vh;
-  overflow:auto;
-  background:#fffdf9;
-  padding:35px;
+background:#fffdf9;
+width:700px;
+max-width:100%;
+max-height:90vh;
+overflow:auto;
+padding:35px;
 }
 
-.admin-header{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:25px;
+.admin-top{
+display:flex;
+justify-content:space-between;
+margin-bottom:25px;
 }
 
-.admin-header h2{
-  font-weight:normal;
+.admin-top h2{
+font-weight:normal;
 }
 
 .close-admin{
-  border:0;
-  background:none;
-  font-size:25px;
-  cursor:pointer;
+border:0;
+background:none;
+font-size:25px;
+cursor:pointer;
 }
 
 .login{
-  max-width:400px;
-  margin:auto;
-  text-align:center;
+max-width:380px;
+margin:auto;
+text-align:center;
 }
 
 .login p{
-  font-family:Arial,sans-serif;
-  color:#756d64;
-  font-size:12px;
-  margin:15px 0;
+font-family:Arial,sans-serif;
+font-size:12px;
+color:#756d64;
+margin:15px 0;
 }
 
 .login input{
-  width:100%;
-  padding:14px;
-  border:1px solid #d4cabf;
-  margin-bottom:10px;
+width:100%;
+padding:14px;
+border:1px solid #ccc;
 }
 
 .login button{
-  width:100%;
-  padding:14px;
-  border:0;
-  background:#171411;
-  color:white;
-  cursor:pointer;
+width:100%;
+padding:14px;
+margin-top:10px;
+background:#171411;
+color:white;
+border:0;
+cursor:pointer;
 }
 
 .error{
-  color:#a02c2c;
-  font-family:Arial,sans-serif;
-  font-size:11px;
-  margin-top:10px;
+color:#9e2929;
+font-family:Arial,sans-serif;
+font-size:11px;
+margin-top:10px;
 }
 
 .admin-content{
-  display:none;
+display:none;
 }
 
 .admin-content.show{
-  display:block;
+display:block;
 }
 
 .admin-card{
-  border:1px solid #ddd5ca;
-  padding:20px;
-  margin-bottom:20px;
+border:1px solid #ddd3c7;
+padding:20px;
+margin-bottom:20px;
 }
 
 .admin-card h3{
-  font-weight:normal;
-  margin-bottom:15px;
+font-weight:normal;
+margin-bottom:15px;
 }
 
 .admin-card label{
-  display:block;
-  margin:10px 0 5px;
-  font-family:Arial,sans-serif;
-  font-size:10px;
+display:block;
+font-family:Arial,sans-serif;
+font-size:10px;
+margin:12px 0 5px;
 }
 
 .admin-card input,
-.admin-card textarea,
-.admin-card select{
-  width:100%;
-  padding:10px;
-  border:1px solid #d4cabf;
-}
-
 .admin-card textarea{
-  min-height:70px;
+width:100%;
+padding:10px;
+border:1px solid #ccc;
 }
 
 .save{
-  width:100%;
-  padding:13px;
-  margin-top:15px;
-  background:#171411;
-  color:white;
-  border:0;
-  cursor:pointer;
+width:100%;
+background:#171411;
+color:white;
+border:0;
+padding:13px;
+margin-top:15px;
+cursor:pointer;
 }
 
 /* ================= FOOTER ================= */
 
 footer{
-  background:#171411;
-  color:#bdb5ad;
-  text-align:center;
-  padding:45px;
-  font-family:Arial,sans-serif;
-  font-size:10px;
-  letter-spacing:2px;
+background:#171411;
+color:#b9b0a8;
+padding:45px;
+text-align:center;
+font-family:Arial,sans-serif;
+font-size:10px;
+letter-spacing:2px;
 }
 
 /* ================= MOBILE ================= */
@@ -718,7 +718,7 @@ footer{
 @media(max-width:900px){
 
 .products{
-  grid-template-columns:repeat(2,1fr);
+grid-template-columns:repeat(2,1fr);
 }
 
 }
@@ -726,23 +726,19 @@ footer{
 @media(max-width:600px){
 
 nav ul{
-  display:none;
+display:none;
 }
 
 .products{
-  grid-template-columns:1fr;
+grid-template-columns:1fr;
 }
 
 .bag-grid{
-  grid-template-columns:1fr;
+grid-template-columns:1fr;
 }
 
 .hero h1{
-  letter-spacing:7px;
-}
-
-.hero h2{
-  font-size:17px;
+letter-spacing:7px;
 }
 
 }
@@ -750,22 +746,39 @@ nav ul{
 </style>
 </head>
 
+
 <body>
+
 
 <!-- ================= NAV ================= -->
 
 <nav>
 
-<div class="logo">NABORA</div>
+<div class="logo">
+NABORA
+</div>
 
 <ul>
-<li><a href="#inicio">INICIO</a></li>
-<li><a href="#coleccion">COLECCIÓN</a></li>
-<li><a href="#carteras">CARTERAS</a></li>
-<li><a href="#asistente">NABORA AI</a></li>
+
+<li>
+<a href="#inicio">INICIO</a>
+</li>
+
+<li>
+<a href="#coleccion">PRODUCTOS</a>
+</li>
+
+<li>
+<a href="#carteras">CARTERAS</a>
+</li>
+
+<li>
+<a href="#asistente">NABORA AI</a>
+</li>
+
 </ul>
 
-<button class="admin-button" onclick="openAdmin()">
+<button class="admin" onclick="openAdmin()">
 ADMIN
 </button>
 
@@ -778,12 +791,13 @@ ADMIN
 
 <div class="hero-image" id="heroImage">
 
-<div class="hero-placeholder">
-TU FOTO DE PORTADA APARECERÁ AQUÍ
+<div class="hero-empty">
+SUBE TU FOTO DE PORTADA
 </div>
 
 </div>
 
+<div class="hero-overlay"></div>
 
 <div class="hero-content">
 
@@ -798,22 +812,19 @@ NABORA PRESENTA
 <h2>COLECCIÓN OTOÑO 2026</h2>
 
 <p>
-Una colección inspirada en la elegancia,
-la transformación y la esencia de cada mujer.
+Una colección creada para expresar elegancia,
+personalidad y estilo.
 </p>
 
 <a href="#coleccion" class="hero-button">
-DESCUBRIR COLECCIÓN
+VER COLECCIÓN
 </a>
 
 </div>
 
 </div>
 
-
-<!-- ESTE ES EL BOTÓN PARA SUBIR LA FOTO -->
-
-<div class="cover-upload">
+<div class="upload-cover">
 
 <label>
 
@@ -829,89 +840,109 @@ onchange="uploadCover(event)"
 
 </div>
 
+</section>
 
-<div class="carousel-controls">
 
-<button onclick="previousCover()">‹</button>
-<button onclick="nextCover()">›</button>
+<!-- ================= BANNER PRODUCTOS ================= -->
 
-</div>
+<section class="banner">
+
+<h2>
+COLECCIÓN OTOÑO 2026
+</h2>
+
+<p>
+ROPA · ZAPATOS · ACCESORIOS · CARTERAS
+</p>
 
 </section>
 
 
-<!-- ================= COLECCIÓN ================= -->
+<!-- ================= PRODUCTOS ================= -->
 
 <section class="section" id="coleccion">
 
-<h2 class="section-title">
-Otoño 2026
+<h2 class="title">
+Nuestros productos
 </h2>
 
-<p class="section-subtitle">
-BY NABORA · NUEVA COLECCIÓN
+<p class="subtitle">
+BY NABORA · OTOÑO 2026
 </p>
+
 
 <div class="filters">
 
-<button class="filter active"
-onclick="filterProducts('all',this)">
+<button
+class="filter active"
+onclick="filterProducts('todos',this)">
 TODOS
 </button>
 
-<button class="filter"
+<button
+class="filter"
 onclick="filterProducts('ropa',this)">
-ROPA
+👗 ROPA
 </button>
 
-<button class="filter"
+<button
+class="filter"
+onclick="filterProducts('zapatos',this)">
+👢 ZAPATOS
+</button>
+
+<button
+class="filter"
 onclick="filterProducts('accesorios',this)">
-ACCESORIOS
+🕶️ ACCESORIOS
 </button>
 
-<button class="filter"
-onclick="filterProducts('calzado',this)">
-CALZADO
+<button
+class="filter"
+onclick="filterProducts('carteras',this)">
+👜 CARTERAS
 </button>
 
 </div>
 
-<div class="products" id="products"></div>
+
+<div
+class="products"
+id="products">
+</div>
 
 </section>
 
 
-<!-- ================= CARTERAS ================= -->
+<!-- ================= CARTERAS EXCLUSIVAS ================= -->
 
 <section class="section bags" id="carteras">
 
-<h2 class="section-title">
-CARTERAS NABORA
+<h2 class="title">
+Carteras NABORA
 </h2>
 
-<p class="section-subtitle">
+<p class="subtitle">
 PIEZAS EXCLUSIVAS · OTOÑO 2026
 </p>
+
 
 <div class="bag-grid">
 
 
-<!-- CARTERA 1 -->
-
 <div class="bag">
 
-<div class="bag-photo" id="bag1">
+<div class="bag-image" id="bag1">
 
 <div class="bag-empty">
-SUBE AQUÍ LA FOTO DE LA CARTERA
+SUBE LA FOTO DE ESTA CARTERA
 </div>
 
-<label class="bag-upload-label">
+<label class="upload-bag">
 
 📷 SUBIR FOTO
 
 <input
-class="bag-upload"
 type="file"
 accept="image/*"
 onchange="uploadBag(event,1)"
@@ -921,26 +952,30 @@ onchange="uploadBag(event,1)"
 
 </div>
 
+
 <div class="bag-info">
 
-<small>NABORA EXCLUSIVE</small>
+<div class="bag-label">
+NABORA EXCLUSIVE
+</div>
 
 <h3>
 Cartera de piedras marrones
 </h3>
 
 <p>
-Diseño elegante decorado con piedras
-en tonos marrones. Una pieza sofisticada
-para complementar looks de otoño,
-eventos especiales y ocasiones elegantes.
+Cartera elegante decorada con piedras
+en tonos marrones. Su diseño sofisticado
+la convierte en el complemento perfecto
+para looks de otoño y ocasiones especiales.
 </p>
 
 <div class="bag-price">
 $250
 </div>
 
-<button class="bag-add"
+<button
+class="bag-add"
 onclick="addToCart('Cartera de piedras marrones',250)">
 AÑADIR AL CARRITO
 </button>
@@ -950,22 +985,19 @@ AÑADIR AL CARRITO
 </div>
 
 
-<!-- CARTERA 2 -->
-
 <div class="bag">
 
-<div class="bag-photo" id="bag2">
+<div class="bag-image" id="bag2">
 
 <div class="bag-empty">
-SUBE AQUÍ LA FOTO DE LA CARTERA
+SUBE LA FOTO DE ESTA CARTERA
 </div>
 
-<label class="bag-upload-label">
+<label class="upload-bag">
 
 📷 SUBIR FOTO
 
 <input
-class="bag-upload"
 type="file"
 accept="image/*"
 onchange="uploadBag(event,2)"
@@ -975,18 +1007,21 @@ onchange="uploadBag(event,2)"
 
 </div>
 
+
 <div class="bag-info">
 
-<small>NABORA SIGNATURE</small>
+<div class="bag-label">
+NABORA SIGNATURE
+</div>
 
 <h3>
 Cartera de perlas con cuero vegano
 </h3>
 
 <p>
-Elaborada con cuero vegano y perlas
-de cristal. Una pieza delicada y
-sofisticada pensada para elevar
+Cartera elaborada con cuero vegano
+y perlas de cristal. Una pieza elegante,
+delicada y sofisticada para elevar
 cualquier outfit.
 </p>
 
@@ -994,7 +1029,8 @@ cualquier outfit.
 $350
 </div>
 
-<button class="bag-add"
+<button
+class="bag-add"
 onclick="addToCart('Cartera de perlas con cuero vegano',350)">
 AÑADIR AL CARRITO
 </button>
@@ -1012,13 +1048,14 @@ AÑADIR AL CARRITO
 
 <section class="ai" id="asistente">
 
-<h2 class="section-title">
+<h2 class="title">
 NABORA AI
 </h2>
 
-<p class="section-subtitle">
+<p class="subtitle">
 TU ASISTENTE PERSONAL DE MODA
 </p>
+
 
 <div class="chat">
 
@@ -1029,8 +1066,9 @@ NABORA ✦ PERSONAL STYLIST
 <div class="messages" id="messages">
 
 <div class="message bot">
-Hola ✨ Soy NABORA, tu asistente personal
-de moda. ¿Qué look quieres crear hoy?
+Hola ✨ Soy NABORA AI.
+Dime qué ocasión tienes y te recomiendo
+un outfit completo.
 </div>
 
 </div>
@@ -1039,7 +1077,7 @@ de moda. ¿Qué look quieres crear hoy?
 
 <input
 id="userInput"
-placeholder="Escribe aquí..."
+placeholder="Ej: necesito un look para una fiesta..."
 onkeydown="if(event.key==='Enter')sendMessage()"
 >
 
@@ -1058,7 +1096,9 @@ ENVIAR
 
 <div class="cart" id="cart">
 
-<button class="cart-close" onclick="closeCart()">×</button>
+<button class="close-cart" onclick="closeCart()">
+×
+</button>
 
 <h2>
 Mi carrito
@@ -1081,13 +1121,15 @@ TOTAL: $<span id="cartTotal">0</span>
 
 <div class="admin-box">
 
-<div class="admin-header">
+<div class="admin-top">
 
 <h2>
-Panel de administración NABORA
+Panel ADMIN · NABORA
 </h2>
 
-<button class="close-admin" onclick="closeAdmin()">
+<button
+class="close-admin"
+onclick="closeAdmin()">
 ×
 </button>
 
@@ -1097,17 +1139,16 @@ Panel de administración NABORA
 <div class="login" id="login">
 
 <h2>
-Administrador
+Acceso de administrador
 </h2>
 
 <p>
-Introduce tu contraseña para administrar
-las fotos de NABORA.
+Contraseña para administrar las imágenes.
 </p>
 
 <input
 type="password"
-id="adminPassword"
+id="password"
 placeholder="Contraseña"
 >
 
@@ -1115,39 +1156,43 @@ placeholder="Contraseña"
 ENTRAR
 </button>
 
-<div class="error" id="loginError"></div>
+<div
+class="error"
+id="loginError">
+</div>
 
 </div>
 
 
-<div class="admin-content" id="adminContent">
+<div
+class="admin-content"
+id="adminContent">
 
 <div class="admin-card">
 
 <h3>
-🖼️ Foto de portada
+📸 Foto de portada
 </h3>
-
-<p style="
-font-family:Arial;
-font-size:11px;
-color:#756d64;
-margin-bottom:15px;
-">
-También puedes cambiar la foto principal
-desde aquí.
-</p>
 
 <input
 type="file"
 accept="image/*"
-onchange="adminCover(event)"
+onchange="uploadCover(event)"
 >
 
 </div>
 
 
-<div id="adminProducts"></div>
+<p style="
+font-family:Arial;
+font-size:11px;
+color:#756d64;
+margin-bottom:20px;
+">
+También puedes subir las fotos directamente
+desde cada producto utilizando el botón
+"SUBIR FOTO".
+</p>
 
 </div>
 
@@ -1166,68 +1211,256 @@ NABORA · COLECCIÓN OTOÑO 2026 · BY NABORA
 <script>
 
 /* =====================================================
-   FOTO DE PORTADA
+PRODUCTOS
 ===================================================== */
 
-let coverImages =
-JSON.parse(localStorage.getItem("naboraCoverImages"))
-|| [];
+let products=[
 
-let coverIndex = 0;
+{
+name:"Poliéster blanco",
+category:"ropa",
+price:20,
+description:"Pieza blanca minimalista y versátil para crear looks elegantes.",
+image:""
+},
+
+{
+name:"Chaqueta de cuero vegano",
+category:"ropa",
+price:40,
+description:"Chaqueta de cuero vegano con estilo moderno y sofisticado.",
+image:""
+},
+
+{
+name:"Pantalón de tela",
+category:"ropa",
+price:30,
+description:"Pantalón cómodo y elegante para combinar con diferentes prendas.",
+image:""
+},
+
+{
+name:"Gafas negras",
+category:"accesorios",
+price:20,
+description:"Gafas negras clásicas para completar tu look.",
+image:""
+},
+
+{
+name:"Botas cortas",
+category:"zapatos",
+price:50,
+description:"Botas cortas perfectas para los días de otoño.",
+image:""
+},
+
+{
+name:"Boina",
+category:"accesorios",
+price:15,
+description:"Boina elegante para complementar outfits otoñales.",
+image:""
+},
+
+{
+name:"Bufanda de seda",
+category:"accesorios",
+price:20,
+description:"Bufanda de seda suave y sofisticada.",
+image:""
+},
+
+{
+name:"Falda con estampado de hojas de otoño",
+category:"ropa",
+price:34,
+description:"Falda inspirada en las hojas de otoño.",
+image:""
+},
+
+{
+name:"Botas largas con tacón estilo otoño",
+category:"zapatos",
+price:75,
+description:"Botas largas con tacón para un look elegante y sofisticado.",
+image:""
+},
+
+{
+name:"Top gris con estampado de hojas de otoño",
+category:"ropa",
+price:35,
+description:"Top gris con detalles de hojas de otoño.",
+image:""
+},
+
+{
+name:"Cartera de perlas",
+category:"carteras",
+price:250,
+description:"Cartera de perlas elegante para ocasiones especiales.",
+image:""
+},
+
+{
+name:"Cartera de perlas con cuero vegano",
+category:"carteras",
+price:350,
+description:"Cartera de cuero vegano decorada con perlas de cristal.",
+image:""
+}
+
+];
 
 
-function showCover(){
+/* ================= MOSTRAR PRODUCTOS ================= */
 
-const area =
-document.getElementById("heroImage");
+function displayProducts(category="todos"){
 
-if(coverImages.length === 0){
+const container=document.getElementById("products");
 
-area.innerHTML = `
-<div class="hero-placeholder">
-TU FOTO DE PORTADA APARECERÁ AQUÍ
+container.innerHTML="";
+
+let list=
+category==="todos"
+?products
+:products.filter(p=>p.category===category);
+
+
+list.forEach((product,index)=>{
+
+let image=product.image
+?`
+<img
+src="${product.image}"
+alt="${product.name}">
+`
+:`
+<div class="empty-photo">
+📷<br>
+SUBE LA FOTO DEL PRODUCTO
 </div>
 `;
 
-return;
 
-}
+container.innerHTML+=`
 
-area.innerHTML = `
-<img
-src="${coverImages[coverIndex]}"
-alt="NABORA Colección Otoño 2026"
->
+<div class="product">
+
+<div class="product-image">
+
+${image}
+
+<label class="upload-product">
+
+📷 SUBIR FOTO
+
+<input
+type="file"
+accept="image/*"
+onchange="uploadProduct(event,${index})">
+
+</label>
+
+</div>
+
+<div class="product-info">
+
+<div class="product-category">
+${product.category.toUpperCase()}
+</div>
+
+<h3>
+${product.name}
+</h3>
+
+<p class="product-description">
+${product.description}
+</p>
+
+<div class="price">
+$${product.price}
+</div>
+
+<button
+class="add"
+onclick="addToCart('${product.name}',${product.price})">
+
+AÑADIR AL CARRITO
+
+</button>
+
+</div>
+
+</div>
+
 `;
 
+});
+
 }
 
 
-function uploadCover(event){
+/* ================= SUBIR FOTO PRODUCTO ================= */
 
-const file = event.target.files[0];
+function uploadProduct(event,index){
+
+const file=event.target.files[0];
 
 if(!file)return;
 
-if(!file.type.startsWith("image/")){
+const reader=new FileReader();
 
-alert("Por favor selecciona una imagen.");
+reader.onload=function(e){
 
-return;
+products[index].image=e.target.result;
+
+localStorage.setItem(
+"naboraProducts",
+JSON.stringify(products)
+);
+
+displayProducts();
+
+};
+
+reader.readAsDataURL(file);
 
 }
 
-const reader = new FileReader();
 
-reader.onload = function(e){
+/* ================= FILTROS ================= */
 
-coverImages.push(e.target.result);
+function filterProducts(category,button){
 
-coverIndex = coverImages.length - 1;
+document
+.querySelectorAll(".filter")
+.forEach(b=>b.classList.remove("active"));
+
+button.classList.add("active");
+
+displayProducts(category);
+
+}
+
+
+/* ================= PORTADA ================= */
+
+function uploadCover(event){
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=function(e){
 
 localStorage.setItem(
-"naboraCoverImages",
-JSON.stringify(coverImages)
+"naboraCover",
+e.target.result
 );
 
 showCover();
@@ -1239,75 +1472,334 @@ reader.readAsDataURL(file);
 }
 
 
-function nextCover(){
+function showCover(){
 
-if(coverImages.length === 0)return;
+const saved=localStorage.getItem("naboraCover");
 
-coverIndex++;
+const area=document.getElementById("heroImage");
 
-if(coverIndex >= coverImages.length){
-coverIndex = 0;
+if(saved){
+
+area.innerHTML=`
+<img
+src="${saved}"
+alt="NABORA Otoño 2026">
+`;
+
+}else{
+
+area.innerHTML=`
+<div class="hero-empty">
+SUBE TU FOTO DE PORTADA
+</div>
+`;
+
 }
+
+}
+
+
+/* ================= CARTERAS ================= */
+
+function uploadBag(event,number){
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+localStorage.setItem(
+"naboraBag"+number,
+e.target.result
+);
+
+showBag(number);
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+
+function showBag(number){
+
+const saved=
+localStorage.getItem("naboraBag"+number);
+
+const area=
+document.getElementById("bag"+number);
+
+if(saved){
+
+area.innerHTML=`
+
+<img
+src="${saved}"
+alt="Cartera NABORA">
+
+<label class="upload-bag">
+
+📷 CAMBIAR FOTO
+
+<input
+type="file"
+accept="image/*"
+onchange="uploadBag(event,${number})">
+
+</label>
+
+`;
+
+}
+
+}
+
+
+function loadBags(){
+
+showBag(1);
+showBag(2);
+
+}
+
+
+/* ================= CARRITO ================= */
+
+let cart=[];
+
+
+function addToCart(name,price){
+
+cart.push({
+name:name,
+price:price
+});
+
+updateCart();
+
+document
+.getElementById("cart")
+.classList.add("open");
+
+}
+
+
+function updateCart(){
+
+const box=document.getElementById("cartItems");
+
+if(cart.length===0){
+
+box.innerHTML="Tu carrito está vacío.";
+
+}else{
+
+box.innerHTML="";
+
+cart.forEach((item,index)=>{
+
+box.innerHTML+=`
+
+<div class="cart-item">
+
+<strong>${item.name}</strong>
+
+<br>
+
+$${item.price}
+
+<br>
+
+<button onclick="removeItem(${index})">
+Eliminar
+</button>
+
+</div>
+
+`;
+
+});
+
+}
+
+let total=cart.reduce(
+(sum,item)=>sum+item.price,0
+);
+
+document.getElementById(
+"cartTotal"
+).textContent=total;
+
+}
+
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+updateCart();
+
+}
+
+
+function closeCart(){
+
+document
+.getElementById("cart")
+.classList.remove("open");
+
+}
+
+
+/* ================= ADMIN ================= */
+
+function openAdmin(){
+
+document
+.getElementById("adminOverlay")
+.classList.add("show");
+
+}
+
+
+function closeAdmin(){
+
+document
+.getElementById("adminOverlay")
+.classList.remove("show");
+
+}
+
+
+function loginAdmin(){
+
+const password=
+document.getElementById("password").value;
+
+
+/* CONTRASEÑA DEL ADMIN */
+
+if(password==="NaboraAdmin2026!"){
+
+document.getElementById("login").style.display="none";
+
+document
+.getElementById("adminContent")
+.classList.add("show");
+
+}else{
+
+document.getElementById("loginError")
+.textContent=
+"Contraseña incorrecta.";
+
+}
+
+}
+
+
+/* ================= IA ================= */
+
+function sendMessage(){
+
+const input=
+document.getElementById("userInput");
+
+const messages=
+document.getElementById("messages");
+
+const text=input.value.trim();
+
+if(!text)return;
+
+
+const user=
+document.createElement("div");
+
+user.className="message user";
+
+user.textContent=text;
+
+messages.appendChild(user);
+
+input.value="";
+
+
+setTimeout(()=>{
+
+const bot=
+document.createElement("div");
+
+bot.className="message bot";
+
+let answer=
+"✨ Cuéntame qué ocasión tienes y qué prendas te gustan para crear tu look NABORA.";
+
+const q=text.toLowerCase();
+
+
+if(q.includes("fiesta")){
+
+answer=
+"✨ Para una fiesta te recomiendo la falda con estampado de hojas de otoño, el top gris, botas largas con tacón y la cartera de perlas.";
+
+}
+
+else if(q.includes("otoño")){
+
+answer=
+"🍂 Para otoño puedes combinar la chaqueta de cuero vegano, pantalón de tela, bufanda de seda y botas cortas.";
+
+}
+
+else if(q.includes("cartera")){
+
+answer=
+"👜 Si quieres destacar tu cartera, combina una pieza llamativa con prendas neutras para que el accesorio sea el protagonista.";
+
+}
+
+else if(q.includes("casual")){
+
+answer=
+"🤎 Para un look casual puedes usar la chaqueta de cuero vegano, pantalón de tela, gafas negras y botas cortas.";
+
+}
+
+bot.textContent=answer;
+
+messages.appendChild(bot);
+
+messages.scrollTop=messages.scrollHeight;
+
+},600);
+
+}
+
+
+/* ================= INICIAR ================= */
+
+const savedProducts=
+localStorage.getItem("naboraProducts");
+
+if(savedProducts){
+
+products=JSON.parse(savedProducts);
+
+}
+
+displayProducts();
 
 showCover();
 
-}
+loadBags();
 
+</script>
 
-function previousCover(){
-
-if(coverImages.length === 0)return;
-
-coverIndex--;
-
-if(coverIndex < 0){
-coverIndex = coverImages.length - 1;
-}
-
-showCover();
-
-}
-
-
-/* CAMBIO AUTOMÁTICO */
-
-setInterval(function(){
-
-if(coverImages.length > 1){
-nextCover();
-}
-
-},5000);
-
-
-/* =====================================================
-   PRODUCTOS
-===================================================== */
-
-const defaultProducts = [
-
-{
-id:1,
-name:"Poliéster blanco",
-price:20,
-category:"ropa",
-description:"Pieza blanca minimalista y versátil para crear looks elegantes.",
-image:""
-},
-
-{
-id:2,
-name:"Chaqueta de cuero vegano",
-price:40,
-category:"ropa",
-description:"Chaqueta de cuero vegano ideal para aportar estructura y carácter.",
-image:""
-},
-
-{
-id:3,
-name:"Pantalón de tela",
-price:30,
-category:"ropa",
-description:"Pan
+</body>
+</html>
 ```
