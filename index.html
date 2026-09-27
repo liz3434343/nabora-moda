@@ -1,595 +1,243 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NABORA | Moda & Carteras - Otoño 2026</title>
-<meta name="description" content="NABORA - Colección Otoño 2026. Moda, carteras y estilo.">
+// PRODUCTOS POR DEFECTO (si no hay nada guardado en localStorage)
+const productosDefault = [
+  {n:"Top Poliéster Blanco",p:"$20",i:"top-blanco.jpg"},
+  {n:"Chaqueta Cuero Vegano",p:"$40",i:"chaqueta-cuero.jpg"},
+  {n:"Pantalón de Tela",p:"$30",i:"pantalon-tela.jpg"},
+  {n:"Gafas Negras",p:"$20",i:"gafas-negras.jpg"},
+  {n:"Botas Cortas",p:"$50",i:"botas-cortas.jpg"},
+  {n:"Boina",p:"$15",i:"boina.jpg"},
+  {n:"Bufanda de Seda",p:"$20",i:"bufanda-seda.jpg"},
+  {n:"Falda Bordada Hojas",p:"$34",i:"falda-hojas.jpg"},
+  {n:"Botas Largas Tacón",p:"$75",i:"botas-largas.jpg"},
+  {n:"Top Gris Bordado",p:"$35",i:"top-bordado.jpg"},
+  {n:"Cartera de Perlas",p:"$250",i:"cartera-perlas.jpg"},
+  {n:"Cartera Perlas + Cuero",p:"$350",i:"cartera-cuero.jpg"}
+];
 
-<style>
-:root {
-  --nabora-fondo: #F5EFE6;
-  --nabora-crema: #FAF6F0;
-  --nabora-negro: #1A1A1A;
-  --nabora-acento: #8B7355;
-  --nabora-dorado: #C9A961;
-  --nabora-blanco: #FFFFFF;
-  --nabora-gris: #E8E0D5;
-  --nabora-texto-suave: #6B6259;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  background: var(--nabora-fondo);
-  color: var(--nabora-negro);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-img { max-width: 100%; height: auto; display: block; }
-a { color: inherit; text-decoration: none; }
-button { font-family: inherit; cursor: pointer; border: none; background: none; }
+// CARGAR PRODUCTOS (desde localStorage o los de defecto)
+const productos = JSON.parse(localStorage.getItem('nabora_productos') || 'null') || productosDefault;
 
-.header {
-  position: sticky; top: 0; background: var(--nabora-crema);
-  z-index: 1000; border-bottom: 1px solid var(--nabora-gris); padding: 12px 20px;
-}
-.header-inner {
-  max-width: 1200px; margin: 0 auto; display: flex;
-  align-items: center; justify-content: space-between; gap: 16px;
-}
-.logo { display: flex; align-items: center; gap: 10px; }
-.logo-img { height: 60px; width: auto; }
-.logo-text { display: flex; flex-direction: column; line-height: 1; }
-.logo-text .nombre { font-size: 22px; letter-spacing: 5px; font-weight: 400; }
-.logo-text .slogan { font-size: 8px; letter-spacing: 3px; color: var(--nabora-texto-suave); margin-top: 2px; }
-.nav { display: flex; align-items: center; gap: 28px; }
-.nav a { font-size: 14px; letter-spacing: 2px; text-transform: uppercase; position: relative; transition: color 0.3s; }
-.nav a::after {
-  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
-  background: var(--nabora-acento); transition: width 0.3s;
-}
-.nav a:hover::after { width: 100%; }
-.nav a:hover { color: var(--nabora-acento); }
-.menu-toggle { display: none; font-size: 26px; }
-
-.hero {
-  position: relative; height: 85vh; min-height: 500px; max-height: 750px;
-  overflow: hidden; background: var(--nabora-negro);
-}
-.slide {
-  position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease;
-  background-size: cover; background-position: center top;
-}
-.slide.active { opacity: 1; }
-.slide::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.65) 100%);
-}
-.slide-content {
-  position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
-  text-align: center; color: var(--nabora-blanco); z-index: 2; width: 90%; max-width: 600px;
-}
-.slide-content h1 {
-  font-size: clamp(24px, 5vw, 48px); font-weight: 400; letter-spacing: 4px;
-  margin-bottom: 12px; text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-}
-.slide-content p { font-size: clamp(13px, 2vw, 17px); letter-spacing: 2px; margin-bottom: 24px; }
-.btn-principal {
-  display: inline-block; padding: 14px 40px; background: var(--nabora-crema);
-  color: var(--nabora-negro); font-size: 13px; letter-spacing: 3px;
-  text-transform: uppercase; border: 1px solid var(--nabora-crema); transition: all 0.3s;
-}
-.btn-principal:hover { background: transparent; color: var(--nabora-crema); }
-.hero-dots {
-  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-  display: flex; gap: 10px; z-index: 5;
-}
-.hero-dots button { width: 30px; height: 3px; background: rgba(255,255,255,0.4); }
-.hero-dots button.active { background: var(--nabora-blanco); }
-
-.section { padding: 70px 20px; max-width: 1200px; margin: 0 auto; }
-.section-title {
-  text-align: center; font-size: clamp(24px, 4vw, 36px); font-weight: 400;
-  letter-spacing: 4px; margin-bottom: 8px; text-transform: uppercase;
-}
-.section-title::after {
-  content: ''; display: block; width: 50px; height: 1px;
-  background: var(--nabora-acento); margin: 18px auto 0;
-}
-.section-subtitle {
-  text-align: center; font-size: 13px; letter-spacing: 3px;
-  color: var(--nabora-texto-suave); margin-bottom: 45px; margin-top: 18px; text-transform: uppercase;
-}
-
-.productos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.producto {
-  background: var(--nabora-blanco); overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column;
-}
-.producto:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
-.producto-img { aspect-ratio: 1 / 1; overflow: hidden; background: var(--nabora-gris); }
-.producto-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
-.producto:hover .producto-img img { transform: scale(1.05); }
-.producto-info {
-  padding: 14px; text-align: center; flex: 1;
-  display: flex; flex-direction: column; justify-content: space-between;
-}
-.producto-nombre { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; line-height: 1.3; }
-.producto-precio { font-size: 17px; color: var(--nabora-acento); font-weight: bold; margin-bottom: 10px; }
-.btn-comprar {
-  display: inline-block; padding: 8px 20px; background: var(--nabora-negro);
-  color: var(--nabora-blanco); font-size: 11px; letter-spacing: 2px;
-  text-transform: uppercase; transition: all 0.3s; align-self: center;
-}
-.btn-comprar:hover { background: var(--nabora-acento); }
-
-.tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 30px; flex-wrap: wrap; }
-.tab {
-  padding: 10px 24px; font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--nabora-texto-suave); border: 1px solid var(--nabora-gris);
-  background: var(--nabora-blanco); transition: all 0.3s;
-}
-.tab.active, .tab:hover { background: var(--nabora-negro); color: var(--nabora-blanco); border-color: var(--nabora-negro); }
-.tab-content { display: none; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-.tab-content.active { display: grid; }
-.idea-card { position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: var(--nabora-gris); }
-.idea-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
-.idea-card:hover img { transform: scale(1.08); }
-.idea-card .etiqueta {
-  position: absolute; top: 12px; left: 12px; background: var(--nabora-crema);
-  color: var(--nabora-negro); padding: 5px 12px; font-size: 10px;
-  letter-spacing: 2px; text-transform: uppercase;
-}
-
-.footer { background: var(--nabora-negro); color: var(--nabora-crema); padding: 50px 20px 24px; text-align: center; }
-.footer-logo { font-size: 26px; letter-spacing: 6px; margin-bottom: 8px; }
-.footer-slogan { font-size: 10px; letter-spacing: 4px; color: var(--nabora-dorado); margin-bottom: 30px; }
-.footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 30px; }
-.footer-links a { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; }
-.footer-links a:hover { opacity: 1; color: var(--nabora-dorado); }
-.footer-copy { font-size: 11px; opacity: 0.5; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); }
-
-.chat-toggle {
-  position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
-  border-radius: 50%; background: var(--nabora-negro); color: var(--nabora-blanco);
-  font-size: 26px; box-shadow: 0 6px 20px rgba(0,0,0,0.25); z-index: 9999;
-  display: flex; align-items: center; justify-content: center; transition: transform 0.3s;
-}
-.chat-toggle:hover { transform: scale(1.08); }
-.chat-badge {
-  position: absolute; top: -4px; right: -4px; background: var(--nabora-dorado);
-  color: var(--nabora-negro); font-size: 12px; font-weight: bold;
-  width: 22px; height: 22px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-}
-.chat-window {
-  position: fixed; bottom: 90px; right: 20px; width: 370px; max-width: calc(100vw - 40px);
-  height: 560px; max-height: calc(100vh - 120px); background: var(--nabora-blanco);
-  border-radius: 18px; box-shadow: 0 12px 40px rgba(0,0,0,0.2); display: none;
-  flex-direction: column; overflow: hidden; z-index: 9998;
-}
-.chat-window.open { display: flex; }
-.chat-header {
-  background: var(--nabora-negro); color: var(--nabora-blanco); padding: 14px 16px;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.chat-header-info { display: flex; align-items: center; gap: 10px; }
-.chat-avatar {
-  width: 40px; height: 40px; border-radius: 50%; background: var(--nabora-fondo);
-  color: var(--nabora-negro); display: flex; align-items: center; justify-content: center;
-  font-weight: bold; font-size: 18px;
-}
-.chat-header h3 { margin: 0; font-size: 15px; letter-spacing: 2px; font-weight: 400; }
-.chat-status { margin: 0; font-size: 11px; opacity: 0.85; display: flex; align-items: center; gap: 5px; }
-.status-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; }
-.chat-close { color: var(--nabora-blanco); font-size: 26px; line-height: 1; padding: 0 4px; }
-.chat-messages {
-  flex: 1; overflow-y: auto; padding: 16px; background: var(--nabora-fondo);
-  display: flex; flex-direction: column; gap: 10px;
-}
-.message { display: flex; }
-.message.bot { justify-content: flex-start; }
-.message.user { justify-content: flex-end; }
-.bubble { max-width: 78%; padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.5; word-wrap: break-word; }
-.message.bot .bubble { background: var(--nabora-blanco); color: var(--nabora-negro); border-bottom-left-radius: 4px; }
-.message.user .bubble { background: var(--nabora-negro); color: var(--nabora-blanco); border-bottom-right-radius: 4px; }
-.typing { display: flex; gap: 4px; padding: 12px 16px; }
-.typing span { width: 8px; height: 8px; border-radius: 50%; background: var(--nabora-acento); animation: bounce 1.4s infinite; }
-.typing span:nth-child(2) { animation-delay: 0.2s; }
-.typing span:nth-child(3) { animation-delay: 0.4s; }
-@keyframes bounce {
-  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-  30% { transform: translateY(-6px); opacity: 1; }
-}
-.quick-replies { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
-.quick-replies button {
-  background: transparent; border: 1px solid var(--nabora-acento); color: var(--nabora-acento);
-  padding: 6px 12px; border-radius: 20px; font-size: 12px;
-}
-.quick-replies button:hover { background: var(--nabora-acento); color: var(--nabora-blanco); }
-.chat-input-area {
-  display: flex; padding: 12px; background: var(--nabora-blanco);
-  border-top: 1px solid var(--nabora-gris); gap: 8px;
-}
-#userInput {
-  flex: 1; border: 1px solid var(--nabora-gris); border-radius: 24px; padding: 10px 16px;
-  font-size: 14px; font-family: inherit; outline: none; background: var(--nabora-fondo);
-}
-#userInput:focus { border-color: var(--nabora-acento); }
-.send-btn {
-  width: 42px; height: 42px; border-radius: 50%; background: var(--nabora-negro);
-  color: var(--nabora-blanco); display: flex; align-items: center; justify-content: center;
-}
-
-@media (min-width: 768px) {
-  .productos-grid { grid-template-columns: repeat(3, 1fr); }
-  .tab-content { grid-template-columns: repeat(3, 1fr); }
-  .menu-toggle { display: none; }
-}
-@media (min-width: 1024px) {
-  .productos-grid { grid-template-columns: repeat(4, 1fr); }
-}
-@media (max-width: 767px) {
-  .menu-toggle { display: block; }
-  .nav {
-    position: fixed; top: 0; right: -100%; width: 75%; max-width: 320px; height: 100vh;
-    background: var(--nabora-crema); flex-direction: column; justify-content: center;
-    gap: 28px; transition: right 0.35s ease; box-shadow: -4px 0 20px rgba(0,0,0,0.15);
-    z-index: 1001; padding: 40px;
-  }
-  .nav.open { right: 0; }
-  .nav a { font-size: 16px; letter-spacing: 3px; }
-  .logo-img { height: 45px; }
-  .logo-text .nombre { font-size: 18px; letter-spacing: 4px; }
-  .hero { height: 75vh; min-height: 450px; }
-  .section { padding: 50px 16px; }
-  .chat-window {
-    width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh;
-    bottom: 0; right: 0; border-radius: 0;
-  }
-  .chat-toggle { bottom: 15px; right: 15px; width: 55px; height: 55px; }
-}
-</style>
-   <body>
-
-<header class="header" id="header">
-  <div class="header-inner">
-    <a href="#" class="logo">
-      <img src="img/logo.png" alt="NABORA" class="logo-img">
-      <div class="logo-text">
-        <span class="nombre">NABORA</span>
-        <span class="slogan">MODA & CARTERAS</span>
-      </div>
-    </a>
-    <nav class="nav" id="nav">
-      <a href="#inicio">Inicio</a>
-      <a href="#coleccion">Colección</a>
-      <a href="#ideas">Ideas</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-    <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
-  </div>
-</header>
-
-<section class="hero" id="inicio">
-  <div class="slide active" style="background-image: url('img/hero-1.jpg');">
-    <div class="slide-content">
-      <h1>OTOÑO 2026</h1>
-      <p>Bordados, texturas y calidez</p>
-      <a href="#coleccion" class="btn-principal">Ver Colección</a>
+// RENDERIZAR PRODUCTOS
+document.getElementById('grid').innerHTML = productos.map(p => `
+  <div class="producto">
+    <div class="producto-img">
+      <img src="${p.i.startsWith('data:') ? p.i : 'img/' + p.i}" alt="${p.n}" loading="lazy">
+    </div>
+    <div class="producto-info">
+      <h3 class="producto-nombre">${p.n}</h3>
+      <p class="producto-precio">${p.p}</p>
+      <button class="btn-comprar">Comprar</button>
     </div>
   </div>
-  <div class="slide" style="background-image: url('img/hero-2.jpg');">
-    <div class="slide-content">
-      <h1>CUERO & PIEL</h1>
-      <p>Actitud y elegancia</p>
-      <a href="#coleccion" class="btn-principal">Descubrir</a>
-    </div>
-  </div>
-  <div class="slide" style="background-image: url('img/hero-3.jpg');">
-    <div class="slide-content">
-      <h1>CHIC URBANO</h1>
-      <p>El equilibrio perfecto</p>
-      <a href="#ideas" class="btn-principal">Ver Looks</a>
-    </div>
-  </div>
-  <div class="hero-dots" id="heroDots">
-    <button class="active" onclick="irASlide(0)"></button>
-    <button onclick="irASlide(1)"></button>
-    <button onclick="irASlide(2)"></button>
-  </div>
-</section>
+`).join('');
 
-<section class="section" id="coleccion">
-  <h2 class="section-title">Colección Otoño 2026</h2>
-  <p class="section-subtitle">12 piezas seleccionadas para ti</p>
-
-  <div class="productos-grid">
-
-    <div class="producto">
-      <div class="producto-img"><img src="img/top-blanco.jpg" alt="Top poliéster blanco" loading="lazy"></div>
-      <div class="producto-info">
-        <h3 class="producto-nombre">Top Poliéster Blanco</h3>
-        <p class="producto-precio">$20</p>
-        <button class="btn-comprar">Comprar</button>
-      </div>
-    </div>
-
-    <div class="producto">
-      <div class="producto-img"><img src="img/chaqueta-cuero.jpg" alt="Chaqueta cuero vegano" loading="lazy"></div>
-      <div class="producto-info">
-        <h3 class="producto-nombre">Chaqueta Cuero Vegano</h3>
-        <p class="producto-precio">$40</p>
-        <button class="btn-comprar">Comprar</button>
-      </div>
-    </div>
-
-    <div class="producto">
-      <div class="producto-img"><img src="img/pantalon-tela.jpg" alt="Pantalón de tela" loading="lazy"></div>
-      <div class="producto-info">
-        <h3 class="producto-nombre">Pantalón de Tela</h3>
-        <p class="producto-precio">$30</p>
-        <button class="btn-comprar">Comprar</button>
-      </div>
-    </div>
-
-    <div class="producto">
-      <div class="producto-img"><img src="img/gafas-negras.jpg" alt="Gafas negras" loading="lazy"></div>
-      <div class="producto-info">
-        <h3 class="producto-nombre">Gafas Negras</h3>
-        <p class="producto-precio">$20</p>
-        <button class="btn-comprar">Comprar</button>
-      </div>
-    </div>
-
-    <div class="producto">
-      <div class="producto-img"><img src="img/botas-cortas.jpg" alt="Botas cortas" loading="lazy"></div>
-      <div class="producto-info">
-        <h3 class="producto-nombre">Botas Cortas</h3>
-        <p class="producto-precio">$50</p>
-        <button class="btn-comprar">Comprar</button>
-      </div>
-    </div>
-
-    <div class="producto">
-      <div class="producto-img"><img src="img/boina.jpg" alt="Boina" loading="lazy"></div>
-      <div class="producto-info">
-        <h3 class="producto-nombre">Boina</h3>
-        <p class="producto-precio">$15</p>
-        <button class="btn-comprar">Comprar</button>
-      </div>
-    </div>
-
-    <div class="producto">
-      <div class="producto-img"><img src="img/bufanda-seda.jpg" alt="Bufanda de seda" loading="lazy"></div>
-      <div class="producto-info">
-        <h3 class="producto-nombre">Bufanda de Seda</h3>
-        <p class="producto-precio">$20</p>
-        <button class="btn-comprar">Comprar</button>
-      </div>
-    </div>
-
-    <div class="producto">
-      <div class="producto-img"><img src="img/falda-hojas.jpg" alt="Falda bordada hojas" loading="lazy"></div>
-      <div class="producto-info">
-        <h3 class="producto-nombre">Falda Bordada Hojas</h3>
-        <p class="producto-precio">$34</p>
-        <button class="btn-comprar">Comprar</button>
-      </div>
-    </div>
-
-    <div class="producto">
-      <div class="producto-img"><img src="img/botas-largas.jpg" alt="Botas largas tacón" loading="lazy"></div>
-      <div class="producto-info">
-        <h3 class="producto-nombre">Botas Largas Tacón</h3>
-        <p class="producto-precio">$75</p>
-        <button class="btn-comprar">Comprar</button>
-      </div>
-    </div>
-
-    <div class="producto">
-      <div class="producto-img"><img src="img/top-bordado.jpg" alt="Top gris bordado" loading="lazy"></div>
-      <div class="producto-info">
-        <h3 class="producto-nombre">Top Gris Bordado</h3>
-        <p class="producto-precio">$35</p>
-        <button class="btn-comprar">Comprar</button>
-      </div>
-    </div>
-
-    <div class="producto">
-      <div class="producto-img"><img src="img/cartera-perlas.jpg" alt="Cartera de perlas" loading="lazy"></div>
-      <div class="producto-info">
-        <h3 class="producto-nombre">Cartera de Perlas</h3>
-        <p class="producto-precio">$250</p>
-        <button class="btn-comprar">Comprar</button>
-      </div>
-    </div>
-
-    <div class="producto">
-      <div class="producto-img"><img src="img/cartera-cuero.jpg" alt="Cartera perlas con cuero" loading="lazy"></div>
-      <div class="producto-info">
-        <h3 class="producto-nombre">Cartera Perlas + Cuero</h3>
-        <p class="producto-precio">$350</p>
-        <button class="btn-comprar">Comprar</button>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="section" id="ideas">
-  <h2 class="section-title">Ideas para Ti</h2>
-  <p class="section-subtitle">Inspiración para cada momento</p>
-
-  <div class="tabs">
-    <button class="tab active" onclick="cambiarTab(event, 'diario')">Diario</button>
-    <button class="tab" onclick="cambiarTab(event, 'fiesta')">Fiesta</button>
-    <button class="tab" onclick="cambiarTab(event, 'otono')">Otoño 2026</button>
-  </div>
-
-  <div class="tab-content active" id="diario">
-    <div class="idea-card"><img src="img/top-blanco.jpg" alt="Casual" loading="lazy"><span class="etiqueta">Casual</span></div>
-    <div class="idea-card"><img src="img/pantalon-tela.jpg" alt="Oficina" loading="lazy"><span class="etiqueta">Oficina</span></div>
-    <div class="idea-card"><img src="img/botas-cortas.jpg" alt="Fin de semana" loading="lazy"><span class="etiqueta">Fin de semana</span></div>
-  </div>
-
-  <div class="tab-content" id="fiesta">
-    <div class="idea-card"><img src="img/cartera-perlas.jpg" alt="Cóctel" loading="lazy"><span class="etiqueta">Cóctel</span></div>
-    <div class="idea-card"><img src="img/top-bordado.jpg" alt="Noche" loading="lazy"><span class="etiqueta">Noche</span></div>
-    <div class="idea-card"><img src="img/botas-largas.jpg" alt="Gala" loading="lazy"><span class="etiqueta">Gala</span></div>
-  </div>
-
-  <div class="tab-content" id="otono">
-    <div class="idea-card"><img src="img/chaqueta-cuero.jpg" alt="Cuero y piel" loading="lazy"><span class="etiqueta">Cuero & Piel</span></div>
-    <div class="idea-card"><img src="img/falda-hojas.jpg" alt="Bordados" loading="lazy"><span class="etiqueta">Bordados</span></div>
-    <div class="idea-card"><img src="img/boina.jpg" alt="Accesorios" loading="lazy"><span class="etiqueta">Accesorios</span></div>
-  </div>
-</section>
-      <footer class="footer" id="contacto">
-  <div class="footer-logo">NABORA</div>
-  <p class="footer-slogan">MODA & CARTERAS</p>
-  <div class="footer-links">
-    <a href="#inicio">Inicio</a>
-    <a href="#coleccion">Colección</a>
-    <a href="#ideas">Ideas</a>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="mailto:contacto@nabora.com">Contacto</a>
-  </div>
-  <p class="footer-copy">© 2026 NABORA. Todos los derechos reservados.</p>
-</footer>
-
-<button class="chat-toggle" id="chatToggle" aria-label="Abrir chat">
-  💬
-  <span class="chat-badge">1</span>
-</button>
-
-<div class="chat-window" id="chatWindow">
-  <div class="chat-header">
-    <div class="chat-header-info">
-      <div class="chat-avatar">N</div>
-      <div>
-        <h3>NABORA</h3>
-        <p class="chat-status"><span class="status-dot"></span> En línea</p>
-      </div>
-    </div>
-    <button class="chat-close" id="chatClose">×</button>
-  </div>
-
-  <div class="chat-messages" id="chat">
-    <div class="message bot">
-      <div class="bubble">¡Bienvenida a <strong>NABORA</strong>! Soy tu asistente personal de moda. Cuéntame, ¿en qué puedo servirte hoy? ✨</div>
-    </div>
-    <div class="quick-replies">
-      <button onclick="quickReply('¿Qué colores me favorecen?')">¿Qué colores me favorecen?</button>
-      <button onclick="quickReply('Ideas para un look de fiesta')">Look de fiesta</button>
-      <button onclick="quickReply('Combina una cartera con mi outfit')">Combinar cartera</button>
-    </div>
-  </div>
-
-  <div class="chat-input-area">
-    <input type="text" id="userInput" placeholder="Escribe tu mensaje..." autocomplete="off" maxlength="300">
-    <button class="send-btn" onclick="sendMessage()" aria-label="Enviar">
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-        <path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/>
-      </svg>
-    </button>
-  </div>
-</div>
-
-<script>
-// ============ CARRUSEL ============
+// CARRUSEL
 let slideActual = 0;
 const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.hero-dots button');
-
-function irASlide(n) {
+function irASlide(n){
   slides.forEach(s => s.classList.remove('active'));
   dots.forEach(d => d.classList.remove('active'));
   slides[n].classList.add('active');
   dots[n].classList.add('active');
   slideActual = n;
 }
-
 setInterval(() => {
   slideActual = (slideActual + 1) % slides.length;
   irASlide(slideActual);
 }, 5000);
 
-// ============ TABS ============
-function cambiarTab(e, id) {
+// TABS
+function cambiarTab(e, id){
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   e.target.classList.add('active');
   document.getElementById(id).classList.add('active');
 }
 
-// ============ MENÚ MÓVIL ============
-const menuToggle = document.getElementById('menuToggle');
-const nav = document.getElementById('nav');
-menuToggle.addEventListener('click', () => nav.classList.toggle('open'));
-nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+// MENÚ MÓVIL
+document.getElementById('menuToggle').onclick = () => {
+  document.getElementById('nav').classList.toggle('open');
+};
 
-// ============ CHAT ============
-const WORKER_URL = "https://nabora-ai.lizzzzzzzzzzzznabiiiiiiiiiiiii.workers.dev/";
+// CHAT
+const WORKER = "https://nabora-ai.lizzzzzzzzzzzznabiiiiiiiiiiiii.workers.dev/";
+const chatWin = document.getElementById('chatWindow');
 const chatToggle = document.getElementById('chatToggle');
-const chatClose = document.getElementById('chatClose');
-const chatWindow = document.getElementById('chatWindow');
-const chatBadge = document.querySelector('.chat-badge');
-
-chatToggle.addEventListener('click', () => {
-  chatWindow.classList.add('open');
+chatToggle.onclick = () => {
+  chatWin.classList.add('open');
   chatToggle.style.display = 'none';
-  if (chatBadge) chatBadge.style.display = 'none';
-  setTimeout(() => document.getElementById('userInput').focus(), 300);
-});
-
-chatClose.addEventListener('click', () => {
-  chatWindow.classList.remove('open');
+};
+document.getElementById('chatClose').onclick = () => {
+  chatWin.classList.remove('open');
   chatToggle.style.display = 'flex';
-});
-
-document.getElementById('userInput').addEventListener('keypress', (e) => {
+};
+document.getElementById('userInput').addEventListener('keypress', e => {
   if (e.key === 'Enter') sendMessage();
 });
-
-function quickReply(texto) {
-  document.getElementById('userInput').value = texto;
-  sendMessage();
-}
-
-function addMessage(text, sender) {
+function addMsg(text, sender){
   const chat = document.getElementById('chat');
-  const msg = document.createElement('div');
-  msg.className = 'message ' + sender;
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble';
-  bubble.textContent = text;
-  msg.appendChild(bubble);
-  chat.appendChild(msg);
+  const m = document.createElement('div');
+  m.className = 'message ' + sender;
+  m.innerHTML = '<div class="bubble">' + text + '</div>';
+  chat.appendChild(m);
   chat.scrollTop = chat.scrollHeight;
-  return bubble;
+  return m.querySelector('.bubble');
 }
-
-function addTyping() {
-  const chat = document.getElementById('chat');
-  const msg = document.createElement('div');
-  msg.className = 'message bot';
-  msg.id = 'typingIndicator';
-  msg.innerHTML = '<div class="bubble typing"><span></span><span></span><span></span></div>';
-  chat.appendChild(msg);
-  chat.scrollTop = chat.scrollHeight;
-  return msg;
-}
-
-async function sendMessage() {
+async function sendMessage(){
   const input = document.getElementById('userInput');
   const text = input.value.trim();
   if (!text) return;
-
-  addMessage(text, 'user');
+  addMsg(text, 'user');
   input.value = '';
-  input.focus();
-
-  const
+  const bubble = addMsg('...', 'bot');
+  try {
+    const r = await fetch(WORKER, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({message: text})
+    });
+    const data = await r.json();
+    bubble.textContent = data.answer || data.response || 'Lo siento, no pude responder.';
+  } catch(e) {
+    bubble.textContent = '⚠️ Error de conexión.';
+    console.error(e);
+  }
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin NABORA</title>
+<style>
+:root{--f:#F5EFE6;--n:#1A1A1A;--a:#8B7355;--b:#FFF;--g:#E8E0D5}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,serif;background:var(--f);color:var(--n);padding:20px}
+.login{max-width:400px;margin:80px auto;background:var(--b);padding:40px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,.1)}
+.login h1{letter-spacing:5px;margin-bottom:30px;font-weight:400}
+.login input{width:100%;padding:12px;border:1px solid var(--g);margin-bottom:15px;font-size:14px;font-family:inherit;background:var(--f)}
+.login button{width:100%;padding:14px;background:var(--n);color:var(--b);letter-spacing:2px;text-transform:uppercase;font-size:13px}
+.panel{max-width:900px;margin:0 auto;display:none}
+.panel.on{display:block}
+.panel h1{letter-spacing:4px;margin-bottom:24px;font-weight:400;text-align:center}
+.card{background:var(--b);padding:20px;margin-bottom:16px;display:grid;grid-template-columns:100px 1fr;gap:16px;align-items:center}
+.card img{width:100%;height:100px;object-fit:cover;background:var(--g)}
+.card input{width:100%;padding:8px;border:1px solid var(--g);font-family:inherit;margin-bottom:8px;font-size:14px;background:var(--f)}
+.card .del{background:#c0392b;color:white;padding:8px 16px;font-size:12px;letter-spacing:1px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0;justify-content:center}
+.actions button{padding:12px 24px;background:var(--n);color:var(--b);font-size:13px;letter-spacing:2px;text-transform:uppercase}
+.actions button.alt{background:var(--a)}
+.actions button.exit{background:#c0392b}
+.info{text-align:center;font-size:12px;color:#888;margin-top:20px}
+</style>
 </head>
+<body>
+
+<div class="login" id="login">
+  <h1>NABORA</h1>
+  <p style="margin-bottom:20px;font-size:13px;color:#888">Panel de Administración</p>
+  <input type="password" id="pass" placeholder="Contraseña" onkeypress="if(event.key==='Enter')entrar()">
+  <button onclick="entrar()">Entrar</button>
+  <p id="error" style="color:#c0392b;margin-top:15px;font-size:13px"></p>
+</div>
+
+<div class="panel" id="panel">
+  <h1>Panel NABORA</h1>
+  <div class="actions">
+    <button class="alt" onclick="agregar()">+ Agregar Producto</button>
+    <button onclick="guardar()">💾 Guardar Cambios</button>
+    <button class="exit" onclick="salir()">Salir</button>
+  </div>
+  <div id="lista"></div>
+  <div class="actions">
+    <button onclick="guardar()">💾 Guardar Cambios</button>
+  </div>
+  <p class="info">Los cambios se guardan en este navegador.</p>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
+// CONTRASEÑA (cámbiala por la que quieras)
+const PASSWORD = "nabora2026";
+
+const productosDefault = [
+  {n:"Top Poliéster Blanco",p:"$20",i:"top-blanco.jpg"},
+  {n:"Chaqueta Cuero Vegano",p:"$40",i:"chaqueta-cuero.jpg"},
+  {n:"Pantalón de Tela",p:"$30",i:"pantalon-tela.jpg"},
+  {n:"Gafas Negras",p:"$20",i:"gafas-negras.jpg"},
+  {n:"Botas Cortas",p:"$50",i:"botas-cortas.jpg"},
+  {n:"Boina",p:"$15",i:"boina.jpg"},
+  {n:"Bufanda de Seda",p:"$20",i:"bufanda-seda.jpg"},
+  {n:"Falda Bordada Hojas",p:"$34",i:"falda-hojas.jpg"},
+  {n:"Botas Largas Tacón",p:"$75",i:"botas-largas.jpg"},
+  {n:"Top Gris Bordado",p:"$35",i:"top-bordado.jpg"},
+  {n:"Cartera de Perlas",p:"$250",i:"cartera-perlas.jpg"},
+  {n:"Cartera Perlas + Cuero",p:"$350",i:"cartera-cuero.jpg"}
+];
+
+let productos = JSON.parse(localStorage.getItem('nabora_productos') || 'null') || [...productosDefault];
+
+function entrar(){
+  const p = document.getElementById('pass').value;
+  if (p === PASSWORD){
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('panel').classList.add('on');
+    render();
+  } else {
+    document.getElementById('error').textContent = 'Contraseña incorrecta';
+  }
+}
+
+function salir(){
+  location.reload();
+}
+
+function render(){
+  document.getElementById('lista').innerHTML = productos.map((p, i) => `
+    <div class="card">
+      <div>
+        <img src="${p.i.startsWith('data:') ? p.i : 'img/' + p.i}" alt="">
+        <input type="file" accept="image/*" onchange="cambiarFoto(event, ${i})" style="margin-top:6px;font-size:11px;padding:4px">
+      </div>
+      <div>
+        <input type="text" value="${p.n}" placeholder="Nombre" onchange="editar(${i},'n',this.value)">
+        <input type="text" value="${p.p}" placeholder="Precio" onchange="editar(${i},'p',this.value)">
+        <button class="del" onclick="borrar(${i})">Eliminar</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function editar(i, campo, valor){
+  productos[i][campo] = valor;
+}
+
+function borrar(i){
+  if (confirm('¿Eliminar este producto?')){
+    productos.splice(i, 1);
+    render();
+  }
+}
+
+function agregar(){
+  productos.push({n:"Nuevo Producto",p:"$0",i:"placeholder.jpg"});
+  render();
+}
+
+function cambiarFoto(e, i){
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    productos[i].i = reader.result;
+    render();
+  };
+  reader.readAsDataURL(file);
+}
+
+function guardar(){
+  localStorage.setItem('nabora_productos', JSON.stringify(productos));
+  alert('✅ Cambios guardados. Ve a la página principal para verlos.');
+}
