@@ -3,163 +3,2468 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>NABORA — Colección Otoño 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NABORA | Colección Otoño 2026</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
 body{
-font-family:Georgia,"Times New Roman",serif;
-background:#f7f2eb;color:#181512
+    font-family:Georgia,"Times New Roman",serif;
+    background:#f7f3ed;
+    color:#191613;
 }
-button,input,textarea{font-family:Arial,sans-serif}
 
-/* NAV */
+button,input,textarea,select{
+    font-family:Arial,sans-serif;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
 nav{
-position:sticky;top:0;z-index:1000;
-height:75px;padding:0 5%;
-display:flex;align-items:center;justify-content:space-between;
-background:#f7f2ebee;border-bottom:1px solid #ddd3c8
+    height:75px;
+    padding:0 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#f7f3ed;
+    border-bottom:1px solid #ddd4ca;
 }
-.logo{font-size:25px;letter-spacing:8px}
-.navlinks{display:flex;gap:25px;list-style:none}
-.navlinks a{color:#181512;text-decoration:none;font:11px Arial;letter-spacing:1px}
-.navbuttons{display:flex;gap:7px}
-.navbuttons button{
-border:1px solid #181512;background:transparent;padding:11px 13px;
-cursor:pointer;font-size:10px
-}
-.navbuttons .dark{background:#181512;color:white}
 
-/* CARRUSEL */
-.carousel{
-height:calc(100vh - 75px);min-height:580px;
-position:relative;overflow:hidden;background:#302a26
+.logo{
+    font-size:25px;
+    letter-spacing:8px;
 }
-.slides{height:100%;position:relative}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:#191613;
+    text-decoration:none;
+    font:11px Arial,sans-serif;
+    letter-spacing:1.5px;
+}
+
+.nav-right{
+    display:flex;
+    gap:8px;
+}
+
+.nav-btn{
+    padding:10px 13px;
+    background:transparent;
+    border:1px solid #191613;
+    cursor:pointer;
+    font-size:10px;
+}
+
+.nav-btn.dark{
+    background:#191613;
+    color:white;
+}
+
+/* =========================
+   CARRUSEL
+========================= */
+
+.hero{
+    height:calc(100vh - 75px);
+    min-height:580px;
+    position:relative;
+    overflow:hidden;
+    background:#2d2824;
+}
+
 .slide{
-position:absolute;inset:0;opacity:0;
-transition:opacity .7s ease
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition:opacity 1s ease;
+    pointer-events:none;
 }
-.slide.active{opacity:1}
+
+.slide.active{
+    opacity:1;
+}
+
 .slide img{
-width:100%;height:100%;object-fit:cover
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
-.slide-empty{
-width:100%;height:100%;
-display:flex;align-items:center;justify-content:center;
-color:#aaa;background:#3b342e;font:12px Arial;letter-spacing:3px
+
+.no-slide-image{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#403830;
+    color:#cfc4b9;
+    font:12px Arial;
+    letter-spacing:4px;
 }
-.overlay{position:absolute;inset:0;background:#0006}
-.hero-text{
-position:absolute;z-index:5;inset:0;
-display:flex;align-items:center;justify-content:center;
-text-align:center;color:white
+
+.hero-dark{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.43);
+    z-index:2;
 }
-.hero-text small{font:11px Arial;letter-spacing:6px}
-.hero-text h1{
-font-size:clamp(65px,11vw,130px);
-font-weight:normal;letter-spacing:15px;margin:18px 0
+
+.hero-content{
+    position:absolute;
+    z-index:5;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+    padding:30px;
 }
-.hero-text h2{font-size:24px;font-weight:normal;letter-spacing:4px}
-.hero-text p{
-max-width:550px;margin:20px auto;
-font:14px/1.8 Arial;color:#eee
+
+.hero-content small{
+    font:11px Arial;
+    letter-spacing:6px;
 }
-.hero-text a{
-display:inline-block;background:white;color:#181512;
-padding:15px 25px;text-decoration:none;
-font:10px Arial;letter-spacing:2px
+
+.hero-content h1{
+    font-size:clamp(65px,11vw,135px);
+    font-weight:normal;
+    letter-spacing:14px;
+    margin:18px 0;
 }
+
+.hero-content h2{
+    font-size:25px;
+    font-weight:normal;
+    letter-spacing:4px;
+}
+
+.hero-content p{
+    max-width:600px;
+    margin:20px auto 30px;
+    font:14px/1.8 Arial;
+}
+
+.hero-link{
+    display:inline-block;
+    background:white;
+    color:#191613;
+    text-decoration:none;
+    padding:16px 25px;
+    font:10px Arial;
+    letter-spacing:2px;
+}
+
 .arrow{
-position:absolute;z-index:8;top:50%;transform:translateY(-50%);
-border:1px solid #fff8;background:#0005;color:white;
-width:45px;height:55px;font-size:25px;cursor:pointer
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:10;
+    width:45px;
+    height:55px;
+    border:1px solid rgba(255,255,255,.5);
+    background:rgba(0,0,0,.35);
+    color:white;
+    font-size:28px;
+    cursor:pointer;
 }
-.prev{left:25px}.next{right:25px}
+
+.arrow:hover{
+    background:white;
+    color:#191613;
+}
+
+.arrow.left{
+    left:25px;
+}
+
+.arrow.right{
+    right:25px;
+}
+
 .dots{
-position:absolute;z-index:8;bottom:25px;
-left:50%;transform:translateX(-50%);
-display:flex;gap:8px
+    position:absolute;
+    z-index:10;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:10px;
 }
+
 .dot{
-width:9px;height:9px;border-radius:50%;
-border:1px solid white;background:transparent;cursor:pointer
-}
-.dot.active{background:white}
-
-/* BANNER */
-.banner{
-padding:65px 20px;text-align:center;
-background:#181512;color:white
-}
-.banner h2{font-size:42px;font-weight:normal;letter-spacing:4px}
-.banner p{
-margin-top:15px;color:#bdb3aa;
-font:10px Arial;letter-spacing:4px
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    border:1px solid white;
+    background:transparent;
+    cursor:pointer;
 }
 
-/* SECCIONES */
-.section{padding:90px 5%}
-.title{text-align:center;font-size:42px;font-weight:normal}
-.subtitle{
-text-align:center;margin:13px 0 45px;
-font:10px Arial;letter-spacing:3px;color:#81776e
+.dot.active{
+    background:white;
 }
 
-/* FILTROS */
+/* =========================
+   BANNER
+========================= */
+
+.collection-banner{
+    background:#191613;
+    color:white;
+    text-align:center;
+    padding:65px 20px;
+}
+
+.collection-banner h2{
+    font-size:42px;
+    font-weight:normal;
+    letter-spacing:4px;
+}
+
+.collection-banner p{
+    margin-top:15px;
+    font:10px Arial;
+    letter-spacing:4px;
+    color:#c5bbb2;
+}
+
+/* =========================
+   SECCIONES
+========================= */
+
+.section{
+    padding:90px 6%;
+}
+
+.section-title{
+    text-align:center;
+    font-size:42px;
+    font-weight:normal;
+}
+
+.section-subtitle{
+    text-align:center;
+    margin:15px 0 45px;
+    color:#81766d;
+    font:10px Arial;
+    letter-spacing:3px;
+}
+
+/* =========================
+   FILTROS
+========================= */
+
 .filters{
-display:flex;justify-content:center;gap:8px;
-flex-wrap:wrap;margin-bottom:40px
-}
-.filters button{
-padding:11px 18px;border:1px solid #cfc3b8;
-background:transparent;cursor:pointer;font-size:10px
-}
-.filters button.active,.filters button:hover{
-background:#181512;color:white
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:40px;
 }
 
-/* PRODUCTOS */
+.filter{
+    padding:11px 18px;
+    background:transparent;
+    border:1px solid #cfc3b9;
+    cursor:pointer;
+    font-size:10px;
+}
+
+.filter.active,
+.filter:hover{
+    background:#191613;
+    color:white;
+}
+
+/* =========================
+   PRODUCTOS
+========================= */
+
 .products{
-max-width:1250px;margin:auto;
-display:grid;grid-template-columns:repeat(4,1fr);gap:22px
-}
-.product{
-background:#fffdf9;border:1px solid #ddd3c8;
-transition:.3s;overflow:hidden
-}
-.product:hover{
-transform:translateY(-5px);
-box-shadow:0 15px 35px #0001
-}
-.product-image{
-height:300px;background:#e3dad0;position:relative
-}
-.product-image img{width:100%;height:100%;object-fit:cover}
-.noimage{
-height:100%;display:flex;align-items:center;justify-content:center;
-text-align:center;color:#766c63;font:10px Arial;letter-spacing:1px
-}
-.product-info{padding:20px}
-.cat{font:9px Arial;letter-spacing:2px;color:#968a80}
-.product h3{font-size:17px;font-weight:normal;margin:8px 0}
-.desc{font:11px/1.6 Arial;color:#766d65}
-.price{font:bold 17px Arial;margin-top:12px}
-.add{
-width:100%;border:0;background:#181512;color:white;
-padding:13px;margin-top:14px;cursor:pointer;font-size:9px;letter-spacing:1px
+    max-width:1250px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
 }
 
-/* CARTERAS */
+.product{
+    background:#fffdf9;
+    border:1px solid #ddd4ca;
+    transition:.3s;
+    overflow:hidden;
+}
+
+.product:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.product-image{
+    height:310px;
+    background:#e4dcd3;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.placeholder{
+    text-align:center;
+    color:#81766d;
+    font:10px Arial;
+    letter-spacing:2px;
+}
+
+.product-info{
+    padding:20px;
+}
+
+.product-category{
+    font:9px Arial;
+    letter-spacing:2px;
+    color:#988d83;
+}
+
+.product-name{
+    margin:9px 0;
+    font-size:17px;
+    font-weight:normal;
+}
+
+.product-description{
+    color:#756c64;
+    font:11px/1.7 Arial;
+    min-height:55px;
+}
+
+.product-price{
+    margin-top:12px;
+    font:bold 17px Arial;
+}
+
+.add-cart{
+    width:100%;
+    margin-top:15px;
+    padding:13px;
+    border:0;
+    background:#191613;
+    color:white;
+    cursor:pointer;
+    font-size:9px;
+    letter-spacing:1.5px;
+}
+
+.add-cart:hover{
+    background:#514840;
+}
+
+/* =========================
+   CARTERAS
+========================= */
+
 .bags{
-background:#181512;color:white
+    background:#191613;
+    color:white;
 }
-.baggrid{
-max-width:1100px;margin:auto;
-display:grid;grid-template-columns:repeat(2,1fr);gap:30px
+
+.bag-grid{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:30px;
 }
+
 .bag{
-background:#
+    background:#29231f;
+    border:1px solid #4c443d;
+}
+
+.bag-photo{
+    height:430px;
+    background:#38312b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.bag-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.bag-info{
+    padding:30px;
+}
+
+.bag-label{
+    color:#c8aa90;
+    font:9px Arial;
+    letter-spacing:3px;
+}
+
+.bag-info h3{
+    margin:12px 0;
+    font-size:24px;
+    font-weight:normal;
+}
+
+.bag-info p{
+    color:#c8bdb4;
+    font:12px/1.8 Arial;
+}
+
+.bag-price{
+    margin-top:17px;
+    font:bold 20px Arial;
+}
+
+.bag-button{
+    margin-top:20px;
+    padding:13px 20px;
+    border:0;
+    background:white;
+    color:#191613;
+    cursor:pointer;
+}
+
+/* =========================
+   IA
+========================= */
+
+.ai-section{
+    padding:100px 20px;
+}
+
+.chat{
+    max-width:720px;
+    margin:auto;
+    background:white;
+    border:1px solid #ddd4ca;
+}
+
+.chat-header{
+    padding:20px;
+    background:#191613;
+    color:white;
+    font:11px Arial;
+    letter-spacing:2px;
+}
+
+.messages{
+    height:320px;
+    overflow-y:auto;
+    padding:25px;
+}
+
+.message{
+    max-width:82%;
+    padding:13px 16px;
+    margin-bottom:14px;
+    font:13px/1.6 Arial;
+}
+
+.message.bot{
+    background:#eee7de;
+}
+
+.message.user{
+    margin-left:auto;
+    background:#191613;
+    color:white;
+}
+
+.chat-input{
+    display:flex;
+    border-top:1px solid #ddd4ca;
+}
+
+.chat-input input{
+    flex:1;
+    padding:18px;
+    border:0;
+    outline:0;
+}
+
+.chat-input button{
+    padding:0 25px;
+    border:0;
+    background:#191613;
+    color:white;
+    cursor:pointer;
+}
+
+/* =========================
+   CARRITO
+========================= */
+
+.cart{
+    position:fixed;
+    z-index:4000;
+    top:0;
+    right:-430px;
+    width:410px;
+    max-width:92%;
+    height:100vh;
+    background:#fffdf9;
+    padding:30px;
+    box-shadow:-10px 0 35px rgba(0,0,0,.25);
+    transition:.4s;
+    overflow-y:auto;
+}
+
+.cart.open{
+    right:0;
+}
+
+.close-cart{
+    float:right;
+    border:0;
+    background:none;
+    font-size:28px;
+    cursor:pointer;
+}
+
+.cart h2{
+    font-weight:normal;
+    margin-bottom:25px;
+}
+
+.cart-item{
+    padding:15px 0;
+    border-bottom:1px solid #ddd4ca;
+    font:12px Arial;
+}
+
+.remove{
+    margin-top:8px;
+    border:0;
+    background:none;
+    text-decoration:underline;
+    cursor:pointer;
+}
+
+.cart-total{
+    margin-top:25px;
+    font:bold 17px Arial;
+}
+
+/* =========================
+   ADMIN MODAL
+========================= */
+
+.admin-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:6000;
+    background:rgba(0,0,0,.75);
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.admin-modal.show{
+    display:flex;
+}
+
+.admin-window{
+    width:1000px;
+    max-width:100%;
+    max-height:94vh;
+    overflow-y:auto;
+    background:#fffdf9;
+    padding:30px;
+}
+
+.admin-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #ddd4ca;
+    padding-bottom:20px;
+    margin-bottom:25px;
+}
+
+.admin-header h2{
+    font-weight:normal;
+}
+
+.admin-close{
+    border:0;
+    background:none;
+    font-size:28px;
+    cursor:pointer;
+}
+
+/* LOGIN */
+
+.admin-login{
+    max-width:400px;
+    margin:40px auto;
+    text-align:center;
+}
+
+.admin-login h3{
+    font-weight:normal;
+    margin-bottom:10px;
+}
+
+.admin-login p{
+    color:#777;
+    font:12px Arial;
+    margin-bottom:20px;
+}
+
+.admin-login input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    outline:none;
+}
+
+.admin-login button{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:0;
+    background:#191613;
+    color:white;
+    cursor:pointer;
+}
+
+.login-error{
+    color:#a22;
+    margin-top:10px;
+    font:11px Arial;
+}
+
+/* PANEL */
+
+.admin-panel{
+    display:none;
+}
+
+.admin-panel.visible{
+    display:block;
+}
+
+.admin-box{
+    border:1px solid #ddd4ca;
+    padding:22px;
+    margin-bottom:22px;
+}
+
+.admin-box h3{
+    font-weight:normal;
+    margin-bottom:10px;
+}
+
+.admin-box p{
+    color:#777;
+    font:11px/1.6 Arial;
+    margin-bottom:18px;
+}
+
+/* CARRUSEL ADMIN */
+
+.carousel-editor{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.carousel-card{
+    border:1px solid #ddd4ca;
+    padding:12px;
+}
+
+.carousel-preview{
+    height:150px;
+    background:#e3dad1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    margin:10px 0;
+}
+
+.carousel-preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.carousel-card input{
+    width:100%;
+    font-size:10px;
+}
+
+/* EDITOR PRODUCTO */
+
+.product-editor{
+    border:1px solid #ddd4ca;
+    padding:20px;
+    margin-bottom:15px;
+}
+
+.product-editor h4{
+    font-weight:normal;
+    margin-bottom:15px;
+}
+
+.form-label{
+    display:block;
+    margin-top:12px;
+    font:10px Arial;
+    letter-spacing:.5px;
+}
+
+.form-input,
+.form-select,
+.form-textarea{
+    width:100%;
+    margin-top:6px;
+    padding:11px;
+    border:1px solid #ccc;
+    outline:none;
+}
+
+.form-textarea{
+    height:80px;
+    resize:vertical;
+}
+
+.editor-photo{
+    width:120px;
+    height:120px;
+    background:#e4dcd3;
+    margin-top:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.editor-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.editor-buttons{
+    display:flex;
+    gap:8px;
+    margin-top:15px;
+}
+
+.save-product,
+.delete-product,
+.add-product{
+    border:0;
+    padding:12px 16px;
+    cursor:pointer;
+    font-size:10px;
+}
+
+.save-product{
+    background:#191613;
+    color:white;
+}
+
+.delete-product{
+    background:#eee;
+    color:#9b2222;
+}
+
+.add-product{
+    background:#191613;
+    color:white;
+    margin-bottom:15px;
+}
+
+/* FOOTER */
+
+footer{
+    padding:40px;
+    text-align:center;
+    background:#191613;
+    color:#aaa19a;
+    font:10px Arial;
+    letter-spacing:2px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1050px){
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .logo{
+        font-size:20px;
+    }
+
+    .products{
+        grid-template-columns:1fr;
+    }
+
+    .bag-grid{
+        grid-template-columns:1fr;
+    }
+
+    .carousel-editor{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .hero-content h1{
+        letter-spacing:7px;
+    }
+
+    .hero-content h2{
+        font-size:18px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav>
+
+<div class="logo">NABORA</div>
+
+<ul class="nav-links">
+<li><a href="#inicio">INICIO</a></li>
+<li><a href="#productos">PRODUCTOS</a></li>
+<li><a href="#carteras">CARTERAS</a></li>
+<li><a href="#asistente">NABORA AI</a></li>
+</ul>
+
+<div class="nav-right">
+
+<button class="nav-btn dark" onclick="openCart()">
+🛍️ <span id="cartCount">0</span>
+</button>
+
+<button class="nav-btn" onclick="openAdmin()">
+ADMIN
+</button>
+
+</div>
+
+</nav>
+
+
+<!-- =========================
+     INICIO / CARRUSEL
+========================= -->
+
+<section class="hero" id="inicio">
+
+<div id="slides"></div>
+
+<div class="hero-dark"></div>
+
+<div class="hero-content">
+
+<div>
+
+<small>NABORA PRESENTA</small>
+
+<h1>NABORA</h1>
+
+<h2>COLECCIÓN OTOÑO 2026</h2>
+
+<p>
+Una colección creada para expresar tu esencia,
+tu elegancia y tu estilo.
+</p>
+
+<a class="hero-link" href="#productos">
+DESCUBRIR COLECCIÓN
+</a>
+
+</div>
+
+</div>
+
+<button class="arrow left" onclick="previousSlide()">‹</button>
+
+<button class="arrow right" onclick="nextSlide()">›</button>
+
+<div class="dots" id="dots"></div>
+
+</section>
+
+
+<!-- =========================
+     BANNER
+========================= -->
+
+<section class="collection-banner">
+
+<h2>COLECCIÓN OTOÑO 2026</h2>
+
+<p>BY NABORA · MODA · ELEGANCIA · ESENCIA</p>
+
+</section>
+
+
+<!-- =========================
+     PRODUCTOS
+========================= -->
+
+<section class="section" id="productos">
+
+<h2 class="section-title">Productos</h2>
+
+<p class="section-subtitle">
+COLECCIÓN OTOÑO 2026 · BY NABORA
+</p>
+
+<div class="filters">
+
+<button class="filter active"
+onclick="filterProducts('todos',this)">
+TODOS
+</button>
+
+<button class="filter"
+onclick="filterProducts('ropa',this)">
+👗 ROPA
+</button>
+
+<button class="filter"
+onclick="filterProducts('zapatos',this)">
+👢 ZAPATOS
+</button>
+
+<button class="filter"
+onclick="filterProducts('accesorios',this)">
+🕶️ ACCESORIOS
+</button>
+
+<button class="filter"
+onclick="filterProducts('carteras',this)">
+👜 CARTERAS
+</button>
+
+</div>
+
+<div class="products" id="products"></div>
+
+</section>
+
+
+<!-- =========================
+     CARTERAS
+========================= -->
+
+<section class="section bags" id="carteras">
+
+<h2 class="section-title">
+Carteras NABORA
+</h2>
+
+<p class="section-subtitle">
+PIEZAS EXCLUSIVAS · OTOÑO 2026
+</p>
+
+<div class="bag-grid">
+
+<div class="bag">
+
+<div class="bag-photo" id="bagPhoto1">
+<div class="placeholder">
+FOTO DE CARTERA
+</div>
+</div>
+
+<div class="bag-info">
+
+<div class="bag-label">
+NABORA EXCLUSIVE
+</div>
+
+<h3>
+Cartera de piedras marrones
+</h3>
+
+<p>
+Cartera sofisticada decorada con piedras
+en tonos marrones. Una pieza elegante
+para completar tus looks de otoño.
+</p>
+
+<div class="bag-price">
+$250
+</div>
+
+<button class="bag-button"
+onclick="addToCart('Cartera de piedras marrones',250)">
+AÑADIR AL CARRITO
+</button>
+
+</div>
+
+</div>
+
+
+<div class="bag">
+
+<div class="bag-photo" id="bagPhoto2">
+<div class="placeholder">
+FOTO DE CARTERA
+</div>
+</div>
+
+<div class="bag-info">
+
+<div class="bag-label">
+NABORA SIGNATURE
+</div>
+
+<h3>
+Cartera de perlas con cuero vegano
+</h3>
+
+<p>
+Diseñada con cuero vegano y perlas
+de cristal. Una pieza delicada,
+elegante y sofisticada.
+</p>
+
+<div class="bag-price">
+$350
+</div>
+
+<button class="bag-button"
+onclick="addToCart('Cartera de perlas con cuero vegano',350)">
+AÑADIR AL CARRITO
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     NABORA AI
+========================= -->
+
+<section class="ai-section" id="asistente">
+
+<h2 class="section-title">
+NABORA AI
+</h2>
+
+<p class="section-subtitle">
+TU ASISTENTE PERSONAL DE MODA
+</p>
+
+<div class="chat">
+
+<div class="chat-header">
+NABORA ✦ ASISTENTE DE MODA
+</div>
+
+<div class="messages" id="messages">
+
+<div class="message bot">
+Hola ✨ Soy NABORA AI.
+Dime qué ocasión tienes y te ayudaré
+a crear un outfit.
+</div>
+
+</div>
+
+<div class="chat-input">
+
+<input
+id="userInput"
+placeholder="Ej: necesito un look para una fiesta"
+onkeydown="if(event.key==='Enter') sendMessage()"
+>
+
+<button onclick="sendMessage()">
+ENVIAR
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     CARRITO
+========================= -->
+
+<div class="cart" id="cart">
+
+<button class="close-cart" onclick="closeCart()">
+×
+</button>
+
+<h2>Mi carrito</h2>
+
+<div id="cartItems">
+Tu carrito está vacío.
+</div>
+
+<div class="cart-total">
+TOTAL: $<span id="cartTotal">0</span>
+</div>
+
+</div>
+
+
+<!-- =========================
+     ADMIN
+========================= -->
+
+<div class="admin-modal" id="adminModal">
+
+<div class="admin-window">
+
+<div class="admin-header">
+
+<h2>
+Panel de administración NABORA
+</h2>
+
+<button class="admin-close"
+onclick="closeAdmin()">
+×
+</button>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div class="admin-login" id="adminLogin">
+
+<h3>
+Acceso de administrador
+</h3>
+
+<p>
+Solo el administrador puede modificar
+productos, precios, descripciones e imágenes.
+</p>
+
+<input
+type="password"
+id="adminPassword"
+placeholder="Contraseña"
+>
+
+<button onclick="loginAdmin()">
+ENTRAR AL PANEL
+</button>
+
+<div class="login-error" id="loginError"></div>
+
+</div>
+
+
+<!-- PANEL -->
+
+<div class="admin-panel" id="adminPanel">
+
+
+<!-- CARRUSEL -->
+
+<div class="admin-box">
+
+<h3>
+🖼️ Carrusel de inicio
+</h3>
+
+<p>
+Puedes subir exactamente 4 fotografías.
+El carrusel cambiará automáticamente cada
+4 segundos.
+</p>
+
+<div class="carousel-editor"
+id="carouselEditor">
+</div>
+
+</div>
+
+
+<!-- PRODUCTOS -->
+
+<div class="admin-box">
+
+<h3>
+👗 Administrar productos
+</h3>
+
+<p>
+Aquí puedes cambiar el nombre, categoría,
+precio, descripción e imagen de cada producto.
+Los visitantes no pueden editar esta información.
+</p>
+
+<button class="add-product"
+onclick="addProduct()">
++ AGREGAR NUEVO PRODUCTO
+</button>
+
+<div id="productEditors"></div>
+
+</div>
+
+
+<!-- CARTERAS -->
+
+<div class="admin-box">
+
+<h3>
+👜 Fotografías de las carteras
+</h3>
+
+<p>
+Solo el administrador puede cambiar estas fotografías.
+</p>
+
+<label class="form-label">
+Cartera de piedras marrones
+</label>
+
+<input
+type="file"
+accept="image/*"
+onchange="changeBagImage(1,event)"
+>
+
+<br><br>
+
+<label class="form-label">
+Cartera de perlas con cuero vegano
+</label>
+
+<input
+type="file"
+accept="image/*"
+onchange="changeBagImage(2,event)"
+>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+NABORA · COLECCIÓN OTOÑO 2026 · BY NABORA
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   PRODUCTOS INICIALES
+===================================================== */
+
+const defaultProducts = [
+
+{
+name:"Poliéster blanco",
+category:"ropa",
+price:20,
+description:"Pieza blanca minimalista y versátil para crear looks elegantes.",
+image:""
+},
+
+{
+name:"Chaqueta de cuero vegano",
+category:"ropa",
+price:40,
+description:"Chaqueta de cuero vegano con estilo moderno y sofisticado.",
+image:""
+},
+
+{
+name:"Pantalón de tela",
+category:"ropa",
+price:30,
+description:"Pantalón cómodo y elegante para diferentes combinaciones.",
+image:""
+},
+
+{
+name:"Gafas negras",
+category:"accesorios",
+price:20,
+description:"Gafas negras clásicas para completar cualquier look.",
+image:""
+},
+
+{
+name:"Botas cortas",
+category:"zapatos",
+price:50,
+description:"Botas cortas perfectas para los días de otoño.",
+image:""
+},
+
+{
+name:"Boina",
+category:"accesorios",
+price:15,
+description:"Boina elegante para complementar tus outfits.",
+image:""
+},
+
+{
+name:"Bufanda de seda",
+category:"accesorios",
+price:20,
+description:"Bufanda de seda suave y sofisticada.",
+image:""
+},
+
+{
+name:"Falda con estampado de hojas de otoño",
+category:"ropa",
+price:34,
+description:"Falda inspirada en las hojas y colores del otoño.",
+image:""
+},
+
+{
+name:"Botas largas con tacón estilo otoño",
+category:"zapatos",
+price:75,
+description:"Botas largas con tacón para un look elegante.",
+image:""
+},
+
+{
+name:"Top gris con estampado de hojas de otoño",
+category:"ropa",
+price:35,
+description:"Top gris con estampado inspirado en las hojas de otoño.",
+image:""
+},
+
+{
+name:"Cartera de perlas",
+category:"carteras",
+price:250,
+description:"Cartera de perlas elegante para ocasiones especiales.",
+image:""
+},
+
+{
+name:"Cartera de perlas con cuero vegano",
+category:"carteras",
+price:350,
+description:"Cartera de cuero vegano decorada con perlas de cristal.",
+image:""
+}
+
+];
+
+
+/* =====================================================
+   CARGAR DATOS
+===================================================== */
+
+let products = JSON.parse(
+localStorage.getItem("NABORA_PRODUCTS")
+);
+
+if(!Array.isArray(products)){
+    products = defaultProducts;
+    saveProducts();
+}
+
+
+let carouselImages = JSON.parse(
+localStorage.getItem("NABORA_CAROUSEL")
+);
+
+if(!Array.isArray(carouselImages) ||
+carouselImages.length !== 4){
+
+carouselImages = ["","","",""];
+
+saveCarousel();
+
+}
+
+
+/* =====================================================
+   GUARDAR
+===================================================== */
+
+function saveProducts(){
+
+localStorage.setItem(
+"NABORA_PRODUCTS",
+JSON.stringify(products)
+);
+
+}
+
+function saveCarousel(){
+
+localStorage.setItem(
+"NABORA_CAROUSEL",
+JSON.stringify(carouselImages)
+);
+
+}
+
+
+/* =====================================================
+   CARRUSEL
+===================================================== */
+
+let currentSlide=0;
+
+function renderCarousel(){
+
+const slides=document.getElementById("slides");
+const dots=document.getElementById("dots");
+
+slides.innerHTML="";
+dots.innerHTML="";
+
+for(let i=0;i<4;i++){
+
+const slide=document.createElement("div");
+
+slide.className="slide";
+
+if(i===currentSlide){
+    slide.classList.add("active");
+}
+
+if(carouselImages[i]){
+
+slide.innerHTML=
+`<img src="${carouselImages[i]}" alt="NABORA">`;
+
+}else{
+
+slide.innerHTML=
+`
+<div class="no-slide-image">
+FOTO ${i+1} · SUBIR DESDE ADMIN
+</div>
+`;
+
+}
+
+slides.appendChild(slide);
+
+
+const dot=document.createElement("button");
+
+dot.className="dot";
+
+if(i===currentSlide){
+    dot.classList.add("active");
+}
+
+dot.onclick=function(){
+    goToSlide(i);
+};
+
+dots.appendChild(dot);
+
+}
+
+}
+
+
+function goToSlide(index){
+
+currentSlide=index;
+
+renderCarousel();
+
+}
+
+
+function nextSlide(){
+
+currentSlide++;
+
+if(currentSlide>=4){
+    currentSlide=0;
+}
+
+renderCarousel();
+
+}
+
+
+function previousSlide(){
+
+currentSlide--;
+
+if(currentSlide<0){
+    currentSlide=3;
+}
+
+renderCarousel();
+
+}
+
+
+/*
+   AUTOMÁTICO
+   CADA 4 SEGUNDOS
+*/
+
+setInterval(function(){
+
+nextSlide();
+
+},4000);
+
+
+/* =====================================================
+   ADMIN DEL CARRUSEL
+===================================================== */
+
+function renderCarouselEditor(){
+
+const editor=
+document.getElementById("carouselEditor");
+
+editor.innerHTML="";
+
+for(let i=0;i<4;i++){
+
+const card=document.createElement("div");
+
+card.className="carousel-card";
+
+let preview="";
+
+if(carouselImages[i]){
+
+preview=
+`<img src="${carouselImages[i]}" alt="">`;
+
+}else{
+
+preview=
+`<span>Sin foto</span>`;
+
+}
+
+card.innerHTML=`
+
+<strong>Foto ${i+1}</strong>
+
+<div class="carousel-preview">
+${preview}
+</div>
+
+<input
+type="file"
+accept="image/*"
+onchange="uploadCarousel(${i},event)"
+>
+
+`;
+
+editor.appendChild(card);
+
+}
+
+}
+
+
+function uploadCarousel(index,event){
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+
+/*
+   Comprimir imagen para evitar errores
+   con almacenamiento del navegador.
+*/
+
+compressImage(file,1200,0.8,function(result){
+
+carouselImages[index]=result;
+
+saveCarousel();
+
+renderCarousel();
+
+renderCarouselEditor();
+
+});
+
+}
+
+
+/* =====================================================
+   COMPRESOR DE IMAGEN
+===================================================== */
+
+function compressImage(file,maxWidth,quality,callback){
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+const img=new Image();
+
+img.onload=function(){
+
+let width=img.width;
+let height=img.height;
+
+if(width>maxWidth){
+
+height=
+height*(maxWidth/width);
+
+width=maxWidth;
+
+}
+
+const canvas=document.createElement("canvas");
+
+canvas.width=width;
+canvas.height=height;
+
+const ctx=canvas.getContext("2d");
+
+ctx.drawImage(
+img,
+0,
+0,
+width,
+height
+);
+
+callback(
+canvas.toDataURL(
+"image/jpeg",
+quality
+)
+);
+
+};
+
+img.src=e.target.result;
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* =====================================================
+   PRODUCTOS
+===================================================== */
+
+function renderProducts(category="todos"){
+
+const container=
+document.getElementById("products");
+
+container.innerHTML="";
+
+products.forEach(function(product,index){
+
+if(
+category!=="todos" &&
+product.category!==category
+){
+return;
+}
+
+
+const card=
+document.createElement("div");
+
+card.className="product";
+
+
+let imageHTML="";
+
+if(product.image){
+
+imageHTML=
+`<img src="${product.image}" alt="">`;
+
+}else{
+
+imageHTML=
+`
+<div class="placeholder">
+📷<br><br>
+FOTO DEL PRODUCTO
+</div>
+`;
+
+}
+
+
+card.innerHTML=`
+
+<div class="product-image">
+${imageHTML}
+</div>
+
+<div class="product-info">
+
+<div class="product-category">
+${product.category.toUpperCase()}
+</div>
+
+<h3 class="product-name">
+${escapeHTML(product.name)}
+</h3>
+
+<p class="product-description">
+${escapeHTML(product.description)}
+</p>
+
+<div class="product-price">
+$${Number(product.price).toFixed(2)}
+</div>
+
+<button class="add-cart"
+onclick="addToCart(${index})">
+AÑADIR AL CARRITO
+</button>
+
+</div>
+
+`;
+
+container.appendChild(card);
+
+});
+
+}
+
+
+function filterProducts(category,button){
+
+document.querySelectorAll(".filter")
+.forEach(function(btn){
+
+btn.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+renderProducts(category);
+
+}
+
+
+/* =====================================================
+   EDITOR DE PRODUCTOS
+===================================================== */
+
+function renderProductEditors(){
+
+const container=
+document.getElementById("productEditors");
+
+container.innerHTML="";
+
+products.forEach(function(product,index){
+
+const editor=
+document.createElement("div");
+
+editor.className="product-editor";
+
+editor.innerHTML=`
+
+<h4>
+Producto ${index+1}
+</h4>
+
+<label class="form-label">
+Nombre del producto
+</label>
+
+<input
+class="form-input"
+id="productName${index}"
+value="${escapeAttribute(product.name)}"
+>
+
+<label class="form-label">
+Categoría
+</label>
+
+<select
+class="form-select"
+id="productCategory${index}"
+>
+
+<option value="ropa"
+${product.category==="ropa"?"selected":""}>
+Ropa
+</option>
+
+<option value="zapatos"
+${product.category==="zapatos"?"selected":""}>
+Zapatos
+</option>
+
+<option value="accesorios"
+${product.category==="accesorios"?"selected":""}>
+Accesorios
+</option>
+
+<option value="carteras"
+${product.category==="carteras"?"selected":""}>
+Carteras
+</option>
+
+</select>
+
+
+<label class="form-label">
+Precio
+</label>
+
+<input
+class="form-input"
+type="number"
+min="0"
+step="0.01"
+id="productPrice${index}"
+value="${product.price}"
+>
+
+
+<label class="form-label">
+Descripción
+</label>
+
+<textarea
+class="form-textarea"
+id="productDescription${index}"
+>${escapeHTML(product.description)}</textarea>
+
+
+<label class="form-label">
+Imagen del producto
+</label>
+
+<div class="editor-photo">
+
+${
+product.image
+?
+`<img src="${product.image}" alt="">`
+:
+`<span>Sin foto</span>`
+}
+
+</div>
+
+<br>
+
+<input
+type="file"
+accept="image/*"
+onchange="uploadProductImage(${index},event)"
+>
+
+
+<div class="editor-buttons">
+
+<button
+class="save-product"
+onclick="saveProduct(${index})">
+💾 GUARDAR CAMBIOS
+</button>
+
+<button
+class="delete-product"
+onclick="deleteProduct(${index})">
+🗑️ ELIMINAR
+</button>
+
+</div>
+
+`;
+
+container.appendChild(editor);
+
+});
+
+}
+
+
+/* =====================================================
+   GUARDAR PRODUCTO
+===================================================== */
+
+function saveProduct(index){
+
+const name=
+document.getElementById(
+"productName"+index
+).value.trim();
+
+const category=
+document.getElementById(
+"productCategory"+index
+).value;
+
+const price=
+Number(
+document.getElementById(
+"productPrice"+index
+).value
+);
+
+const description=
+document.getElementById(
+"productDescription"+index
+).value.trim();
+
+
+if(!name){
+
+alert("Escribe un nombre para el producto.");
+
+return;
+
+}
+
+if(isNaN(price) || price<0){
+
+alert("Escribe un precio válido.");
+
+return;
+
+}
+
+
+products[index].name=name;
+products[index].category=category;
+products[index].price=price;
+products[index].description=description;
+
+saveProducts();
+
+renderProducts();
+
+renderProductEditors();
+
+alert("✅ Producto guardado correctamente.");
+
+}
+
+
+/* =====================================================
+   IMAGEN PRODUCTO
+===================================================== */
+
+function uploadProductImage(index,event){
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+compressImage(file,1000,0.8,function(result){
+
+products[index].image=result;
+
+saveProducts();
+
+renderProducts();
+
+renderProductEditors();
+
+alert("📸 Imagen actualizada.");
+
+});
+
+}
+
+
+/* =====================================================
+   AGREGAR PRODUCTO
+===================================================== */
+
+function addProduct(){
+
+products.push({
+
+name:"Nuevo producto",
+
+category:"ropa",
+
+price:0,
+
+description:"Escribe aquí la descripción del producto.",
+
+image:""
+
+});
+
+saveProducts();
+
+renderProducts();
+
+renderProductEditors();
+
+}
+
+
+/* =====================================================
+   ELIMINAR
+===================================================== */
+
+function deleteProduct(index){
+
+const confirmed=
+confirm(
+"¿Seguro que quieres eliminar este producto?"
+);
+
+if(!confirmed)return;
+
+products.splice(index,1);
+
+saveProducts();
+
+renderProducts();
+
+renderProductEditors();
+
+}
+
+
+/* =====================================================
+   CARTERAS
+===================================================== */
+
+function renderBagImages(){
+
+const bag1=
+localStorage.getItem("NABORA_BAG_1");
+
+const bag2=
+localStorage.getItem("NABORA_BAG_2");
+
+
+if(bag1){
+
+document.getElementById("bagPhoto1").innerHTML=
+`<img src="${bag1}" alt="Cartera">`;
+
+}
+
+if(bag2){
+
+document.getElementById("bagPhoto2").innerHTML=
+`<img src="${bag2}" alt="Cartera">`;
+
+}
+
+}
+
+
+function changeBagImage(number,event){
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+compressImage(file,1200,0.8,function(result){
+
+localStorage.setItem(
+"NABORA_BAG_"+number,
+result
+);
+
+renderBagImages();
+
+alert("📸 Foto de cartera actualizada.");
+
+});
+
+}
+
+
+/* =====================================================
+   ADMIN
+===================================================== */
+
+function openAdmin(){
+
+document
+.getElementById("adminModal")
+.classList.add("show");
+
+document
+.getElementById("adminPassword")
+.value="";
+
+document
+.getElementById("loginError")
+.textContent="";
+
+}
+
+
+function closeAdmin(){
+
+document
+.getElementById("adminModal")
+.classList.remove("show");
+
+}
+
+
+function loginAdmin(){
+
+const password=
+document.getElementById(
+"adminPassword"
+).value;
+
+
+/*
+   CONTRASEÑA ADMIN
+*/
+
+if(password==="NaboraAdmin2026!"){
+
+document
+.getElementById("adminLogin")
+.style.display="none";
+
+document
+.getElementById("adminPanel")
+.classList.add("visible");
+
+renderCarouselEditor();
+
+renderProductEditors();
+
+}else{
+
+document
+.getElementById("loginError")
+.textContent=
+"❌ Contraseña incorrecta.";
+
+}
+
+}
+
+
+/* =====================================================
+   CARRITO
+===================================================== */
+
+let cart=[];
+
+
+function addToCart(index){
+
+const product=products[index];
+
+cart.push({
+
+name:product.name,
+
+price:Number(product.price)
+
+});
+
+updateCart();
+
+openCart();
+
+}
+
+
+function updateCart(){
+
+document
+.getElementById("cartCount")
+.textContent=cart.length;
+
+const box=
+document.getElementById("cartItems");
+
+if(cart.length===0){
+
+box.innerHTML=
+"Tu carrito está vacío.";
+
+document
+.getElementById("cartTotal")
+.textContent="0.00";
+
+return;
+
+}
+
+let total=0;
+
+box.innerHTML="";
+
+cart.forEach(function(item,index){
+
+total+=item.price;
+
+box.innerHTML+=`
+
+<div class="cart-item">
+
+<strong>
+${escapeHTML(item.name)}
+</strong>
+
+<br><br>
+
+$${item.price.toFixed(2)}
+
+<br>
+
+<button
+class="remove"
+onclick="removeCart(${index})">
+Eliminar
+</button>
+
+</div>
+
+`;
+
+});
+
+document
+.getElementById("cartTotal")
+.textContent=
+total.toFixed(2);
+
+}
+
+
+function removeCart(index){
+
+cart.splice(index,1);
+
+updateCart();
+
+}
+
+
+function openCart(){
+
+document
+.getElementById("cart")
+.classList.add("open");
+
+}
+
+
+function closeCart(){
+
+document
+.getElementById("cart")
+.classList.remove("open");
+
+}
+
+
+/* =====================================================
+   NABORA AI
+===================================================== */
+
+function sendMessage(){
+
+const input=
+document.getElementById("userInput");
+
+const text=
+input.value.trim();
+
+if(!text)return;
+
+const messages=
+document.getElementById("messages");
+
+messages.innerHTML+=
+`
+<div class="message user">
+${escapeHTML(text)}
+</div>
+`;
+
+input.value="";
+
+
+let answer=
+"✨ Puedo ayudarte a crear un outfit. Dime para qué ocasión necesitas tu look.";
+
+
+const question=
+text.toLowerCase();
+
+
+if(question.includes("fiesta")){
+
+answer=
+"✨ Para una fiesta te recomiendo la falda con estampado de hojas de otoño, el top gris, las botas largas con tacón y la cartera de perlas.";
+
+}
+
+else if(question.includes("casual")){
+
+answer=
+"🤎 Para un look casual puedes combinar la chaqueta de cuero vegano, el pantalón de tela, las gafas negras y las botas cortas.";
+
+}
+
+else if(question.includes("otoño")){
+
+answer=
+"🍂 Para otoño puedes combinar tonos marrones, grises, negros, beige y blanco. La bufanda de seda y las botas largas quedan perfectas.";
+
+}
+
+else if(question.includes("cartera")){
+
+answer=
+"👜 La cartera de perlas con cuero vegano es ideal para ocasiones elegantes. La cartera de piedras marrones combina muy bien con tonos neutros.";
+
+}
+
+
+setTimeout(function(){
+
+messages.innerHTML+=
+`
+<div class="message bot">
+${answer}
+</div>
+`;
+
+messages.scrollTop=
+messages.scrollHeight;
+
+},500);
+
+}
+
+
+/* =====================================================
+   SEGURIDAD
+===================================================== */
+
+function escapeHTML(text){
+
+return String(text)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttribute(text){
+
+return escapeHTML(text)
+.replace(/`/g,"&#96;");
+
+}
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+renderCarousel();
+
+renderProducts();
+
+renderBagImages();
+
+</script>
+
+</body>
+</html>
 ```
