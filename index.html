@@ -6,6 +6,8 @@
 
 <title>NABORA | Colección Otoño 2026</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 *{
     box-sizing:border-box;
@@ -14,291 +16,162 @@
 }
 
 body{
-    font-family:Georgia,"Times New Roman",serif;
-    background:#f7f3ed;
-    color:#191613;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#faf8f5;
+    color:#222;
 }
 
-button,input,textarea,select{
-    font-family:Arial,sans-serif;
-}
-
-nav{
-    height:75px;
-    padding:0 6%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+header{
+    background:#fff;
+    border-bottom:1px solid #eee;
     position:sticky;
     top:0;
     z-index:1000;
-    background:#f7f3ed;
-    border-bottom:1px solid #ddd4ca;
+}
+
+.navbar{
+    max-width:1200px;
+    margin:auto;
+    padding:18px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .logo{
-    font-size:25px;
-    letter-spacing:8px;
-}
-
-.nav-links{
-    display:flex;
-    gap:30px;
-    list-style:none;
-}
-
-.nav-links a{
-    color:#191613;
-    text-decoration:none;
-    font:11px Arial,sans-serif;
-    letter-spacing:1.5px;
-}
-
-.nav-right{
-    display:flex;
-    gap:8px;
-}
-
-.nav-btn{
-    padding:10px 13px;
-    background:transparent;
-    border:1px solid #191613;
-    cursor:pointer;
-    font-size:10px;
-}
-
-.nav-btn.dark{
-    background:#191613;
-    color:white;
-}
-
-.hero{
-    height:calc(100vh - 75px);
-    min-height:580px;
-    position:relative;
-    overflow:hidden;
-    background:#2d2824;
-}
-
-.slide{
-    position:absolute;
-    inset:0;
-    opacity:0;
-    transition:opacity 1s ease;
-    pointer-events:none;
-}
-
-.slide.active{
-    opacity:1;
-}
-
-.slide img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.no-slide-image{
-    width:100%;
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#403830;
-    color:#cfc4b9;
-    font:12px Arial;
-    letter-spacing:4px;
-}
-
-.hero-dark{
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,.43);
-    z-index:2;
-}
-
-.hero-content{
-    position:absolute;
-    z-index:5;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:white;
-    padding:30px;
-}
-
-.hero-content small{
-    font:11px Arial;
-    letter-spacing:6px;
-}
-
-.hero-content h1{
-    font-size:clamp(65px,11vw,135px);
-    font-weight:normal;
-    letter-spacing:14px;
-    margin:18px 0;
-}
-
-.hero-content h2{
-    font-size:25px;
-    font-weight:normal;
-    letter-spacing:4px;
-}
-
-.hero-content p{
-    max-width:600px;
-    margin:20px auto 30px;
-    font:14px/1.8 Arial;
-}
-
-.hero-link{
-    display:inline-block;
-    background:white;
-    color:#191613;
-    text-decoration:none;
-    padding:16px 25px;
-    font:10px Arial;
-    letter-spacing:2px;
-}
-
-.arrow{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    z-index:10;
-    width:45px;
-    height:55px;
-    border:1px solid rgba(255,255,255,.5);
-    background:rgba(0,0,0,.35);
-    color:white;
     font-size:28px;
-    cursor:pointer;
+    letter-spacing:6px;
+    font-weight:bold;
 }
 
-.arrow:hover{
-    background:white;
-    color:#191613;
-}
-
-.arrow.left{
-    left:25px;
-}
-
-.arrow.right{
-    right:25px;
-}
-
-.dots{
-    position:absolute;
-    z-index:10;
-    bottom:25px;
-    left:50%;
-    transform:translateX(-50%);
+.nav-buttons{
     display:flex;
     gap:10px;
 }
 
-.dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    border:1px solid white;
-    background:transparent;
+button{
+    border:none;
     cursor:pointer;
+}
+
+.nav-btn{
+    background:none;
+    padding:10px 14px;
+    border-radius:20px;
+}
+
+.nav-btn:hover{
+    background:#f0ede8;
+}
+
+.hero{
+    max-width:1200px;
+    margin:25px auto;
+    padding:0 20px;
+}
+
+.carousel{
+    position:relative;
+    width:100%;
+    height:480px;
+    overflow:hidden;
+    border-radius:18px;
+    background:#eee;
+}
+
+.carousel img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none;
+}
+
+.carousel img.active{
+    display:block;
+}
+
+.carousel-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:rgba(255,255,255,.8);
+    font-size:22px;
+    z-index:5;
+}
+
+.carousel-arrow.left{
+    left:15px;
+}
+
+.carousel-arrow.right{
+    right:15px;
+}
+
+.carousel-dots{
+    position:absolute;
+    bottom:15px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:8px;
+}
+
+.dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#fff;
+    opacity:.6;
 }
 
 .dot.active{
-    background:white;
+    opacity:1;
 }
 
-.collection-banner{
-    background:#191613;
-    color:white;
-    text-align:center;
-    padding:65px 20px;
-}
-
-.collection-banner h2{
-    font-size:42px;
-    font-weight:normal;
-    letter-spacing:4px;
-}
-
-.collection-banner p{
-    margin-top:15px;
-    font:10px Arial;
-    letter-spacing:4px;
-    color:#c5bbb2;
-}
-
-.section{
-    padding:90px 6%;
-}
-
-.section-title{
-    text-align:center;
-    font-size:42px;
-    font-weight:normal;
-}
-
-.section-subtitle{
-    text-align:center;
-    margin:15px 0 45px;
-    color:#81766d;
-    font:10px Arial;
-    letter-spacing:3px;
-}
-
-.filters{
+.categories{
+    max-width:1200px;
+    margin:25px auto;
+    padding:0 20px;
     display:flex;
-    justify-content:center;
     flex-wrap:wrap;
-    gap:8px;
-    margin-bottom:40px;
+    gap:10px;
 }
 
-.filter{
+.category-btn{
     padding:11px 18px;
-    background:transparent;
-    border:1px solid #cfc3b9;
-    cursor:pointer;
-    font-size:10px;
+    border-radius:25px;
+    background:#eeeae5;
 }
 
-.filter.active,
-.filter:hover{
-    background:#191613;
-    color:white;
+.category-btn.active{
+    background:#222;
+    color:#fff;
 }
 
 .products{
-    max-width:1250px;
-    margin:auto;
+    max-width:1200px;
+    margin:30px auto;
+    padding:0 20px;
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:22px;
 }
 
 .product{
-    background:#fffdf9;
-    border:1px solid #ddd4ca;
-    transition:.3s;
+    background:#fff;
+    border-radius:15px;
     overflow:hidden;
-}
-
-.product:hover{
-    transform:translateY(-5px);
-    box-shadow:0 15px 35px rgba(0,0,0,.08);
+    box-shadow:0 3px 15px rgba(0,0,0,.06);
 }
 
 .product-image{
-    height:310px;
-    background:#e4dcd3;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    width:100%;
+    height:330px;
+    background:#f0efed;
+    position:relative;
     overflow:hidden;
 }
 
@@ -308,2349 +181,2440 @@ nav{
     object-fit:cover;
 }
 
-.placeholder{
-    text-align:center;
-    color:#81766d;
-    font:10px Arial;
-    letter-spacing:2px;
+.no-image{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#999;
+    font-size:14px;
 }
 
 .product-info{
-    padding:20px;
+    padding:16px;
 }
 
 .product-category{
-    font:9px Arial;
-    letter-spacing:2px;
-    color:#988d83;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    color:#999;
+    margin-bottom:6px;
 }
 
 .product-name{
-    margin:9px 0;
     font-size:17px;
-    font-weight:normal;
-}
-
-.product-description{
-    color:#756c64;
-    font:11px/1.7 Arial;
-    min-height:55px;
+    margin-bottom:8px;
 }
 
 .product-price{
-    margin-top:12px;
-    font:bold 17px Arial;
+    font-weight:bold;
+    margin-bottom:14px;
 }
 
 .add-cart{
     width:100%;
-    margin-top:15px;
-    padding:13px;
-    border:0;
-    background:#191613;
-    color:white;
-    cursor:pointer;
-    font-size:9px;
-    letter-spacing:1.5px;
+    padding:11px;
+    border-radius:8px;
+    background:#222;
+    color:#fff;
 }
 
 .add-cart:hover{
-    background:#514840;
+    opacity:.85;
 }
 
-.bags{
-    background:#191613;
-    color:white;
+.section-title{
+    max-width:1200px;
+    margin:40px auto 20px;
+    padding:0 20px;
 }
 
-.bag-grid{
-    max-width:1100px;
-    margin:auto;
+.bags-section{
+    max-width:1200px;
+    margin:20px auto 50px;
+    padding:0 20px;
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:30px;
+    gap:20px;
 }
 
 .bag{
-    background:#29231f;
-    border:1px solid #4c443d;
-}
-
-.bag-photo{
-    height:430px;
-    background:#38312b;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    background:#fff;
+    border-radius:15px;
     overflow:hidden;
 }
 
-.bag-photo img{
+.bag img{
     width:100%;
-    height:100%;
+    height:400px;
     object-fit:cover;
+    display:block;
 }
 
 .bag-info{
-    padding:30px;
+    padding:18px;
 }
 
-.bag-label{
-    color:#c8aa90;
-    font:9px Arial;
-    letter-spacing:3px;
-}
-
-.bag-info h3{
-    margin:12px 0;
-    font-size:24px;
-    font-weight:normal;
-}
-
-.bag-info p{
-    color:#c8bdb4;
-    font:12px/1.8 Arial;
-}
-
-.bag-price{
-    margin-top:17px;
-    font:bold 20px Arial;
-}
-
-.bag-button{
-    margin-top:20px;
-    padding:13px 20px;
-    border:0;
-    background:white;
-    color:#191613;
-    cursor:pointer;
-}
-
-.ai-section{
-    padding:100px 20px;
-}
-
-.chat{
-    max-width:720px;
-    margin:auto;
-    background:white;
-    border:1px solid #ddd4ca;
-}
-
-.chat-header{
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
     padding:20px;
-    background:#191613;
-    color:white;
-    font:11px Arial;
-    letter-spacing:2px;
 }
 
-.messages{
-    height:320px;
-    overflow-y:auto;
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:750px;
+    max-height:90vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:18px;
     padding:25px;
 }
 
-.message{
-    max-width:82%;
-    padding:13px 16px;
-    margin-bottom:14px;
-    font:13px/1.6 Arial;
-}
-
-.message.bot{
-    background:#eee7de;
-}
-
-.message.user{
-    margin-left:auto;
-    background:#191613;
-    color:white;
-}
-
-.chat-input{
-    display:flex;
-    border-top:1px solid #ddd4ca;
-}
-
-.chat-input input{
-    flex:1;
-    padding:18px;
-    border:0;
-    outline:0;
-}
-
-.chat-input button{
-    padding:0 25px;
-    border:0;
-    background:#191613;
-    color:white;
-    cursor:pointer;
-}
-
-.cart{
-    position:fixed;
-    z-index:4000;
-    top:0;
-    right:-430px;
-    width:410px;
-    max-width:92%;
-    height:100vh;
-    background:#fffdf9;
-    padding:30px;
-    box-shadow:-10px 0 35px rgba(0,0,0,.25);
-    transition:.4s;
-    overflow-y:auto;
-}
-
-.cart.open{
-    right:0;
-}
-
-.close-cart{
-    float:right;
-    border:0;
-    background:none;
-    font-size:28px;
-    cursor:pointer;
-}
-
-.cart h2{
-    font-weight:normal;
-    margin-bottom:25px;
-}
-
-.cart-item{
-    padding:15px 0;
-    border-bottom:1px solid #ddd4ca;
-    font:12px Arial;
-}
-
-.remove{
-    margin-top:8px;
-    border:0;
-    background:none;
-    text-decoration:underline;
-    cursor:pointer;
-}
-
-.cart-total{
-    margin-top:25px;
-    font:bold 17px Arial;
-}
-
-.admin-modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:6000;
-    background:rgba(0,0,0,.75);
-    align-items:center;
-    justify-content:center;
-    padding:15px;
-}
-
-.admin-modal.show{
-    display:flex;
-}
-
-.admin-window{
-    width:1000px;
-    max-width:100%;
-    max-height:94vh;
-    overflow-y:auto;
-    background:#fffdf9;
-    padding:30px;
-}
-
-.admin-header{
+.modal-header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    border-bottom:1px solid #ddd4ca;
-    padding-bottom:20px;
-    margin-bottom:25px;
-}
-
-.admin-header h2{
-    font-weight:normal;
-}
-
-.admin-close{
-    border:0;
-    background:none;
-    font-size:28px;
-    cursor:pointer;
-}
-
-.admin-login{
-    max-width:400px;
-    margin:40px auto;
-    text-align:center;
-}
-
-.admin-login h3{
-    font-weight:normal;
-    margin-bottom:10px;
-}
-
-.admin-login p{
-    color:#777;
-    font:12px Arial;
     margin-bottom:20px;
 }
 
-.admin-login input{
-    width:100%;
-    padding:14px;
-    border:1px solid #ccc;
-    outline:none;
+.close{
+    background:#eee;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    font-size:20px;
 }
 
-.admin-login button{
-    width:100%;
-    padding:14px;
-    margin-top:10px;
-    border:0;
-    background:#191613;
-    color:white;
-    cursor:pointer;
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #eee;
+    padding:15px 0;
 }
 
-.login-error{
-    color:#a22;
-    margin-top:10px;
-    font:11px Arial;
+.cart-total{
+    text-align:right;
+    font-size:20px;
+    font-weight:bold;
+    margin-top:20px;
 }
 
-.admin-panel{
+.empty{
+    text-align:center;
+    padding:30px;
+    color:#888;
+}
+
+.admin-section{
     display:none;
 }
 
-.admin-panel.visible{
+.admin-section.active{
     display:block;
 }
 
-.admin-box{
-    border:1px solid #ddd4ca;
-    padding:22px;
-    margin-bottom:22px;
+.form-group{
+    margin-bottom:15px;
 }
 
-.admin-box h3{
-    font-weight:normal;
-    margin-bottom:10px;
-}
-
-.admin-box p{
-    color:#777;
-    font:11px/1.6 Arial;
-    margin-bottom:18px;
-}
-
-.carousel-editor{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-}
-
-.carousel-card{
-    border:1px solid #ddd4ca;
-    padding:12px;
-}
-
-.carousel-preview{
-    height:150px;
-    background:#e3dad1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-    margin:10px 0;
-}
-
-.carousel-preview img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.carousel-card input{
-    width:100%;
-    font-size:10px;
-}
-
-.bulk-upload{
-    border:2px dashed #cfc3b9;
-    padding:25px;
-    text-align:center;
-    margin-bottom:20px;
-    background:#faf7f2;
-}
-
-.bulk-upload strong{
+.form-group label{
     display:block;
-    margin-bottom:8px;
-    font-size:16px;
+    margin-bottom:6px;
+    font-size:14px;
+    font-weight:bold;
 }
 
-.bulk-upload p{
-    margin-bottom:15px;
-}
-
-.bulk-upload input{
+.form-group input,
+.form-group textarea,
+.form-group select{
     width:100%;
-    padding:12px;
-    background:white;
-    border:1px solid #ccc;
-}
-
-.bulk-status{
-    margin-top:12px;
-    font:11px Arial;
-    color:#6d625a;
-}
-
-.product-editor{
-    border:1px solid #ddd4ca;
-    padding:20px;
-    margin-bottom:15px;
-}
-
-.product-editor h4{
-    font-weight:normal;
-    margin-bottom:15px;
-}
-
-.form-label{
-    display:block;
-    margin-top:12px;
-    font:10px Arial;
-    letter-spacing:.5px;
-}
-
-.form-input,
-.form-select,
-.form-textarea{
-    width:100%;
-    margin-top:6px;
     padding:11px;
-    border:1px solid #ccc;
-    outline:none;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-family:inherit;
 }
 
-.form-textarea{
-    height:80px;
+.form-group textarea{
+    min-height:100px;
     resize:vertical;
 }
 
-.editor-photo{
-    width:120px;
-    height:120px;
-    background:#e4dcd3;
-    margin-top:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
+.admin-button{
+    background:#222;
+    color:#fff;
+    padding:12px 18px;
+    border-radius:8px;
+    margin-right:8px;
+    margin-bottom:8px;
 }
 
-.editor-photo img{
+.admin-button.light{
+    background:#eee;
+    color:#222;
+}
+
+.upload-area{
+    border:2px dashed #ccc;
+    border-radius:12px;
+    padding:25px;
+    text-align:center;
+    margin:15px 0;
+}
+
+.preview-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-top:15px;
+}
+
+.preview-item{
+    position:relative;
+    height:120px;
+    border-radius:8px;
+    overflow:hidden;
+    background:#eee;
+}
+
+.preview-item img{
     width:100%;
     height:100%;
     object-fit:cover;
 }
 
-.editor-buttons{
+.preview-number{
+    position:absolute;
+    top:5px;
+    left:5px;
+    background:#000;
+    color:#fff;
+    padding:3px 7px;
+    border-radius:10px;
+    font-size:11px;
+}
+
+.admin-product{
+    border:1px solid #eee;
+    border-radius:10px;
+    padding:15px;
+    margin-bottom:12px;
     display:flex;
-    gap:8px;
-    margin-top:15px;
+    gap:15px;
+    align-items:center;
 }
 
-.save-product,
-.delete-product,
-.add-product{
-    border:0;
-    padding:12px 16px;
-    cursor:pointer;
-    font-size:10px;
-}
-
-.save-product{
-    background:#191613;
-    color:white;
-}
-
-.delete-product{
+.admin-product img{
+    width:80px;
+    height:80px;
+    object-fit:cover;
+    border-radius:8px;
     background:#eee;
-    color:#9b2222;
 }
 
-.add-product{
-    background:#191613;
-    color:white;
-    margin-bottom:15px;
+.admin-product-info{
+    flex:1;
+}
+
+.message{
+    padding:12px;
+    border-radius:8px;
+    margin:10px 0;
+    display:none;
+}
+
+.message.show{
+    display:block;
+}
+
+.message.success{
+    background:#e7f6e7;
+    color:#236323;
+}
+
+.message.error{
+    background:#fde7e7;
+    color:#8b2222;
+}
+
+.ai-box{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:350px;
+    background:#fff;
+    border-radius:18px;
+    box-shadow:0 10px 40px rgba(0,0,0,.2);
+    overflow:hidden;
+    z-index:1500;
+    display:none;
+}
+
+.ai-box.active{
+    display:block;
+}
+
+.ai-header{
+    background:#222;
+    color:#fff;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.ai-messages{
+    height:300px;
+    overflow-y:auto;
+    padding:15px;
+}
+
+.ai-message{
+    margin-bottom:10px;
+    padding:10px 12px;
+    border-radius:12px;
+    max-width:85%;
+}
+
+.ai-message.bot{
+    background:#f0ede8;
+}
+
+.ai-message.user{
+    background:#222;
+    color:#fff;
+    margin-left:auto;
+}
+
+.ai-input{
+    display:flex;
+    border-top:1px solid #eee;
+}
+
+.ai-input input{
+    flex:1;
+    padding:13px;
+    border:none;
+    outline:none;
+}
+
+.ai-input button{
+    width:60px;
+    background:#222;
+    color:#fff;
+}
+
+.ai-open{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#222;
+    color:#fff;
+    border-radius:50px;
+    padding:14px 20px;
+    z-index:1400;
 }
 
 footer{
-    padding:40px;
+    background:#222;
+    color:#fff;
     text-align:center;
-    background:#191613;
-    color:#aaa19a;
-    font:10px Arial;
-    letter-spacing:2px;
+    padding:35px 20px;
+    margin-top:50px;
 }
 
-@media(max-width:1050px){
-
+@media(max-width:900px){
     .products{
         grid-template-columns:repeat(2,1fr);
     }
 
+    .carousel{
+        height:380px;
+    }
 }
 
-@media(max-width:700px){
-
-    nav{
-        padding:0 4%;
-    }
-
-    .nav-links{
-        display:none;
+@media(max-width:600px){
+    .navbar{
+        padding:14px;
     }
 
     .logo{
-        font-size:20px;
+        font-size:21px;
+    }
+
+    .nav-buttons{
+        gap:2px;
+    }
+
+    .nav-btn{
+        padding:8px;
+        font-size:12px;
+    }
+
+    .carousel{
+        height:300px;
+        border-radius:12px;
     }
 
     .products{
-        grid-template-columns:1fr;
-    }
-
-    .bag-grid{
-        grid-template-columns:1fr;
-    }
-
-    .carousel-editor{
         grid-template-columns:repeat(2,1fr);
+        gap:12px;
+        padding:0 12px;
     }
 
-    .hero-content h1{
-        letter-spacing:7px;
+    .product-image{
+        height:230px;
     }
 
-    .hero-content h2{
-        font-size:18px;
+    .product-info{
+        padding:11px;
     }
 
-    .admin-window{
-        padding:18px;
+    .product-name{
+        font-size:14px;
     }
 
+    .product-price{
+        font-size:14px;
+    }
+
+    .add-cart{
+        font-size:12px;
+    }
+
+    .bags-section{
+        grid-template-columns:1fr;
+        padding:0 12px;
+    }
+
+    .bag img{
+        height:320px;
+    }
+
+    .ai-box{
+        width:calc(100% - 30px);
+        right:15px;
+        bottom:15px;
+    }
+
+    .preview-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
 }
 </style>
 </head>
 
 <body>
 
-<nav>
+<header>
+    <div class="navbar">
 
-<div class="logo">NABORA</div>
+        <div class="logo">NABORA</div>
 
-<ul class="nav-links">
-<li><a href="#inicio">INICIO</a></li>
-<li><a href="#productos">PRODUCTOS</a></li>
-<li><a href="#carteras">CARTERAS</a></li>
-<li><a href="#asistente">NABORA AI</a></li>
-</ul>
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="openCart()">
+                🛒 <span id="cartCount">0</span>
+            </button>
 
-<div class="nav-right">
+            <button class="nav-btn" onclick="openAdmin()">
+                ⚙️
+            </button>
 
-<button class="nav-btn dark" onclick="openCart()">
-🛍️ <span id="cartCount">0</span>
-</button>
+            <button class="nav-btn" onclick="toggleAI()">
+                ✨ AI
+            </button>
+        </div>
 
-<button class="nav-btn" onclick="openAdmin()">
-ADMIN
-</button>
+    </div>
+</header>
 
-</div>
+<main>
 
-</nav>
+<section class="hero">
 
+    <div class="carousel" id="carousel">
 
-<section class="hero" id="inicio">
+        <button class="carousel-arrow left" onclick="previousSlide()">‹</button>
 
-<div id="slides"></div>
+        <img id="slide1" class="active" src="" alt="NABORA">
+        <img id="slide2" src="" alt="NABORA">
+        <img id="slide3" src="" alt="NABORA">
+        <img id="slide4" src="" alt="NABORA">
 
-<div class="hero-dark"></div>
+        <button class="carousel-arrow right" onclick="nextSlide()">›</button>
 
-<div class="hero-content">
+        <div class="carousel-dots">
+            <span class="dot active" onclick="showSlide(0)"></span>
+            <span class="dot" onclick="showSlide(1)"></span>
+            <span class="dot" onclick="showSlide(2)"></span>
+            <span class="dot" onclick="showSlide(3)"></span>
+        </div>
 
-<div>
-
-<small>NABORA PRESENTA</small>
-
-<h1>NABORA</h1>
-
-<h2>COLECCIÓN OTOÑO 2026</h2>
-
-<p>
-Una colección creada para expresar tu esencia,
-tu elegancia y tu estilo.
-</p>
-
-<a class="hero-link" href="#productos">
-DESCUBRIR COLECCIÓN
-</a>
-
-</div>
-
-</div>
-
-<button class="arrow left" onclick="previousSlide()">‹</button>
-
-<button class="arrow right" onclick="nextSlide()">›</button>
-
-<div class="dots" id="dots"></div>
+    </div>
 
 </section>
 
+<div class="categories">
 
-<section class="collection-banner">
+    <button class="category-btn active" onclick="filterProducts('todos',this)">
+        TODOS
+    </button>
 
-<h2>COLECCIÓN OTOÑO 2026</h2>
+    <button class="category-btn" onclick="filterProducts('ropa',this)">
+        ROPA
+    </button>
 
-<p>BY NABORA · MODA · ELEGANCIA · ESENCIA</p>
+    <button class="category-btn" onclick="filterProducts('zapatos',this)">
+        ZAPATOS
+    </button>
+
+    <button class="category-btn" onclick="filterProducts('accesorios',this)">
+        ACCESORIOS
+    </button>
+
+    <button class="category-btn" onclick="filterProducts('carteras',this)">
+        CARTERAS
+    </button>
+
+</div>
+
+<section>
+
+    <div class="section-title">
+        <h2>Colección Otoño 2026</h2>
+    </div>
+
+    <div class="products" id="products"></div>
 
 </section>
 
+<section>
 
-<section class="section" id="productos">
+    <div class="section-title">
+        <h2>Carteras NABORA</h2>
+    </div>
 
-<h2 class="section-title">Productos</h2>
+    <div class="bags-section">
 
-<p class="section-subtitle">
-COLECCIÓN OTOÑO 2026 · BY NABORA
-</p>
+        <div class="bag">
 
-<div class="filters">
+            <img id="bagImage1" src="" alt="Cartera NABORA">
 
-<button class="filter active"
-onclick="filterProducts('todos',this)">
-TODOS
-</button>
+            <div class="bag-info">
 
-<button class="filter"
-onclick="filterProducts('ropa',this)">
-👗 ROPA
-</button>
+                <h3>Cartera de perlas</h3>
 
-<button class="filter"
-onclick="filterProducts('zapatos',this)">
-👢 ZAPATOS
-</button>
+                <p class="product-price">$250</p>
 
-<button class="filter"
-onclick="filterProducts('accesorios',this)">
-🕶️ ACCESORIOS
-</button>
+                <button class="add-cart" onclick="addBagToCart(1)">
+                    Añadir al carrito
+                </button>
 
-<button class="filter"
-onclick="filterProducts('carteras',this)">
-👜 CARTERAS
-</button>
+            </div>
 
-</div>
+        </div>
 
-<div class="products" id="products"></div>
+        <div class="bag">
 
-</section>
+            <img id="bagImage2" src="" alt="Cartera NABORA">
 
+            <div class="bag-info">
 
-<section class="section bags" id="carteras">
+                <h3>Cartera de perlas con cuero vegano</h3>
 
-<h2 class="section-title">
-Carteras NABORA
-</h2>
+                <p class="product-price">$350</p>
 
-<p class="section-subtitle">
-PIEZAS EXCLUSIVAS · OTOÑO 2026
-</p>
+                <button class="add-cart" onclick="addBagToCart(2)">
+                    Añadir al carrito
+                </button>
 
-<div class="bag-grid">
+            </div>
 
-<div class="bag">
+        </div>
 
-<div class="bag-photo" id="bagPhoto1">
-<div class="placeholder">
-FOTO DE CARTERA
-</div>
-</div>
-
-<div class="bag-info">
-
-<div class="bag-label">
-NABORA EXCLUSIVE
-</div>
-
-<h3>
-Cartera de piedras marrones
-</h3>
-
-<p>
-Cartera sofisticada decorada con piedras
-en tonos marrones. Una pieza elegante
-para completar tus looks de otoño.
-</p>
-
-<div class="bag-price">
-$250
-</div>
-
-<button class="bag-button"
-onclick="addBagToCart('Cartera de piedras marrones',250)">
-AÑADIR AL CARRITO
-</button>
-
-</div>
-
-</div>
-
-
-<div class="bag">
-
-<div class="bag-photo" id="bagPhoto2">
-<div class="placeholder">
-FOTO DE CARTERA
-</div>
-</div>
-
-<div class="bag-info">
-
-<div class="bag-label">
-NABORA SIGNATURE
-</div>
-
-<h3>
-Cartera de perlas con cuero vegano
-</h3>
-
-<p>
-Diseñada con cuero vegano y perlas
-de cristal. Una pieza delicada,
-elegante y sofisticada.
-</p>
-
-<div class="bag-price">
-$350
-</div>
-
-<button class="bag-button"
-onclick="addBagToCart('Cartera de perlas con cuero vegano',350)">
-AÑADIR AL CARRITO
-</button>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
+</main>
 
-<section class="ai-section" id="asistente">
+<!-- CARRITO -->
 
-<h2 class="section-title">
-NABORA AI
-</h2>
+<div class="modal" id="cartModal">
 
-<p class="section-subtitle">
-TU ASISTENTE PERSONAL DE MODA
-</p>
+    <div class="modal-box">
 
-<div class="chat">
+        <div class="modal-header">
 
-<div class="chat-header">
-NABORA ✦ ASISTENTE DE MODA
+            <h2>Tu carrito</h2>
+
+            <button class="close" onclick="closeModal('cartModal')">
+                ×
+            </button>
+
+        </div>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-total" id="cartTotal">
+            Total: $0
+        </div>
+
+        <button class="admin-button" onclick="checkout()">
+            Finalizar compra
+        </button>
+
+    </div>
+
 </div>
 
-<div class="messages" id="messages">
+<!-- LOGIN ADMIN -->
 
-<div class="message bot">
-Hola ✨ Soy NABORA AI.
-Dime qué ocasión tienes y te ayudaré
-a crear un outfit.
+<div class="modal" id="loginModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>Administración NABORA</h2>
+
+            <button class="close" onclick="closeModal('loginModal')">
+                ×
+            </button>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Contraseña</label>
+
+            <input
+                type="password"
+                id="adminPassword"
+                placeholder="Contraseña"
+            >
+
+        </div>
+
+        <button class="admin-button" onclick="loginAdmin()">
+            Entrar
+        </button>
+
+        <div id="loginMessage" class="message"></div>
+
+    </div>
+
 </div>
 
+<!-- ADMIN -->
+
+<div class="modal" id="adminModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>Panel NABORA</h2>
+
+            <button class="close" onclick="closeModal('adminModal')">
+                ×
+            </button>
+
+        </div>
+
+        <div id="adminMessage" class="message"></div>
+
+        <h3>📸 Subir productos</h3>
+
+        <div class="upload-area">
+
+            <p>
+                Selecciona varias fotos a la vez.
+            </p>
+
+            <br>
+
+            <input
+                type="file"
+                id="productFiles"
+                accept="image/*"
+                multiple
+                onchange="previewProductImages(event)"
+            >
+
+            <div
+                class="preview-grid"
+                id="productPreview"
+            ></div>
+
+            <br>
+
+            <button
+                class="admin-button"
+                onclick="uploadProductImages()"
+            >
+                ☁️ Subir fotos
+            </button>
+
+        </div>
+
+        <hr>
+
+        <h3>🎠 Fotos del carrusel</h3>
+
+        <div class="upload-area">
+
+            <input
+                type="file"
+                id="carouselFiles"
+                accept="image/*"
+                multiple
+                onchange="previewCarousel(event)"
+            >
+
+            <div
+                class="preview-grid"
+                id="carouselPreview"
+            ></div>
+
+            <br>
+
+            <button
+                class="admin-button"
+                onclick="uploadCarouselImages()"
+            >
+                Subir carrusel
+            </button>
+
+        </div>
+
+        <hr>
+
+        <h3>👜 Fotos de carteras</h3>
+
+        <div class="upload-area">
+
+            <input
+                type="file"
+                id="bagFiles"
+                accept="image/*"
+                multiple
+                onchange="previewBags(event)"
+            >
+
+            <div
+                class="preview-grid"
+                id="bagPreview"
+            ></div>
+
+            <br>
+
+            <button
+                class="admin-button"
+                onclick="uploadBagImages()"
+            >
+                Subir carteras
+            </button>
+
+        </div>
+
+        <hr>
+
+        <h3>➕ Crear producto</h3>
+
+        <div class="form-group">
+
+            <label>Nombre</label>
+
+            <input
+                type="text"
+                id="newName"
+                placeholder="Ej. Vestido negro"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Categoría</label>
+
+            <select id="newCategory">
+
+                <option value="ropa">Ropa</option>
+
+                <option value="zapatos">Zapatos</option>
+
+                <option value="accesorios">Accesorios</option>
+
+                <option value="carteras">Carteras</option>
+
+            </select>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Precio</label>
+
+            <input
+                type="number"
+                id="newPrice"
+                placeholder="50"
+            >
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Descripción</label>
+
+            <textarea
+                id="newDescription"
+                placeholder="Descripción del producto..."
+            ></textarea>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Foto del producto</label>
+
+            <input
+                type="file"
+                id="newImage"
+                accept="image/*"
+            >
+
+        </div>
+
+        <button
+            class="admin-button"
+            onclick="createProduct()"
+        >
+            Crear producto
+        </button>
+
+        <hr>
+
+        <h3>📦 Productos</h3>
+
+        <div id="adminProducts"></div>
+
+    </div>
+
 </div>
 
-<div class="chat-input">
+<!-- AI -->
 
-<input
-id="userInput"
-placeholder="Ej: necesito un look para una fiesta"
-onkeydown="if(event.key==='Enter') sendMessage()"
->
-
-<button onclick="sendMessage()">
-ENVIAR
+<button class="ai-open" id="aiOpen" onclick="toggleAI()">
+    ✨ NABORA AI
 </button>
 
-</div>
+<div class="ai-box" id="aiBox">
+
+    <div class="ai-header">
+
+        <span>NABORA AI ✨</span>
+
+        <button
+            onclick="toggleAI()"
+            style="background:none;color:white;font-size:20px"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <div class="ai-messages" id="aiMessages">
+
+        <div class="ai-message bot">
+            ¡Hola! ✨ Soy NABORA AI. Dime qué tipo de look buscas y te ayudo.
+        </div>
+
+    </div>
+
+    <div class="ai-input">
+
+        <input
+            id="userInput"
+            type="text"
+            placeholder="Ej. quiero un look elegante..."
+            onkeydown="if(event.key==='Enter')sendMessage()"
+        >
+
+        <button onclick="sendMessage()">
+            ➤
+        </button>
+
+    </div>
 
 </div>
-
-</section>
-
-
-<div class="cart" id="cart">
-
-<button class="close-cart" onclick="closeCart()">
-×
-</button>
-
-<h2>Mi carrito</h2>
-
-<div id="cartItems">
-Tu carrito está vacío.
-</div>
-
-<div class="cart-total">
-TOTAL: $<span id="cartTotal">0</span>
-</div>
-
-</div>
-
-
-<div class="admin-modal" id="adminModal">
-
-<div class="admin-window">
-
-<div class="admin-header">
-
-<h2>
-Panel de administración NABORA
-</h2>
-
-<button class="admin-close"
-onclick="closeAdmin()">
-×
-</button>
-
-</div>
-
-
-<div class="admin-login" id="adminLogin">
-
-<h3>
-Acceso de administrador
-</h3>
-
-<p>
-Solo el administrador puede modificar
-productos, precios, descripciones e imágenes.
-</p>
-
-<input
-type="password"
-id="adminPassword"
-placeholder="Contraseña"
->
-
-<button onclick="loginAdmin()">
-ENTRAR AL PANEL
-</button>
-
-<div class="login-error" id="loginError"></div>
-
-</div>
-
-
-<div class="admin-panel" id="adminPanel">
-
-
-<div class="admin-box">
-
-<h3>
-🖼️ Carrusel de inicio
-</h3>
-
-<p>
-Puedes subir exactamente 4 fotografías.
-El carrusel cambiará automáticamente cada
-4 segundos.
-</p>
-
-<div class="carousel-editor"
-id="carouselEditor">
-</div>
-
-</div>
-
-
-<div class="admin-box">
-
-<h3>
-📸 CARGAR MUCHAS FOTOS
-</h3>
-
-<div class="bulk-upload">
-
-<strong>
-Carga tus 15 fotos de una sola vez
-</strong>
-
-<p>
-Selecciona todas las imágenes que quieras.
-NABORA las asignará automáticamente a los
-productos que todavía no tengan fotografía.
-</p>
-
-<input
-type="file"
-id="bulkPhotos"
-accept="image/*"
-multiple
-onchange="bulkUploadImages(event)"
->
-
-<div class="bulk-status"
-id="bulkStatus">
-Ninguna foto seleccionada.
-</div>
-
-</div>
-
-</div>
-
-
-<div class="admin-box">
-
-<h3>
-👗 Administrar productos
-</h3>
-
-<p>
-Aquí puedes cambiar el nombre, categoría,
-precio, descripción e imagen de cada producto.
-</p>
-
-<button class="add-product"
-onclick="addProduct()">
-+ AGREGAR NUEVO PRODUCTO
-</button>
-
-<div id="productEditors"></div>
-
-</div>
-
-
-<div class="admin-box">
-
-<h3>
-👜 Fotografías de las carteras
-</h3>
-
-<p>
-Solo el administrador puede cambiar estas fotografías.
-</p>
-
-<label class="form-label">
-Cartera de piedras marrones
-</label>
-
-<input
-type="file"
-accept="image/*"
-onchange="changeBagImage(1,event)"
->
-
-<br><br>
-
-<label class="form-label">
-Cartera de perlas con cuero vegano
-</label>
-
-<input
-type="file"
-accept="image/*"
-onchange="changeBagImage(2,event)"
->
-
-</div>
-
-
-</div>
-
-</div>
-
-</div>
-
 
 <footer>
 
-NABORA · COLECCIÓN OTOÑO 2026 · BY NABORA
+    <h2>NABORA</h2>
+
+    <p>Moda que evoluciona contigo.</p>
+
+    <br>
+
+    <p>© 2026 NABORA</p>
 
 </footer>
 
-
 <script>
 
-/* =====================================================
-   PRODUCTOS
-===================================================== */
+/* =========================================================
+   SUPABASE
+   ========================================================= */
+
+/*
+    🔴 PEGA AQUÍ TUS DATOS DE SUPABASE
+
+    Ejemplo:
+
+    const SUPABASE_URL = "https://xxxxx.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOi...";
+
+*/
+
+const SUPABASE_URL = "PEGA_AQUI_TU_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "PEGA_AQUI_TU_SUPABASE_ANON_KEY";
+
+let supabaseClient = null;
+
+if(
+    SUPABASE_URL.startsWith("https://") &&
+    !SUPABASE_URL.includes("PEGA_AQUI")
+){
+    supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+        );
+}
+
+
+/* =========================================================
+   CONFIGURACIÓN
+   ========================================================= */
+
+const ADMIN_PASSWORD = "NaboraAdmin2026!";
+
+const PRODUCTS_KEY = "NABORA_PRODUCTS_V3";
+
+let products = [];
+
+let cart = [];
+
+let currentFilter = "todos";
+
+let currentSlide = 0;
+
+let carouselImages = [];
+
+let bagImages = [];
+
+
+/* =========================================================
+   PRODUCTOS INICIALES
+   ========================================================= */
 
 const defaultProducts = [
 
 {
-name:"Poliéster blanco",
-category:"ropa",
-price:20,
-description:"Pieza blanca minimalista y versátil para crear looks elegantes.",
-image:""
+    id:"p1",
+    name:"Poliéster blanco",
+    category:"ropa",
+    price:20,
+    description:"Prenda blanca elegante para combinar fácilmente.",
+    image:""
 },
 
 {
-name:"Chaqueta de cuero vegano",
-category:"ropa",
-price:40,
-description:"Chaqueta de cuero vegano con estilo moderno y sofisticado.",
-image:""
+    id:"p2",
+    name:"Chaqueta de cuero vegano",
+    category:"ropa",
+    price:40,
+    description:"Chaqueta moderna de cuero vegano.",
+    image:""
 },
 
 {
-name:"Pantalón de tela",
-category:"ropa",
-price:30,
-description:"Pantalón cómodo y elegante para diferentes combinaciones.",
-image:""
+    id:"p3",
+    name:"Pantalón de tela",
+    category:"ropa",
+    price:30,
+    description:"Pantalón elegante y cómodo.",
+    image:""
 },
 
 {
-name:"Gafas negras",
-category:"accesorios",
-price:20,
-description:"Gafas negras clásicas para completar cualquier look.",
-image:""
+    id:"p4",
+    name:"Gafas negras",
+    category:"accesorios",
+    price:20,
+    description:"Gafas negras minimalistas.",
+    image:""
 },
 
 {
-name:"Botas cortas",
-category:"zapatos",
-price:50,
-description:"Botas cortas perfectas para los días de otoño.",
-image:""
+    id:"p5",
+    name:"Botas cortas",
+    category:"zapatos",
+    price:50,
+    description:"Botas cortas para un look de otoño.",
+    image:""
 },
 
 {
-name:"Boina",
-category:"accesorios",
-price:15,
-description:"Boina elegante para complementar tus outfits.",
-image:""
+    id:"p6",
+    name:"Boina",
+    category:"accesorios",
+    price:15,
+    description:"Boina elegante para complementar tu look.",
+    image:""
 },
 
 {
-name:"Bufanda de seda",
-category:"accesorios",
-price:20,
-description:"Bufanda de seda suave y sofisticada.",
-image:""
+    id:"p7",
+    name:"Bufanda de seda",
+    category:"accesorios",
+    price:20,
+    description:"Bufanda suave y elegante.",
+    image:""
 },
 
 {
-name:"Falda con estampado de hojas de otoño",
-category:"ropa",
-price:34,
-description:"Falda inspirada en las hojas y colores del otoño.",
-image:""
+    id:"p8",
+    name:"Falda con estampado de hojas de otoño",
+    category:"ropa",
+    price:34,
+    description:"Falda inspirada en los colores del otoño.",
+    image:""
 },
 
 {
-name:"Botas largas con tacón estilo otoño",
-category:"zapatos",
-price:75,
-description:"Botas largas con tacón para un look elegante.",
-image:""
+    id:"p9",
+    name:"Botas largas con tacón estilo otoño",
+    category:"zapatos",
+    price:75,
+    description:"Botas largas con tacón elegante.",
+    image:""
 },
 
 {
-name:"Top gris con estampado de hojas de otoño",
-category:"ropa",
-price:35,
-description:"Top gris con estampado inspirado en las hojas de otoño.",
-image:""
+    id:"p10",
+    name:"Top gris con estampado de hojas de otoño",
+    category:"ropa",
+    price:35,
+    description:"Top gris inspirado en el otoño.",
+    image:""
 },
 
 {
-name:"Cartera de perlas",
-category:"carteras",
-price:250,
-description:"Cartera de perlas elegante para ocasiones especiales.",
-image:""
+    id:"p11",
+    name:"Cartera de perlas",
+    category:"carteras",
+    price:250,
+    description:"Cartera elegante con detalles de perlas.",
+    image:""
 },
 
 {
-name:"Cartera de perlas con cuero vegano",
-category:"carteras",
-price:350,
-description:"Cartera de cuero vegano decorada con perlas de cristal.",
-image:""
+    id:"p12",
+    name:"Cartera de perlas con cuero vegano",
+    category:"carteras",
+    price:350,
+    description:"Cartera premium con perlas y cuero vegano.",
+    image:""
 }
 
 ];
 
 
-/* =====================================================
-   DATOS
-===================================================== */
+/* =========================================================
+   INICIO
+   ========================================================= */
 
-let products =
-JSON.parse(localStorage.getItem("NABORA_PRODUCTS")) || null;
+document.addEventListener("DOMContentLoaded",async()=>{
 
-if(!Array.isArray(products)){
-    products = JSON.parse(JSON.stringify(defaultProducts));
-    saveProducts();
+    loadProducts();
+
+    renderProducts();
+
+    updateCart();
+
+    loadLocalImages();
+
+    setupCarousel();
+
+});
+
+
+/* =========================================================
+   PRODUCTOS
+   ========================================================= */
+
+function loadProducts(){
+
+    try{
+
+        const saved =
+            localStorage.getItem(PRODUCTS_KEY);
+
+        if(saved){
+
+            products = JSON.parse(saved);
+
+        }else{
+
+            products =
+                JSON.parse(
+                    JSON.stringify(defaultProducts)
+                );
+
+            saveProducts();
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        products =
+            JSON.parse(
+                JSON.stringify(defaultProducts)
+            );
+
+    }
+
 }
 
-
-let carouselImages =
-JSON.parse(localStorage.getItem("NABORA_CAROUSEL")) || null;
-
-if(!Array.isArray(carouselImages) ||
-carouselImages.length !== 4){
-
-carouselImages = ["","","",""];
-
-saveCarousel();
-
-}
-
-
-/* =====================================================
-   GUARDAR PRODUCTOS
-===================================================== */
 
 function saveProducts(){
 
-localStorage.setItem(
-"NABORA_PRODUCTS",
-JSON.stringify(products)
-);
+    try{
+
+        /*
+          SOLO guardamos nombres/precios/etc.
+          Las imágenes ya NO se guardan como base64.
+        */
+
+        const safeProducts =
+            products.map(product=>({
+
+                id:product.id,
+                name:product.name,
+                category:product.category,
+                price:product.price,
+                description:product.description,
+                image:product.image || ""
+
+            }));
+
+        localStorage.setItem(
+            PRODUCTS_KEY,
+            JSON.stringify(safeProducts)
+        );
+
+    }catch(error){
+
+        console.error(
+            "No se pudieron guardar los productos:",
+            error
+        );
+
+    }
 
 }
 
 
-/* =====================================================
-   GUARDAR CARRUSEL
-===================================================== */
+/* =========================================================
+   MOSTRAR PRODUCTOS
+   ========================================================= */
 
-function saveCarousel(){
+function renderProducts(){
 
-localStorage.setItem(
-"NABORA_CAROUSEL",
-JSON.stringify(carouselImages)
-);
+    const container =
+        document.getElementById("products");
 
-}
+    if(!container) return;
 
+    let filtered = products;
 
-/* =====================================================
-   COMPRESOR
-===================================================== */
+    if(currentFilter !== "todos"){
 
-function compressImage(file,maxWidth,quality){
+        filtered =
+            products.filter(
+                p => p.category === currentFilter
+            );
 
-return new Promise(function(resolve,reject){
+    }
 
-const reader = new FileReader();
+    if(filtered.length === 0){
 
-reader.onload = function(e){
+        container.innerHTML =
+            `<div class="empty">
+                No hay productos en esta categoría.
+             </div>`;
 
-const img = new Image();
+        return;
 
-img.onload = function(){
+    }
 
-let width = img.width;
-let height = img.height;
+    container.innerHTML =
+        filtered.map(product=>`
 
-if(width > maxWidth){
+        <article class="product">
 
-height = height * (maxWidth / width);
-width = maxWidth;
+            <div class="product-image">
 
-}
+                ${
+                    product.image
 
-const canvas =
-document.createElement("canvas");
+                    ?
 
-canvas.width = width;
-canvas.height = height;
+                    `<img
+                        src="${escapeHtml(product.image)}"
+                        alt="${escapeHtml(product.name)}"
+                        loading="lazy"
+                        onerror="this.style.display='none';this.parentElement.innerHTML='<div class=&quot;no-image&quot;>Imagen no disponible</div>'"
+                    >`
 
-const ctx =
-canvas.getContext("2d");
+                    :
 
-ctx.drawImage(
-img,
-0,
-0,
-width,
-height
-);
+                    `<div class="no-image">
+                        Foto próximamente
+                     </div>`
+                }
 
-resolve(
-canvas.toDataURL(
-"image/jpeg",
-quality
-)
-);
+            </div>
 
-};
+            <div class="product-info">
 
-img.onerror = reject;
+                <div class="product-category">
+                    ${escapeHtml(product.category)}
+                </div>
 
-img.src = e.target.result;
+                <div class="product-name">
+                    ${escapeHtml(product.name)}
+                </div>
 
-};
+                <div class="product-price">
+                    $${Number(product.price).toFixed(2)}
+                </div>
 
-reader.onerror = reject;
+                <button
+                    class="add-cart"
+                    onclick="addToCart('${product.id}')"
+                >
+                    Añadir al carrito
+                </button>
 
-reader.readAsDataURL(file);
+            </div>
 
-});
+        </article>
 
-}
-
-
-/* =====================================================
-   CARRUSEL
-===================================================== */
-
-let currentSlide = 0;
-
-function renderCarousel(){
-
-const slides =
-document.getElementById("slides");
-
-const dots =
-document.getElementById("dots");
-
-slides.innerHTML = "";
-dots.innerHTML = "";
-
-for(let i=0;i<4;i++){
-
-const slide =
-document.createElement("div");
-
-slide.className = "slide";
-
-if(i === currentSlide){
-slide.classList.add("active");
-}
-
-if(carouselImages[i]){
-
-slide.innerHTML =
-`<img src="${carouselImages[i]}" alt="NABORA">`;
-
-}else{
-
-slide.innerHTML =
-`
-<div class="no-slide-image">
-FOTO ${i+1} · SUBIR DESDE ADMIN
-</div>
-`;
-
-}
-
-slides.appendChild(slide);
-
-const dot =
-document.createElement("button");
-
-dot.className = "dot";
-
-if(i === currentSlide){
-dot.classList.add("active");
-}
-
-dot.onclick = function(){
-goToSlide(i);
-};
-
-dots.appendChild(dot);
-
-}
+    `).join("");
 
 }
 
 
-function goToSlide(index){
-
-currentSlide = index;
-
-renderCarousel();
-
-}
-
-
-function nextSlide(){
-
-currentSlide++;
-
-if(currentSlide >= 4){
-currentSlide = 0;
-}
-
-renderCarousel();
-
-}
-
-
-function previousSlide(){
-
-currentSlide--;
-
-if(currentSlide < 0){
-currentSlide = 3;
-}
-
-renderCarousel();
-
-}
-
-
-setInterval(function(){
-
-nextSlide();
-
-},4000);
-
-
-/* =====================================================
-   EDITOR CARRUSEL
-===================================================== */
-
-function renderCarouselEditor(){
-
-const editor =
-document.getElementById("carouselEditor");
-
-if(!editor)return;
-
-editor.innerHTML = "";
-
-for(let i=0;i<4;i++){
-
-const card =
-document.createElement("div");
-
-card.className = "carousel-card";
-
-let preview = "";
-
-if(carouselImages[i]){
-
-preview =
-`<img src="${carouselImages[i]}" alt="">`;
-
-}else{
-
-preview =
-`<span>Sin foto</span>`;
-
-}
-
-card.innerHTML = `
-
-<strong>Foto ${i+1}</strong>
-
-<div class="carousel-preview">
-${preview}
-</div>
-
-<input
-type="file"
-accept="image/*"
-onchange="uploadCarousel(${i},event)"
->
-
-`;
-
-editor.appendChild(card);
-
-}
-
-}
-
-
-async function uploadCarousel(index,event){
-
-const file =
-event.target.files[0];
-
-if(!file)return;
-
-try{
-
-const result =
-await compressImage(file,1200,0.75);
-
-carouselImages[index] = result;
-
-saveCarousel();
-
-renderCarousel();
-
-renderCarouselEditor();
-
-}catch(error){
-
-alert("No se pudo cargar la imagen.");
-
-}
-
-}
-
-
-/* =====================================================
-   CARGAR MUCHAS FOTOS
-===================================================== */
-
-async function bulkUploadImages(event){
-
-const files =
-Array.from(event.target.files || []);
-
-const status =
-document.getElementById("bulkStatus");
-
-if(!files.length){
-
-status.textContent =
-"Ninguna foto seleccionada.";
-
-return;
-
-}
-
-
-/*
-   Busca primero productos sin imagen.
-*/
-
-let availableIndexes = [];
-
-products.forEach(function(product,index){
-
-if(!product.image){
-
-availableIndexes.push(index);
-
-}
-
-});
-
-
-if(availableIndexes.length === 0){
-
-status.textContent =
-"Todos los productos ya tienen una foto. Agrega más productos si necesitas cargar más imágenes.";
-
-return;
-
-}
-
-
-let loaded = 0;
-let skipped = 0;
-
-status.textContent =
-"Cargando fotos...";
-
-
-for(let i=0;i<files.length;i++){
-
-if(i >= availableIndexes.length){
-
-skipped =
-files.length - i;
-
-break;
-
-}
-
-const file = files[i];
-
-if(!file.type.startsWith("image/")){
-
-continue;
-
-}
-
-try{
-
-const image =
-await compressImage(file,1000,0.72);
-
-const productIndex =
-availableIndexes[i];
-
-products[productIndex].image =
-image;
-
-loaded++;
-
-status.textContent =
-`Cargando ${loaded} de ${files.length}...`;
-
-}catch(error){
-
-console.error(error);
-
-}
-
-}
-
-
-saveProducts();
-
-renderProducts();
-
-renderProductEditors();
-
-
-status.textContent =
-`✅ ${loaded} foto(s) cargada(s) correctamente.` +
-(skipped
-?
-` ${skipped} foto(s) no se asignaron porque no quedan productos sin foto.`
-:
-"");
-
-
-event.target.value = "";
-
-}
-
-
-/* =====================================================
-   PRODUCTOS
-===================================================== */
-
-function renderProducts(category="todos"){
-
-const container =
-document.getElementById("products");
-
-container.innerHTML = "";
-
-products.forEach(function(product,index){
-
-if(
-category !== "todos" &&
-product.category !== category
-){
-return;
-}
-
-const card =
-document.createElement("div");
-
-card.className = "product";
-
-let imageHTML = "";
-
-if(product.image){
-
-imageHTML =
-`<img src="${product.image}" alt="${escapeAttribute(product.name)}">`;
-
-}else{
-
-imageHTML =
-`
-<div class="placeholder">
-📷<br><br>
-FOTO DEL PRODUCTO
-</div>
-`;
-
-}
-
-card.innerHTML = `
-
-<div class="product-image">
-${imageHTML}
-</div>
-
-<div class="product-info">
-
-<div class="product-category">
-${escapeHTML(product.category.toUpperCase())}
-</div>
-
-<h3 class="product-name">
-${escapeHTML(product.name)}
-</h3>
-
-<p class="product-description">
-${escapeHTML(product.description)}
-</p>
-
-<div class="product-price">
-$${Number(product.price).toFixed(2)}
-</div>
-
-<button class="add-cart"
-onclick="addToCart(${index})">
-AÑADIR AL CARRITO
-</button>
-
-</div>
-
-`;
-
-container.appendChild(card);
-
-});
-
-}
-
+/* =========================================================
+   FILTROS
+   ========================================================= */
 
 function filterProducts(category,button){
 
-document
-.querySelectorAll(".filter")
-.forEach(function(btn){
+    currentFilter = category;
 
-btn.classList.remove("active");
+    document
+        .querySelectorAll(".category-btn")
+        .forEach(btn=>{
+            btn.classList.remove("active");
+        });
 
-});
+    if(button){
+        button.classList.add("active");
+    }
 
-button.classList.add("active");
-
-renderProducts(category);
-
-}
-
-
-/* =====================================================
-   EDITORES
-===================================================== */
-
-function renderProductEditors(){
-
-const container =
-document.getElementById("productEditors");
-
-if(!container)return;
-
-container.innerHTML = "";
-
-products.forEach(function(product,index){
-
-const editor =
-document.createElement("div");
-
-editor.className =
-"product-editor";
-
-editor.innerHTML = `
-
-<h4>
-Producto ${index+1}
-</h4>
-
-<label class="form-label">
-Nombre del producto
-</label>
-
-<input
-class="form-input"
-id="productName${index}"
-value="${escapeAttribute(product.name)}"
->
-
-<label class="form-label">
-Categoría
-</label>
-
-<select
-class="form-select"
-id="productCategory${index}"
->
-
-<option value="ropa"
-${product.category==="ropa"?"selected":""}>
-Ropa
-</option>
-
-<option value="zapatos"
-${product.category==="zapatos"?"selected":""}>
-Zapatos
-</option>
-
-<option value="accesorios"
-${product.category==="accesorios"?"selected":""}>
-Accesorios
-</option>
-
-<option value="carteras"
-${product.category==="carteras"?"selected":""}>
-Carteras
-</option>
-
-</select>
-
-<label class="form-label">
-Precio
-</label>
-
-<input
-class="form-input"
-type="number"
-min="0"
-step="0.01"
-id="productPrice${index}"
-value="${Number(product.price)}"
->
-
-<label class="form-label">
-Descripción
-</label>
-
-<textarea
-class="form-textarea"
-id="productDescription${index}"
->${escapeHTML(product.description)}</textarea>
-
-<label class="form-label">
-Imagen del producto
-</label>
-
-<div class="editor-photo">
-
-${
-product.image
-?
-`<img src="${product.image}" alt="">`
-:
-`<span>Sin foto</span>`
-}
-
-</div>
-
-<br>
-
-<input
-type="file"
-accept="image/*"
-onchange="uploadProductImage(${index},event)"
->
-
-<div class="editor-buttons">
-
-<button
-class="save-product"
-onclick="saveProduct(${index})">
-💾 GUARDAR CAMBIOS
-</button>
-
-<button
-class="delete-product"
-onclick="deleteProduct(${index})">
-🗑️ ELIMINAR
-</button>
-
-</div>
-
-`;
-
-container.appendChild(editor);
-
-});
+    renderProducts();
 
 }
 
 
-/* =====================================================
-   GUARDAR PRODUCTO
-===================================================== */
-
-function saveProduct(index){
-
-const name =
-document.getElementById(
-"productName"+index
-).value.trim();
-
-const category =
-document.getElementById(
-"productCategory"+index
-).value;
-
-const price =
-Number(
-document.getElementById(
-"productPrice"+index
-).value
-);
-
-const description =
-document.getElementById(
-"productDescription"+index
-).value.trim();
-
-
-if(!name){
-
-alert(
-"Escribe un nombre para el producto."
-);
-
-return;
-
-}
-
-if(isNaN(price) || price < 0){
-
-alert(
-"Escribe un precio válido."
-);
-
-return;
-
-}
-
-products[index].name = name;
-products[index].category = category;
-products[index].price = price;
-products[index].description = description;
-
-saveProducts();
-
-renderProducts();
-
-renderProductEditors();
-
-alert(
-"✅ Producto guardado correctamente."
-);
-
-}
-
-
-/* =====================================================
-   FOTO INDIVIDUAL
-===================================================== */
-
-async function uploadProductImage(index,event){
-
-const file =
-event.target.files[0];
-
-if(!file)return;
-
-try{
-
-const result =
-await compressImage(file,1000,0.72);
-
-products[index].image = result;
-
-saveProducts();
-
-renderProducts();
-
-renderProductEditors();
-
-alert(
-"📸 Imagen actualizada."
-);
-
-}catch(error){
-
-alert(
-"No se pudo cargar la imagen."
-);
-
-}
-
-}
-
-
-/* =====================================================
-   AGREGAR PRODUCTO
-===================================================== */
-
-function addProduct(){
-
-products.push({
-
-name:"Nuevo producto",
-
-category:"ropa",
-
-price:0,
-
-description:
-"Escribe aquí la descripción del producto.",
-
-image:""
-
-});
-
-saveProducts();
-
-renderProducts();
-
-renderProductEditors();
-
-}
-
-
-/* =====================================================
-   ELIMINAR
-===================================================== */
-
-function deleteProduct(index){
-
-const confirmed =
-confirm(
-"¿Seguro que quieres eliminar este producto?"
-);
-
-if(!confirmed)return;
-
-products.splice(index,1);
-
-saveProducts();
-
-renderProducts();
-
-renderProductEditors();
-
-}
-
-
-/* =====================================================
-   CARTERAS
-===================================================== */
-
-function renderBagImages(){
-
-const bag1 =
-localStorage.getItem("NABORA_BAG_1");
-
-const bag2 =
-localStorage.getItem("NABORA_BAG_2");
-
-
-if(bag1){
-
-document.getElementById(
-"bagPhoto1"
-).innerHTML =
-`<img src="${bag1}" alt="Cartera">`;
-
-}
-
-if(bag2){
-
-document.getElementById(
-"bagPhoto2"
-).innerHTML =
-`<img src="${bag2}" alt="Cartera">`;
-
-}
-
-}
-
-
-async function changeBagImage(number,event){
-
-const file =
-event.target.files[0];
-
-if(!file)return;
-
-try{
-
-const result =
-await compressImage(file,1200,0.72);
-
-localStorage.setItem(
-"NABORA_BAG_"+number,
-result
-);
-
-renderBagImages();
-
-alert(
-"📸 Foto de cartera actualizada."
-);
-
-}catch(error){
-
-alert(
-"No se pudo cargar la foto."
-);
-
-}
-
-}
-
-
-/* =====================================================
-   ADMIN
-===================================================== */
-
-function openAdmin(){
-
-document
-.getElementById("adminModal")
-.classList.add("show");
-
-document
-.getElementById("adminPassword")
-.value = "";
-
-document
-.getElementById("loginError")
-.textContent = "";
-
-}
-
-
-function closeAdmin(){
-
-document
-.getElementById("adminModal")
-.classList.remove("show");
-
-}
-
-
-function loginAdmin(){
-
-const password =
-document.getElementById(
-"adminPassword"
-).value;
-
-
-if(password === "NaboraAdmin2026!"){
-
-document
-.getElementById("adminLogin")
-.style.display = "none";
-
-document
-.getElementById("adminPanel")
-.classList.add("visible");
-
-renderCarouselEditor();
-
-renderProductEditors();
-
-}else{
-
-document
-.getElementById("loginError")
-.textContent =
-"❌ Contraseña incorrecta.";
-
-}
-
-}
-
-
-/* =====================================================
+/* =========================================================
    CARRITO
-===================================================== */
+   ========================================================= */
 
-let cart = [];
+function addToCart(id){
 
+    const product =
+        products.find(p=>p.id===id);
 
-function addToCart(index){
+    if(!product) return;
 
-const product =
-products[index];
+    cart.push(product);
 
-cart.push({
-
-name:product.name,
-
-price:Number(product.price)
-
-});
-
-updateCart();
-
-openCart();
+    updateCart();
 
 }
 
 
-function addBagToCart(name,price){
+function addBagToCart(number){
 
-cart.push({
+    const product =
+        products.find(
+            p =>
+            number === 1
+            ? p.id === "p11"
+            : p.id === "p12"
+        );
 
-name:name,
+    if(product){
 
-price:Number(price)
+        cart.push(product);
 
-});
+        updateCart();
 
-updateCart();
-
-openCart();
+    }
 
 }
 
 
 function updateCart(){
 
-document
-.getElementById("cartCount")
-.textContent =
-cart.length;
+    const count =
+        document.getElementById("cartCount");
 
-const box =
-document.getElementById(
-"cartItems"
-);
+    if(count){
 
-if(cart.length === 0){
+        count.textContent =
+            cart.length;
 
-box.innerHTML =
-"Tu carrito está vacío.";
+    }
 
-document
-.getElementById("cartTotal")
-.textContent =
-"0.00";
-
-return;
-
-}
-
-let total = 0;
-
-box.innerHTML = "";
-
-cart.forEach(function(item,index){
-
-total += item.price;
-
-box.innerHTML += `
-
-<div class="cart-item">
-
-<strong>
-${escapeHTML(item.name)}
-</strong>
-
-<br><br>
-
-$${item.price.toFixed(2)}
-
-<br>
-
-<button
-class="remove"
-onclick="removeCart(${index})">
-Eliminar
-</button>
-
-</div>
-
-`;
-
-});
-
-document
-.getElementById("cartTotal")
-.textContent =
-total.toFixed(2);
+    renderCart();
 
 }
 
 
-function removeCart(index){
+function renderCart(){
 
-cart.splice(index,1);
+    const container =
+        document.getElementById("cartItems");
 
-updateCart();
+    const total =
+        document.getElementById("cartTotal");
+
+    if(!container) return;
+
+    if(cart.length===0){
+
+        container.innerHTML =
+            `<div class="empty">
+                Tu carrito está vacío.
+             </div>`;
+
+        if(total){
+            total.textContent =
+                "Total: $0.00";
+        }
+
+        return;
+
+    }
+
+    container.innerHTML =
+        cart.map((item,index)=>`
+
+        <div class="cart-item">
+
+            <div>
+
+                <strong>
+                    ${escapeHtml(item.name)}
+                </strong>
+
+                <br>
+
+                <small>
+                    $${Number(item.price).toFixed(2)}
+                </small>
+
+            </div>
+
+            <button
+                class="admin-button light"
+                onclick="removeFromCart(${index})"
+            >
+                Eliminar
+            </button>
+
+        </div>
+
+    `).join("");
+
+    const totalValue =
+        cart.reduce(
+            (sum,item)=>
+                sum + Number(item.price),
+            0
+        );
+
+    if(total){
+
+        total.textContent =
+            `Total: $${totalValue.toFixed(2)}`;
+
+    }
+
+}
+
+
+function removeFromCart(index){
+
+    cart.splice(index,1);
+
+    updateCart();
 
 }
 
 
 function openCart(){
 
-document
-.getElementById("cart")
-.classList.add("open");
+    document
+        .getElementById("cartModal")
+        .classList.add("active");
 
 }
 
 
-function closeCart(){
+function checkout(){
 
-document
-.getElementById("cart")
-.classList.remove("open");
+    if(cart.length===0){
+
+        alert("Tu carrito está vacío.");
+
+        return;
+
+    }
+
+    alert(
+        "Tu pedido está preparado. 💗\n\n" +
+        "Puedes conectar aquí WhatsApp, Stripe o tu método de pago."
+    );
 
 }
 
 
-/* =====================================================
+/* =========================================================
+   MODALES
+   ========================================================= */
+
+function closeModal(id){
+
+    document
+        .getElementById(id)
+        .classList.remove("active");
+
+}
+
+
+/* =========================================================
+   ADMIN
+   ========================================================= */
+
+function openAdmin(){
+
+    document
+        .getElementById("loginModal")
+        .classList.add("active");
+
+}
+
+
+function loginAdmin(){
+
+    const password =
+        document.getElementById("adminPassword").value;
+
+    const message =
+        document.getElementById("loginMessage");
+
+    if(password === ADMIN_PASSWORD){
+
+        closeModal("loginModal");
+
+        document
+            .getElementById("adminModal")
+            .classList.add("active");
+
+        renderAdminProducts();
+
+        message.className =
+            "message";
+
+        document
+            .getElementById("adminPassword")
+            .value = "";
+
+    }else{
+
+        message.textContent =
+            "Contraseña incorrecta.";
+
+        message.className =
+            "message error show";
+
+    }
+
+}
+
+
+/* =========================================================
+   ADMIN - PRODUCTOS
+   ========================================================= */
+
+function renderAdminProducts(){
+
+    const container =
+        document.getElementById("adminProducts");
+
+    if(!container) return;
+
+    container.innerHTML =
+        products.map(product=>`
+
+        <div class="admin-product">
+
+            ${
+                product.image
+
+                ?
+
+                `<img
+                    src="${escapeHtml(product.image)}"
+                    alt=""
+                >`
+
+                :
+
+                `<img
+                    src=""
+                    alt=""
+                >`
+            }
+
+            <div class="admin-product-info">
+
+                <strong>
+                    ${escapeHtml(product.name)}
+                </strong>
+
+                <br>
+
+                <small>
+                    ${escapeHtml(product.category)}
+                    ·
+                    $${Number(product.price).toFixed(2)}
+                </small>
+
+            </div>
+
+            <button
+                class="admin-button light"
+                onclick="deleteProduct('${product.id}')"
+            >
+                Eliminar
+            </button>
+
+        </div>
+
+    `).join("");
+
+}
+
+
+async function createProduct(){
+
+    const name =
+        document.getElementById("newName").value.trim();
+
+    const category =
+        document.getElementById("newCategory").value;
+
+    const price =
+        Number(
+            document.getElementById("newPrice").value
+        );
+
+    const description =
+        document.getElementById("newDescription").value.trim();
+
+    const file =
+        document.getElementById("newImage").files[0];
+
+    if(!name || !price){
+
+        showAdminMessage(
+            "Completa nombre y precio.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    let imageUrl = "";
+
+    if(file){
+
+        imageUrl =
+            await uploadToSupabase(
+                file,
+                "products"
+            );
+
+        if(!imageUrl){
+
+            return;
+
+        }
+
+    }
+
+    const product = {
+
+        id:
+            "p_" +
+            Date.now() +
+            "_" +
+            Math.random()
+                .toString(36)
+                .substring(2,8),
+
+        name,
+        category,
+        price,
+        description,
+        image:imageUrl
+
+    };
+
+    products.push(product);
+
+    saveProducts();
+
+    renderProducts();
+
+    renderAdminProducts();
+
+    document.getElementById("newName").value="";
+    document.getElementById("newPrice").value="";
+    document.getElementById("newDescription").value="";
+    document.getElementById("newImage").value="";
+
+    showAdminMessage(
+        "Producto creado correctamente. ✨",
+        "success"
+    );
+
+}
+
+
+function deleteProduct(id){
+
+    if(!confirm("¿Eliminar este producto?")) return;
+
+    products =
+        products.filter(
+            p=>p.id!==id
+        );
+
+    saveProducts();
+
+    renderProducts();
+
+    renderAdminProducts();
+
+    showAdminMessage(
+        "Producto eliminado.",
+        "success"
+    );
+
+}
+
+
+/* =========================================================
+   SUBIDA A SUPABASE
+   ========================================================= */
+
+async function uploadToSupabase(file,folder){
+
+    if(!supabaseClient){
+
+        showAdminMessage(
+            "Primero debes configurar Supabase en el código.",
+            "error"
+        );
+
+        return null;
+
+    }
+
+    try{
+
+        const extension =
+            file.name
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+        const fileName =
+            `${folder}/${Date.now()}-${Math.random()
+                .toString(36)
+                .substring(2)}.${extension}`;
+
+        const {data,error} =
+            await supabaseClient
+                .storage
+                .from("nabora-images")
+                .upload(
+                    fileName,
+                    file,
+                    {
+                        cacheControl:"3600",
+                        upsert:false,
+                        contentType:file.type
+                    }
+                );
+
+        if(error){
+
+            console.error(error);
+
+            showAdminMessage(
+                "Error subiendo la imagen: " +
+                error.message,
+                "error"
+            );
+
+            return null;
+
+        }
+
+        const result =
+            supabaseClient
+                .storage
+                .from("nabora-images")
+                .getPublicUrl(fileName);
+
+        return result.data.publicUrl;
+
+    }catch(error){
+
+        console.error(error);
+
+        showAdminMessage(
+            "No se pudo subir la imagen.",
+            "error"
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* =========================================================
+   SUBIDA MASIVA DE PRODUCTOS
+   ========================================================= */
+
+let selectedProductFiles = [];
+
+
+function previewProductImages(event){
+
+    selectedProductFiles =
+        Array.from(event.target.files);
+
+    const preview =
+        document.getElementById("productPreview");
+
+    preview.innerHTML = "";
+
+    selectedProductFiles.forEach((file,index)=>{
+
+        const url =
+            URL.createObjectURL(file);
+
+        preview.innerHTML += `
+
+            <div class="preview-item">
+
+                <img
+                    src="${url}"
+                    alt=""
+                >
+
+                <span class="preview-number">
+                    ${index+1}
+                </span>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+async function uploadProductImages(){
+
+    if(selectedProductFiles.length===0){
+
+        showAdminMessage(
+            "Selecciona las fotos primero.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    const availableProducts =
+        products.filter(
+            product => !product.image
+        );
+
+    if(availableProducts.length===0){
+
+        showAdminMessage(
+            "Todos los productos ya tienen imagen.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    let uploaded = 0;
+
+    for(
+        let i=0;
+        i<selectedProductFiles.length &&
+        i<availableProducts.length;
+        i++
+    ){
+
+        const file =
+            selectedProductFiles[i];
+
+        const url =
+            await uploadToSupabase(
+                file,
+                "products"
+            );
+
+        if(url){
+
+            availableProducts[i].image =
+                url;
+
+            uploaded++;
+
+        }
+
+    }
+
+    saveProducts();
+
+    renderProducts();
+
+    renderAdminProducts();
+
+    selectedProductFiles = [];
+
+    document.getElementById(
+        "productFiles"
+    ).value = "";
+
+    document.getElementById(
+        "productPreview"
+    ).innerHTML = "";
+
+    showAdminMessage(
+        `${uploaded} foto(s) subidas correctamente. 📸`,
+        "success"
+    );
+
+}
+
+
+/* =========================================================
+   CARRUSEL
+   ========================================================= */
+
+let selectedCarouselFiles = [];
+
+
+function previewCarousel(event){
+
+    selectedCarouselFiles =
+        Array.from(event.target.files)
+            .slice(0,4);
+
+    const preview =
+        document.getElementById("carouselPreview");
+
+    preview.innerHTML="";
+
+    selectedCarouselFiles.forEach(
+        (file,index)=>{
+
+            const url =
+                URL.createObjectURL(file);
+
+            preview.innerHTML += `
+
+                <div class="preview-item">
+
+                    <img src="${url}" alt="">
+
+                    <span class="preview-number">
+                        ${index+1}
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+async function uploadCarouselImages(){
+
+    if(selectedCarouselFiles.length===0){
+
+        showAdminMessage(
+            "Selecciona hasta 4 fotos.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    carouselImages=[];
+
+    for(const file of selectedCarouselFiles){
+
+        const url =
+            await uploadToSupabase(
+                file,
+                "carousel"
+            );
+
+        if(url){
+
+            carouselImages.push(url);
+
+        }
+
+    }
+
+    localStorage.setItem(
+        "NABORA_CAROUSEL_URLS",
+        JSON.stringify(carouselImages)
+    );
+
+    setupCarousel();
+
+    showAdminMessage(
+        "Carrusel actualizado. 🎠",
+        "success"
+    );
+
+}
+
+
+/* =========================================================
+   CARRUSEL FUNCIONAMIENTO
+   ========================================================= */
+
+function loadLocalImages(){
+
+    try{
+
+        const savedCarousel =
+            localStorage.getItem(
+                "NABORA_CAROUSEL_URLS"
+            );
+
+        if(savedCarousel){
+
+            carouselImages =
+                JSON.parse(savedCarousel);
+
+        }
+
+    }catch(error){
+
+        carouselImages=[];
+
+    }
+
+    try{
+
+        const savedBags =
+            localStorage.getItem(
+                "NABORA_BAGS_URLS"
+            );
+
+        if(savedBags){
+
+            bagImages =
+                JSON.parse(savedBags);
+
+        }
+
+    }catch(error){
+
+        bagImages=[];
+
+    }
+
+}
+
+
+function setupCarousel(){
+
+    for(let i=0;i<4;i++){
+
+        const img =
+            document.getElementById(
+                "slide"+(i+1)
+            );
+
+        if(carouselImages[i]){
+
+            img.src =
+                carouselImages[i];
+
+            img.style.display="";
+
+        }else{
+
+            /*
+             Foto de respaldo.
+             Puedes sustituir estas rutas por
+             tus imágenes reales si quieres.
+            */
+
+            img.src =
+                `images/carousel-${i+1}.jpg`;
+
+        }
+
+    }
+
+    showSlide(currentSlide);
+
+}
+
+
+function showSlide(index){
+
+    currentSlide =
+        (index + 4) % 4;
+
+    document
+        .querySelectorAll(".carousel img")
+        .forEach(
+            img=>img.classList.remove("active")
+        );
+
+    document
+        .querySelectorAll(".dot")
+        .forEach(
+            dot=>dot.classList.remove("active")
+        );
+
+    const slide =
+        document.getElementById(
+            "slide"+(currentSlide+1)
+        );
+
+    if(slide){
+
+        slide.classList.add("active");
+
+    }
+
+    const dot =
+        document.querySelectorAll(".dot")[currentSlide];
+
+    if(dot){
+
+        dot.classList.add("active");
+
+    }
+
+}
+
+
+function nextSlide(){
+
+    showSlide(currentSlide+1);
+
+}
+
+
+function previousSlide(){
+
+    showSlide(currentSlide-1);
+
+}
+
+
+setInterval(()=>{
+
+    nextSlide();
+
+},4000);
+
+
+/* =========================================================
+   CARTERAS
+   ========================================================= */
+
+let selectedBagFiles = [];
+
+
+function previewBags(event){
+
+    selectedBagFiles =
+        Array.from(event.target.files)
+            .slice(0,2);
+
+    const preview =
+        document.getElementById("bagPreview");
+
+    preview.innerHTML="";
+
+    selectedBagFiles.forEach(
+        (file,index)=>{
+
+            const url =
+                URL.createObjectURL(file);
+
+            preview.innerHTML += `
+
+                <div class="preview-item">
+
+                    <img src="${url}" alt="">
+
+                    <span class="preview-number">
+                        ${index+1}
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+async function uploadBagImages(){
+
+    if(selectedBagFiles.length===0){
+
+        showAdminMessage(
+            "Selecciona las fotos de las carteras.",
+            "error"
+        );
+
+        return;
+
+    }
+
+    bagImages=[];
+
+    for(const file of selectedBagFiles){
+
+        const url =
+            await uploadToSupabase(
+                file,
+                "bags"
+            );
+
+        if(url){
+
+            bagImages.push(url);
+
+        }
+
+    }
+
+    localStorage.setItem(
+        "NABORA_BAGS_URLS",
+        JSON.stringify(bagImages)
+    );
+
+    displayBags();
+
+    showAdminMessage(
+        "Fotos de carteras actualizadas. 👜",
+        "success"
+    );
+
+}
+
+
+function displayBags(){
+
+    const bag1 =
+        document.getElementById(
+            "bagImage1"
+        );
+
+    const bag2 =
+        document.getElementById(
+            "bagImage2"
+        );
+
+    if(bagImages[0]){
+
+        bag1.src =
+            bagImages[0];
+
+    }else{
+
+        bag1.src =
+            "images/bag-1.jpg";
+
+    }
+
+    if(bagImages[1]){
+
+        bag2.src =
+            bagImages[1];
+
+    }else{
+
+        bag2.src =
+            "images/bag-2.jpg";
+
+    }
+
+}
+
+
+/* =========================================================
+   ADMIN MENSAJES
+   ========================================================= */
+
+function showAdminMessage(text,type){
+
+    const message =
+        document.getElementById(
+            "adminMessage"
+        );
+
+    message.textContent=text;
+
+    message.className =
+        `message ${type} show`;
+
+    setTimeout(()=>{
+
+        message.classList.remove("show");
+
+    },5000);
+
+}
+
+
+/* =========================================================
    NABORA AI
-===================================================== */
+   ========================================================= */
+
+function toggleAI(){
+
+    const box =
+        document.getElementById("aiBox");
+
+    const button =
+        document.getElementById("aiOpen");
+
+    box.classList.toggle("active");
+
+    if(box.classList.contains("active")){
+
+        button.style.display="none";
+
+    }else{
+
+        button.style.display="block";
+
+    }
+
+}
+
 
 function sendMessage(){
 
-const input =
-document.getElementById(
-"userInput"
-);
+    const input =
+        document.getElementById("userInput");
 
-const text =
-input.value.trim();
+    const text =
+        input.value.trim();
 
-if(!text)return;
+    if(!text) return;
 
-const messages =
-document.getElementById(
-"messages"
-);
+    addAIMessage(
+        text,
+        "user"
+    );
 
-messages.innerHTML +=
-`
-<div class="message user">
-${escapeHTML(text)}
-</div>
-`;
+    input.value="";
 
-input.value = "";
+    setTimeout(()=>{
 
-let answer =
-"✨ Puedo ayudarte a crear un outfit. Dime para qué ocasión necesitas tu look.";
+        const response =
+            getAIResponse(text);
 
-const question =
-text.toLowerCase();
+        addAIMessage(
+            response,
+            "bot"
+        );
 
-
-if(question.includes("fiesta")){
-
-answer =
-"✨ Para una fiesta te recomiendo la falda con estampado de hojas de otoño, el top gris, las botas largas con tacón y la cartera de perlas.";
-
-}
-
-else if(question.includes("casual")){
-
-answer =
-"🤎 Para un look casual puedes combinar la chaqueta de cuero vegano, el pantalón de tela, las gafas negras y las botas cortas.";
-
-}
-
-else if(question.includes("otoño")){
-
-answer =
-"🍂 Para otoño puedes combinar tonos marrones, grises, negros, beige y blanco. La bufanda de seda y las botas largas quedan perfectas.";
-
-}
-
-else if(question.includes("cartera")){
-
-answer =
-"👜 La cartera de perlas con cuero vegano es ideal para ocasiones elegantes. La cartera de piedras marrones combina muy bien con tonos neutros.";
-
-}
-
-else if(
-question.includes("zapato") ||
-question.includes("botas")
-){
-
-answer =
-"👢 Para tus zapatos puedes elegir las botas cortas para un look casual o las botas largas con tacón para un look más elegante.";
-
-}
-
-else if(
-question.includes("accesorio") ||
-question.includes("gafas")
-){
-
-answer =
-"🕶️ Puedes completar el look con las gafas negras, la boina o la bufanda de seda.";
+    },500);
 
 }
 
 
-setTimeout(function(){
+function addAIMessage(text,type){
 
-messages.innerHTML +=
-`
-<div class="message bot">
-${answer}
-</div>
-`;
+    const container =
+        document.getElementById(
+            "aiMessages"
+        );
 
-messages.scrollTop =
-messages.scrollHeight;
+    const div =
+        document.createElement("div");
 
-},500);
+    div.className =
+        `ai-message ${type}`;
 
-}
+    div.textContent=text;
 
+    container.appendChild(div);
 
-/* =====================================================
-   SEGURIDAD HTML
-===================================================== */
-
-function escapeHTML(text){
-
-return String(text)
-
-.replace(/&/g,"&amp;")
-
-.replace(/</g,"&lt;")
-
-.replace(/>/g,"&gt;")
-
-.replace(/"/g,"&quot;")
-
-.replace(/'/g,"&#039;");
+    container.scrollTop =
+        container.scrollHeight;
 
 }
 
 
-function escapeAttribute(text){
+function getAIResponse(text){
 
-return escapeHTML(text)
-.replace(/`/g,"&#96;");
+    const message =
+        text.toLowerCase();
+
+    if(
+        message.includes("zapato") ||
+        message.includes("bota")
+    ){
+
+        return "✨ Tenemos botas cortas y botas largas de otoño. Puedes entrar en ZAPATOS para verlas.";
+
+    }
+
+    if(
+        message.includes("cartera") ||
+        message.includes("bolso")
+    ){
+
+        return "👜 Tenemos carteras de perlas y una versión con cuero vegano.";
+
+    }
+
+    if(
+        message.includes("accesorio") ||
+        message.includes("gafa") ||
+        message.includes("bufanda") ||
+        message.includes("boina")
+    ){
+
+        return "💍 En ACCESORIOS encontrarás gafas negras, boina y bufanda de seda.";
+
+    }
+
+    if(
+        message.includes("elegante") ||
+        message.includes("fiesta")
+    ){
+
+        return "✨ Para un look elegante puedes combinar una cartera de perlas, botas largas y un top de otoño.";
+
+    }
+
+    if(
+        message.includes("otoño")
+    ){
+
+        return "🍂 Para otoño te recomiendo combinar tonos neutros, botas y alguna pieza con estampado de hojas.";
+
+    }
+
+    return "✨ Puedo ayudarte a encontrar ropa, zapatos, accesorios y carteras de NABORA. ¿Qué estilo estás buscando?";
 
 }
 
 
-/* =====================================================
-   INICIO
-===================================================== */
+/* =========================================================
+   UTILIDAD
+   ========================================================= */
 
-renderCarousel();
+function escapeHtml(value){
 
-renderProducts();
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 
-renderBagImages();
+}
+
+
+/* =========================================================
+   INICIALIZAR CARTERAS
+   ========================================================= */
+
+displayBags();
 
 </script>
 
