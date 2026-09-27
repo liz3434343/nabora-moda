@@ -1,14 +1,11 @@
-const SUPABASE_URL = "TU_URL_DE_SUPABASE";
-const SUPABASE_ANON_KEY = "TU_ANON_KEY_DE_SUPABASE";
 ```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NABORA — Colección Otoño 2026</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<title>NABORA | Colección Otoño 2026</title>
 
 <style>
 *{
@@ -20,15 +17,19 @@ const SUPABASE_ANON_KEY = "TU_ANON_KEY_DE_SUPABASE";
 body{
   font-family:Georgia,"Times New Roman",serif;
   background:#f7f3ec;
-  color:#171513;
+  color:#191715;
 }
 
 button,input,textarea,select{
   font-family:Arial,sans-serif;
 }
 
+/* =========================
+   NAVBAR
+========================= */
+
 nav{
-  height:76px;
+  height:75px;
   padding:0 6%;
   display:flex;
   align-items:center;
@@ -37,7 +38,7 @@ nav{
   background:#f7f3ec;
   position:sticky;
   top:0;
-  z-index:1000;
+  z-index:100;
 }
 
 .logo{
@@ -47,44 +48,42 @@ nav{
 
 nav ul{
   display:flex;
-  gap:28px;
   list-style:none;
+  gap:28px;
 }
 
 nav a{
-  color:#171513;
+  color:#191715;
   text-decoration:none;
   font:11px Arial,sans-serif;
   letter-spacing:1px;
 }
 
-.nav-actions{
-  display:flex;
-  gap:8px;
-}
-
-.nav-actions button{
-  border:1px solid #171513;
-  background:white;
-  padding:9px 12px;
+.admin-open{
+  border:1px solid #191715;
+  background:transparent;
+  padding:9px 13px;
   cursor:pointer;
+  font-size:10px;
 }
 
-/* HERO */
+/* =========================
+   CARRUSEL
+========================= */
 
 .hero{
-  height:calc(100vh - 76px);
-  min-height:600px;
+  height:calc(100vh - 75px);
+  min-height:580px;
   position:relative;
   overflow:hidden;
-  background:#342e29;
+  background:#302a25;
 }
 
 .slide{
   position:absolute;
   inset:0;
   opacity:0;
-  transition:opacity 1s ease;
+  transition:opacity .8s ease;
 }
 
 .slide.active{
@@ -97,55 +96,55 @@ nav a{
   object-fit:cover;
 }
 
-.slide-empty{
+.empty-slide{
   width:100%;
   height:100%;
   display:flex;
   justify-content:center;
   align-items:center;
-  color:#d7cec5;
-  font:11px Arial;
+  color:#aaa;
+  font:12px Arial;
   letter-spacing:4px;
 }
 
-.hero-overlay{
+.hero-dark{
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.43);
+  background:rgba(0,0,0,.42);
   z-index:2;
 }
 
-.hero-content{
+.hero-text{
   position:absolute;
-  inset:0;
   z-index:5;
+  inset:0;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   text-align:center;
   color:white;
   padding:20px;
 }
 
-.hero-content small{
+.hero-text small{
   font:11px Arial;
   letter-spacing:5px;
 }
 
-.hero-content h1{
+.hero-text h1{
   font-size:clamp(60px,11vw,130px);
   font-weight:normal;
   letter-spacing:12px;
   margin:15px 0;
 }
 
-.hero-content h2{
+.hero-text h2{
   font-size:25px;
   font-weight:normal;
   letter-spacing:4px;
 }
 
-.hero-content p{
+.hero-text p{
   max-width:600px;
   margin:20px auto 30px;
   font:14px/1.8 Arial;
@@ -153,9 +152,9 @@ nav a{
 
 .hero-button{
   display:inline-block;
-  padding:16px 25px;
+  padding:15px 25px;
   background:white;
-  color:#171513;
+  color:#191715;
   text-decoration:none;
   font:10px Arial;
   letter-spacing:2px;
@@ -163,27 +162,32 @@ nav a{
 
 .arrow{
   position:absolute;
+  z-index:10;
   top:50%;
   transform:translateY(-50%);
-  z-index:10;
   width:45px;
   height:55px;
   border:1px solid white;
-  background:rgba(0,0,0,.3);
   color:white;
+  background:rgba(0,0,0,.25);
   font-size:30px;
   cursor:pointer;
 }
 
-.arrow.left{left:20px;}
-.arrow.right{right:20px;}
+.arrow.left{
+  left:20px;
+}
+
+.arrow.right{
+  right:20px;
+}
 
 .dots{
   position:absolute;
+  z-index:10;
   bottom:25px;
   left:50%;
   transform:translateX(-50%);
-  z-index:10;
   display:flex;
   gap:9px;
 }
@@ -201,35 +205,39 @@ nav a{
   background:white;
 }
 
-/* BANNER */
+/* =========================
+   COLECCION
+========================= */
 
-.collection-banner{
-  background:#171513;
+.collection{
+  background:#191715;
   color:white;
   text-align:center;
   padding:65px 20px;
 }
 
-.collection-banner h2{
+.collection h2{
   font-size:40px;
   font-weight:normal;
   letter-spacing:4px;
 }
 
-.collection-banner p{
-  margin-top:15px;
-  color:#bdb4ac;
+.collection p{
+  margin-top:14px;
+  color:#bdb4ab;
   font:10px Arial;
   letter-spacing:4px;
 }
 
-/* PRODUCTOS */
+/* =========================
+   PRODUCTOS
+========================= */
 
-.section{
+.products-section{
   padding:90px 6%;
 }
 
-.section-title{
+.title{
   text-align:center;
   font-size:42px;
   font-weight:normal;
@@ -237,8 +245,8 @@ nav a{
 
 .subtitle{
   text-align:center;
-  color:#857b72;
-  margin:15px 0 45px;
+  margin:15px 0 40px;
+  color:#82786f;
   font:10px Arial;
   letter-spacing:3px;
 }
@@ -251,7 +259,7 @@ nav a{
   margin-bottom:40px;
 }
 
-.filters button{
+.filter{
   padding:11px 18px;
   border:1px solid #cfc6ba;
   background:transparent;
@@ -259,9 +267,9 @@ nav a{
   font-size:10px;
 }
 
-.filters button.active,
-.filters button:hover{
-  background:#171513;
+.filter.active,
+.filter:hover{
+  background:#191715;
   color:white;
 }
 
@@ -275,7 +283,7 @@ nav a{
 
 .product{
   background:#fffdf9;
-  border:1px solid #ddd5ca;
+  border:1px solid #ded6cc;
   overflow:hidden;
   transition:.3s;
 }
@@ -284,23 +292,23 @@ nav a{
   transform:translateY(-5px);
 }
 
-.product-image{
-  height:300px;
-  background:#e5ddd5;
+.product-photo{
+  height:290px;
+  background:#e4ddd5;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   overflow:hidden;
 }
 
-.product-image img{
+.product-photo img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-.no-image{
-  color:#82776e;
+.no-photo{
+  color:#81776e;
   text-align:center;
   font:10px Arial;
   letter-spacing:2px;
@@ -310,46 +318,49 @@ nav a{
   padding:20px;
 }
 
-.category{
-  color:#958a80;
+.product-category{
+  color:#968b81;
   font:9px Arial;
   letter-spacing:2px;
 }
 
 .product h3{
-  margin:9px 0;
   font-size:18px;
   font-weight:normal;
+  margin:9px 0;
 }
 
-.description{
+.product-description{
+  color:#756c63;
   min-height:55px;
-  color:#756c64;
   font:11px/1.7 Arial;
 }
 
-.price{
-  margin-top:13px;
+.product-price{
+  margin-top:12px;
   font:bold 17px Arial;
 }
 
-.cart-button{
+.buy{
   width:100%;
-  margin-top:15px;
-  padding:13px;
   border:0;
-  background:#171513;
+  background:#191715;
   color:white;
+  padding:13px;
+  margin-top:15px;
   cursor:pointer;
   font:10px Arial;
   letter-spacing:1px;
 }
 
-/* CARTERAS */
+/* =========================
+   CARTERAS
+========================= */
 
 .bags{
-  background:#171513;
+  background:#191715;
   color:white;
+  padding:90px 6%;
 }
 
 .bag-grid{
@@ -362,22 +373,28 @@ nav a{
 
 .bag{
   background:#29231f;
-  border:1px solid #4d453e;
+  border:1px solid #4b433d;
 }
 
-.bag-image{
+.bag-photo{
   height:420px;
-  background:#38312b;
+  background:#37302a;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   overflow:hidden;
 }
 
-.bag-image img{
+.bag-photo img{
   width:100%;
   height:100%;
   object-fit:cover;
+}
+
+.bag-photo span{
+  color:#aaa;
+  font:10px Arial;
+  letter-spacing:2px;
 }
 
 .bag-info{
@@ -385,19 +402,19 @@ nav a{
 }
 
 .bag-info small{
-  color:#c9ad95;
+  color:#c8aa91;
   font:9px Arial;
   letter-spacing:3px;
 }
 
 .bag-info h3{
-  margin:12px 0;
   font-size:24px;
   font-weight:normal;
+  margin:12px 0;
 }
 
 .bag-info p{
-  color:#c7bdb5;
+  color:#c8beb6;
   font:12px/1.8 Arial;
 }
 
@@ -406,10 +423,12 @@ nav a{
   font:bold 20px Arial;
 }
 
-/* AI */
+/* =========================
+   AI
+========================= */
 
-.ai{
-  padding:100px 20px;
+.ai-section{
+  padding:90px 20px;
 }
 
 .chat{
@@ -417,12 +436,11 @@ nav a{
   margin:auto;
   background:white;
   border:1px solid #ddd5ca;
-  box-shadow:0 15px 50px rgba(0,0,0,.07);
 }
 
 .chat-header{
   padding:20px;
-  background:#171513;
+  background:#191715;
   color:white;
   font:11px Arial;
   letter-spacing:2px;
@@ -435,20 +453,20 @@ nav a{
 }
 
 .message{
-  max-width:82%;
+  max-width:80%;
   padding:13px 16px;
   margin-bottom:14px;
   font:13px/1.6 Arial;
 }
 
 .bot{
-  background:#eee7df;
+  background:#eee8e0;
 }
 
 .user{
-  margin-left:auto;
-  background:#171513;
+  background:#191715;
   color:white;
+  margin-left:auto;
 }
 
 .chat-input{
@@ -458,31 +476,33 @@ nav a{
 
 .chat-input input{
   flex:1;
+  padding:18px;
   border:0;
   outline:none;
-  padding:18px;
 }
 
 .chat-input button{
   padding:0 25px;
   border:0;
-  background:#171513;
+  background:#191715;
   color:white;
   cursor:pointer;
 }
 
-/* CARRITO */
+/* =========================
+   CARRITO
+========================= */
 
 .cart{
   position:fixed;
-  z-index:3000;
   top:0;
   right:-420px;
   width:400px;
   max-width:92%;
   height:100vh;
-  padding:30px;
+  z-index:1000;
   background:#fffdf9;
+  padding:30px;
   box-shadow:-10px 0 30px rgba(0,0,0,.25);
   transition:.4s;
   overflow-y:auto;
@@ -501,22 +521,24 @@ nav a{
 }
 
 .cart h2{
-  margin-bottom:25px;
   font-weight:normal;
+  margin-bottom:25px;
 }
 
 .cart-item{
-  padding:15px 0;
   border-bottom:1px solid #ddd5ca;
+  padding:15px 0;
   font:12px Arial;
 }
 
-.cart-total{
+.total{
   margin-top:25px;
   font:bold 18px Arial;
 }
 
-/* ADMIN */
+/* =========================
+   ADMIN
+========================= */
 
 .modal{
   position:fixed;
@@ -525,8 +547,8 @@ nav a{
   display:none;
   align-items:center;
   justify-content:center;
-  padding:15px;
   background:rgba(0,0,0,.75);
+  padding:15px;
 }
 
 .modal.show{
@@ -538,24 +560,24 @@ nav a{
   max-width:100%;
   max-height:95vh;
   overflow-y:auto;
-  padding:30px;
   background:#fffdf9;
+  padding:30px;
 }
 
-.admin-header{
+.admin-top{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #ddd5ca;
   padding-bottom:20px;
   margin-bottom:25px;
-  border-bottom:1px solid #ddd5ca;
 }
 
-.admin-header h2{
+.admin-top h2{
   font-weight:normal;
 }
 
-.close-admin{
+.close{
   border:0;
   background:none;
   font-size:28px;
@@ -564,19 +586,19 @@ nav a{
 
 .login{
   max-width:400px;
-  margin:40px auto;
+  margin:50px auto;
   text-align:center;
 }
 
 .login h3{
-  margin-bottom:10px;
   font-weight:normal;
+  margin-bottom:10px;
 }
 
 .login p{
-  margin-bottom:20px;
   color:#777;
   font:12px Arial;
+  margin-bottom:20px;
 }
 
 .login input{
@@ -587,44 +609,46 @@ nav a{
 
 .login button{
   width:100%;
-  margin-top:10px;
   padding:14px;
-  border:0;
-  background:#171513;
+  margin-top:10px;
+  background:#191715;
   color:white;
+  border:0;
   cursor:pointer;
 }
 
-.error{
+.login-error{
   color:#a00;
   margin-top:10px;
   font:11px Arial;
 }
 
-.panel{
+.admin-panel{
   display:none;
 }
 
-.panel.show{
+.admin-panel.show{
   display:block;
 }
 
-.admin-section{
+.admin-box{
+  border:1px solid #ddd5ca;
   padding:22px;
   margin-bottom:22px;
-  border:1px solid #ddd5ca;
 }
 
-.admin-section h3{
-  margin-bottom:10px;
+.admin-box h3{
   font-weight:normal;
+  margin-bottom:8px;
 }
 
-.admin-section p{
-  margin-bottom:20px;
+.admin-box p{
   color:#777;
   font:11px/1.6 Arial;
+  margin-bottom:20px;
 }
+
+/* CARRUSEL ADMIN */
 
 .carousel-admin{
   display:grid;
@@ -633,14 +657,14 @@ nav a{
 }
 
 .carousel-card{
-  padding:12px;
   border:1px solid #ddd5ca;
+  padding:12px;
 }
 
 .preview{
   height:150px;
   margin:10px 0;
-  background:#e4dcd4;
+  background:#e4ddd5;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -658,27 +682,29 @@ nav a{
   font-size:10px;
 }
 
-.add-product{
-  padding:13px 18px;
-  margin-bottom:15px;
-  border:0;
-  background:#171513;
+/* PRODUCTOS ADMIN */
+
+.add{
+  background:#191715;
   color:white;
+  border:0;
+  padding:13px 18px;
   cursor:pointer;
+  margin-bottom:18px;
 }
 
-.product-admin{
+.admin-product{
+  border:1px solid #ddd5ca;
   padding:20px;
   margin-bottom:15px;
-  border:1px solid #ddd5ca;
 }
 
-.product-admin h4{
-  margin-bottom:15px;
+.admin-product h4{
   font-weight:normal;
+  margin-bottom:15px;
 }
 
-.label{
+label{
   display:block;
   margin-top:12px;
   font:10px Arial;
@@ -687,73 +713,97 @@ nav a{
 .field{
   width:100%;
   padding:11px;
-  margin-top:5px;
   border:1px solid #ccc;
+  margin-top:5px;
 }
 
 textarea.field{
-  height:80px;
+  min-height:80px;
   resize:vertical;
 }
 
-.product-preview{
+.admin-photo{
   width:130px;
   height:130px;
   margin-top:10px;
-  background:#e4dcd4;
+  background:#e4ddd5;
   display:flex;
   align-items:center;
   justify-content:center;
   overflow:hidden;
 }
 
-.product-preview img{
+.admin-photo img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-.admin-actions{
+.actions{
   display:flex;
   gap:8px;
   margin-top:15px;
 }
 
 .save{
-  padding:12px 16px;
-  border:0;
-  background:#171513;
+  background:#191715;
   color:white;
+  border:0;
+  padding:12px 17px;
   cursor:pointer;
 }
 
 .delete{
-  padding:12px 16px;
-  border:0;
   background:#eee;
-  color:#a22;
+  color:#a00;
+  border:0;
+  padding:12px 17px;
   cursor:pointer;
 }
 
+/* =========================
+   FOOTER
+========================= */
+
 footer{
-  padding:40px;
-  background:#171513;
+  background:#191715;
   color:#aaa19a;
   text-align:center;
+  padding:40px;
   font:10px Arial;
   letter-spacing:2px;
 }
 
-@media(max-width:1050px){
+/* =========================
+   MOVIL
+========================= */
+
+@media(max-width:1000px){
+
   .products{
     grid-template-columns:repeat(2,1fr);
   }
+
 }
 
 @media(max-width:700px){
 
   nav ul{
     display:none;
+  }
+
+  .hero{
+    min-height:520px;
+    height:75vh;
+  }
+
+  .hero-text h1{
+    font-size:60px;
+    letter-spacing:7px;
+  }
+
+  .hero-text h2{
+    font-size:18px;
   }
 
   .products{
@@ -768,8 +818,8 @@ footer{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .hero-content h1{
-    letter-spacing:7px;
+  .bag-photo{
+    height:330px;
   }
 
 }
@@ -777,26 +827,30 @@ footer{
 </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     NAV
+========================= -->
 
 <nav>
 
-<div class="logo">NABORA</div>
+<div class="logo">
+NABORA
+</div>
 
 <ul>
 <li><a href="#inicio">INICIO</a></li>
 <li><a href="#productos">PRODUCTOS</a></li>
 <li><a href="#carteras">CARTERAS</a></li>
-<li><a href="#ai">NABORA AI</a></li>
+<li><a href="#asistente">NABORA AI</a></li>
 </ul>
 
-<div class="nav-actions">
+<div>
 
-<button onclick="openCart()">
-🛍️ <span id="cartCount">0</span>
-</button>
-
-<button onclick="openAdmin()">
+<button class="admin-open" onclick="openAdmin()">
 ADMIN
 </button>
 
@@ -805,13 +859,17 @@ ADMIN
 </nav>
 
 
+<!-- =========================
+     CARRUSEL
+========================= -->
+
 <section class="hero" id="inicio">
 
 <div id="slides"></div>
 
-<div class="hero-overlay"></div>
+<div class="hero-dark"></div>
 
-<div class="hero-content">
+<div class="hero-text">
 
 <div>
 
@@ -822,101 +880,145 @@ ADMIN
 <h2>COLECCIÓN OTOÑO 2026</h2>
 
 <p>
-Una colección creada para expresar
-tu estilo, elegancia y esencia.
+Moda, elegancia y esencia.
+Descubre la nueva colección de NABORA.
 </p>
 
-<a class="hero-button" href="#productos">
-DESCUBRIR COLECCIÓN
+<a href="#productos" class="hero-button">
+VER COLECCIÓN
 </a>
 
 </div>
 
 </div>
 
-<button class="arrow left" onclick="previousSlide()">‹</button>
+<button class="arrow left" onclick="previousSlide()">
+‹
+</button>
 
-<button class="arrow right" onclick="nextSlide()">›</button>
+<button class="arrow right" onclick="nextSlide()">
+›
+</button>
 
 <div class="dots" id="dots"></div>
 
 </section>
 
 
-<section class="collection-banner">
+<!-- =========================
+     BANNER
+========================= -->
 
-<h2>COLECCIÓN OTOÑO 2026</h2>
+<section class="collection">
 
-<p>BY NABORA · MODA · ELEGANCIA · ESENCIA</p>
+<h2>
+COLECCIÓN OTOÑO 2026
+</h2>
+
+<p>
+BY NABORA · MODA · CARTERAS · ACCESORIOS
+</p>
 
 </section>
 
 
-<section class="section" id="productos">
+<!-- =========================
+     PRODUCTOS
+========================= -->
 
-<h2 class="section-title">Productos</h2>
+<section class="products-section" id="productos">
 
-<p class="subtitle">OTOÑO 2026 · BY NABORA</p>
+<h2 class="title">
+Productos
+</h2>
+
+<p class="subtitle">
+COLECCIÓN OTOÑO 2026 · BY NABORA
+</p>
+
 
 <div class="filters">
 
-<button class="active"
+<button class="filter active"
 onclick="filterProducts('todos',this)">
 TODOS
 </button>
 
-<button onclick="filterProducts('ropa',this)">
+<button class="filter"
+onclick="filterProducts('ropa',this)">
 ROPA
 </button>
 
-<button onclick="filterProducts('zapatos',this)">
+<button class="filter"
+onclick="filterProducts('zapatos',this)">
 ZAPATOS
 </button>
 
-<button onclick="filterProducts('accesorios',this)">
+<button class="filter"
+onclick="filterProducts('accesorios',this)">
 ACCESORIOS
 </button>
 
-<button onclick="filterProducts('carteras',this)">
+<button class="filter"
+onclick="filterProducts('carteras',this)">
 CARTERAS
 </button>
 
 </div>
+
 
 <div class="products" id="products"></div>
 
 </section>
 
 
-<section class="section bags" id="carteras">
+<!-- =========================
+     CARTERAS
+========================= -->
 
-<h2 class="section-title">Carteras NABORA</h2>
+<section class="bags" id="carteras">
+
+<h2 class="title">
+Carteras NABORA
+</h2>
 
 <p class="subtitle">
 PIEZAS EXCLUSIVAS · OTOÑO 2026
 </p>
 
+
 <div class="bag-grid">
 
+
 <div class="bag">
 
-<div class="bag-image" id="bag1">
-<span>FOTO DE CARTERA</span>
+<div class="bag-photo" id="bagPhoto1">
+
+<span>
+PUEDES CARGAR LA FOTO DESDE ADMIN
+</span>
+
 </div>
 
 <div class="bag-info">
 
-<small>NABORA EXCLUSIVE</small>
+<small>
+NABORA EXCLUSIVE
+</small>
 
-<h3>Cartera de piedras marrones</h3>
+<h3>
+Cartera de piedras marrones
+</h3>
 
 <p>
-Cartera sofisticada decorada con piedras
-en tonos marrones. Una pieza elegante
-para completar tus looks de otoño.
+Elegante cartera decorada con piedras
+en tonos marrones. Diseñada para aportar
+un toque sofisticado a cualquier look.
 </p>
 
-<div class="bag-price">$250</div>
+<div class="bag-price">
+$250
+</div>
 
 </div>
 
@@ -925,40 +1027,58 @@ para completar tus looks de otoño.
 
 <div class="bag">
 
-<div class="bag-image" id="bag2">
-<span>FOTO DE CARTERA</span>
+<div class="bag-photo" id="bagPhoto2">
+
+<span>
+PUEDES CARGAR LA FOTO DESDE ADMIN
+</span>
+
 </div>
 
 <div class="bag-info">
 
-<small>NABORA SIGNATURE</small>
+<small>
+NABORA SIGNATURE
+</small>
 
-<h3>Cartera de perlas con cuero vegano</h3>
+<h3>
+Cartera de perlas con cuero vegano
+</h3>
 
 <p>
-Diseñada con cuero vegano y perlas
-de cristal. Una pieza delicada,
-elegante y sofisticada.
+Cartera elaborada con cuero vegano
+y perlas de cristal. Una pieza delicada,
+elegante y exclusiva.
 </p>
 
-<div class="bag-price">$350</div>
-
+<div class="bag-price">
+$350
 </div>
 
 </div>
+
+</div>
+
 
 </div>
 
 </section>
 
 
-<section class="ai" id="ai">
+<!-- =========================
+     AI
+========================= -->
 
-<h2 class="section-title">NABORA AI</h2>
+<section class="ai-section" id="asistente">
+
+<h2 class="title">
+NABORA AI
+</h2>
 
 <p class="subtitle">
 TU ASISTENTE PERSONAL DE MODA
 </p>
+
 
 <div class="chat">
 
@@ -980,10 +1100,12 @@ Hola ✨ Soy NABORA AI.
 <input
 id="userInput"
 placeholder="Escribe tu pregunta..."
-onkeydown="if(event.key==='Enter')sendMessage()"
+onkeydown="if(event.key==='Enter') sendMessage()"
 >
 
-<button onclick="sendMessage()">ENVIAR</button>
+<button onclick="sendMessage()">
+ENVIAR
+</button>
 
 </div>
 
@@ -992,48 +1114,63 @@ onkeydown="if(event.key==='Enter')sendMessage()"
 </section>
 
 
+<!-- =========================
+     CARRITO
+========================= -->
+
 <div class="cart" id="cart">
 
-<button class="cart-close" onclick="closeCart()">×</button>
+<button class="cart-close" onclick="closeCart()">
+×
+</button>
 
-<h2>Mi carrito</h2>
+<h2>
+Mi carrito
+</h2>
 
 <div id="cartItems">
 Tu carrito está vacío.
 </div>
 
-<div class="cart-total">
+<div class="total">
 TOTAL: $<span id="cartTotal">0.00</span>
 </div>
 
 </div>
 
 
-<!-- ADMIN -->
+<!-- =========================
+     ADMIN
+========================= -->
 
 <div class="modal" id="adminModal">
 
 <div class="admin">
 
-<div class="admin-header">
+<div class="admin-top">
 
-<h2>Panel ADMIN · NABORA</h2>
+<h2>
+Panel de administración NABORA
+</h2>
 
-<button class="close-admin"
-onclick="closeAdmin()">
+<button class="close" onclick="closeAdmin()">
 ×
 </button>
 
 </div>
 
 
+<!-- LOGIN -->
+
 <div class="login" id="login">
 
-<h3>Acceso de administrador</h3>
+<h3>
+Acceso de administrador
+</h3>
 
 <p>
-Introduce tu contraseña para administrar
-los productos y fotografías.
+Contraseña requerida para modificar
+la página.
 </p>
 
 <input
@@ -1046,21 +1183,27 @@ placeholder="Contraseña"
 ENTRAR
 </button>
 
-<div class="error" id="loginError"></div>
+<div class="login-error" id="loginError"></div>
 
 </div>
 
 
-<div class="panel" id="panel">
+<!-- PANEL -->
+
+<div class="admin-panel" id="adminPanel">
 
 
-<div class="admin-section">
+<!-- CARRUSEL -->
 
-<h3>🖼️ Carrusel de inicio</h3>
+<div class="admin-box">
+
+<h3>
+🖼️ Fotos del carrusel
+</h3>
 
 <p>
-Carga hasta 4 fotografías.
-El carrusel cambiará automáticamente.
+Puedes cargar 4 fotografías. El carrusel
+se cambia automáticamente cada 4 segundos.
 </p>
 
 <div class="carousel-admin" id="carouselAdmin"></div>
@@ -1068,22 +1211,63 @@ El carrusel cambiará automáticamente.
 </div>
 
 
-<div class="admin-section">
+<!-- PRODUCTOS -->
 
-<h3>🛍️ Productos</h3>
+<div class="admin-box">
+
+<h3>
+🛍️ Productos
+</h3>
 
 <p>
-Puedes administrar hasta 15 productos.
-Puedes cambiar nombre, categoría,
-precio, descripción e imagen.
+Puedes tener hasta 15 productos y cambiar
+su nombre, precio, descripción, categoría
+y fotografía.
 </p>
 
-<button class="add-product"
-onclick="addProduct()">
+<button class="add" onclick="addProduct()">
 + AGREGAR PRODUCTO
 </button>
 
-<div id="productAdmin"></div>
+<div id="adminProducts"></div>
+
+</div>
+
+
+<!-- CARTERAS -->
+
+<div class="admin-box">
+
+<h3>
+👜 Fotografías de las carteras
+</h3>
+
+<p>
+Carga las dos fotografías de las carteras
+exclusivas.
+</p>
+
+<label>
+Cartera de piedras marrones — $250
+</label>
+
+<input
+type="file"
+accept="image/*"
+onchange="loadBagPhoto(1,event)"
+>
+
+<br><br>
+
+<label>
+Cartera de perlas con cuero vegano — $350
+</label>
+
+<input
+type="file"
+accept="image/*"
+onchange="loadBagPhoto(2,event)"
+>
 
 </div>
 
@@ -1096,1149 +1280,1295 @@ onclick="addProduct()">
 
 
 <footer>
-NABORA · MODA & CARTERAS · OTOÑO 2026
+
+NABORA · MODA & CARTERAS · COLECCIÓN OTOÑO 2026
+
 </footer>
 
 
 <script>
 
-/* ======================================================
-   CONFIGURACIÓN
-   REEMPLAZA ESTOS DOS VALORES
-====================================================== */
+/* ==================================================
+   CONTRASEÑA
+================================================== */
 
-const SUPABASE_URL =
-"TU_URL_DE_SUPABASE";
-
-const SUPABASE_ANON_KEY =
-"TU_ANON_KEY_DE_SUPABASE";
+const ADMIN_PASSWORD = "NaboraAdmin2026!";
 
 
-const db =
-supabase.createClient(
-SUPABASE_URL,
-SUPABASE_ANON_KEY
-);
+/* ==================================================
+   DATOS INICIALES
+================================================== */
+
+let products = [
+
+{
+id:1,
+name:"Poliéster blanco",
+category:"ropa",
+price:20,
+description:"Prenda blanca de poliéster, elegante y versátil para combinar con diferentes looks.",
+image:""
+},
+
+{
+id:2,
+name:"Chaqueta de cuero vegano",
+category:"ropa",
+price:40,
+description:"Chaqueta de cuero vegano con un estilo moderno y sofisticado.",
+image:""
+},
+
+{
+id:3,
+name:"Pantalón de tela",
+category:"ropa",
+price:30,
+description:"Pantalón de tela cómodo y elegante para looks casuales o formales.",
+image:""
+},
+
+{
+id:4,
+name:"Gafas negras",
+category:"accesorios",
+price:20,
+description:"Gafas negras de estilo elegante para completar tu outfit.",
+image:""
+},
+
+{
+id:5,
+name:"Botas cortas",
+category:"zapatos",
+price:50,
+description:"Botas cortas perfectas para combinar con la colección de otoño.",
+image:""
+},
+
+{
+id:6,
+name:"Boina",
+category:"accesorios",
+price:15,
+description:"Boina elegante para aportar un toque clásico y sofisticado.",
+image:""
+},
+
+{
+id:7,
+name:"Bufanda de seda",
+category:"accesorios",
+price:20,
+description:"Bufanda de seda suave y elegante para completar tus looks.",
+image:""
+},
+
+{
+id:8,
+name:"Falda con estampado de hojas de otoño",
+category:"ropa",
+price:34,
+description:"Falda inspirada en los colores y formas de las hojas de otoño.",
+image:""
+},
+
+{
+id:9,
+name:"Botas largas con tacón estilo otoño",
+category:"zapatos",
+price:75,
+description:"Botas largas con tacón diseñadas para elevar tus looks de otoño.",
+image:""
+},
+
+{
+id:10,
+name:"Top gris con estampado de hojas de otoño",
+category:"ropa",
+price:35,
+description:"Top gris con delicado estampado inspirado en las hojas de otoño.",
+image:""
+},
+
+{
+id:11,
+name:"Cartera de perlas",
+category:"carteras",
+price:250,
+description:"Cartera decorada con perlas para un look elegante y femenino.",
+image:""
+},
+
+{
+id:12,
+name:"Cartera de perlas con cuero vegano",
+category:"carteras",
+price:350,
+description:"Cartera exclusiva elaborada con cuero vegano y perlas de cristal.",
+image:""
+}
+];
 
 
-/* ======================================================
-   VARIABLES
-====================================================== */
-
-let products = [];
+/* ==================================================
+   CARRUSEL
+================================================== */
 
 let carousel = [
-  {id:1,image_url:""},
-  {id:2,image_url:""},
-  {id:3,image_url:""},
-  {id:4,image_url:""}
+"",
+"",
+"",
+""
 ];
 
 let currentSlide = 0;
 
+
+/* ==================================================
+   CARRITO
+================================================== */
+
 let cart = [];
 
 
-/* ======================================================
-   INICIO
-====================================================== */
+/* ==================================================
+   GUARDAR DATOS
+================================================== */
 
-async function init(){
+function saveData(){
 
-  await loadCarousel();
+localStorage.setItem(
+"naboraProducts",
+JSON.stringify(products)
+);
 
-  await loadProducts();
+localStorage.setItem(
+"naboraCarousel",
+JSON.stringify(carousel)
+);
 
-  loadBags();
+}
+
+
+/* ==================================================
+   CARGAR DATOS
+================================================== */
+
+function loadData(){
+
+const savedProducts =
+localStorage.getItem("naboraProducts");
+
+const savedCarousel =
+localStorage.getItem("naboraCarousel");
+
+
+if(savedProducts){
+
+products =
+JSON.parse(savedProducts);
 
 }
 
 
-/* ======================================================
-   CARRUSEL
-====================================================== */
+if(savedCarousel){
 
-async function loadCarousel(){
-
-  const {data,error} =
-    await db
-    .from("carousel")
-    .select("*")
-    .order("id");
-
-  if(error){
-
-    console.error(error);
-    return;
-
-  }
-
-  if(data){
-
-    carousel = data;
-
-    renderCarousel();
-
-  }
+carousel =
+JSON.parse(savedCarousel);
 
 }
 
+}
+
+
+/* ==================================================
+   MOSTRAR CARRUSEL
+================================================== */
 
 function renderCarousel(){
 
-  const slides =
-    document.getElementById("slides");
+const slides =
+document.getElementById("slides");
 
-  const dots =
-    document.getElementById("dots");
+const dots =
+document.getElementById("dots");
 
-  slides.innerHTML = "";
+slides.innerHTML = "";
 
-  dots.innerHTML = "";
-
-
-  carousel.forEach((slide,index)=>{
-
-    const element =
-      document.createElement("div");
-
-    element.className = "slide";
-
-    if(index === currentSlide){
-      element.classList.add("active");
-    }
+dots.innerHTML = "";
 
 
-    if(slide.image_url){
+carousel.forEach((image,index)=>{
 
-      element.innerHTML =
-      `<img src="${slide.image_url}" alt="NABORA">`;
+const slide =
+document.createElement("div");
 
-    }else{
-
-      element.innerHTML =
-      `<div class="slide-empty">
-        NABORA · FOTO ${index+1}
-      </div>`;
-
-    }
-
-    slides.appendChild(element);
+slide.className = "slide";
 
 
-    const dot =
-      document.createElement("button");
+if(index === currentSlide){
 
-    dot.className = "dot";
-
-    if(index === currentSlide){
-      dot.classList.add("active");
-    }
-
-    dot.onclick = function(){
-
-      currentSlide = index;
-
-      renderCarousel();
-
-    };
-
-    dots.appendChild(dot);
-
-  });
+slide.classList.add("active");
 
 }
 
+
+if(image){
+
+slide.innerHTML =
+`<img src="${image}" alt="NABORA">`;
+
+}else{
+
+slide.innerHTML =
+`
+<div class="empty-slide">
+NABORA · COLECCIÓN OTOÑO 2026
+</div>
+`;
+
+}
+
+
+slides.appendChild(slide);
+
+
+const dot =
+document.createElement("button");
+
+dot.className = "dot";
+
+
+if(index === currentSlide){
+
+dot.classList.add("active");
+
+}
+
+
+dot.onclick = function(){
+
+currentSlide = index;
+
+renderCarousel();
+
+};
+
+
+dots.appendChild(dot);
+
+});
+
+}
+
+
+/* ==================================================
+   SIGUIENTE FOTO
+================================================== */
 
 function nextSlide(){
 
-  currentSlide++;
+currentSlide++;
 
-  if(currentSlide >= 4){
-    currentSlide = 0;
-  }
+if(currentSlide >= carousel.length){
 
-  renderCarousel();
+currentSlide = 0;
 
 }
 
+renderCarousel();
+
+}
+
+
+/* ==================================================
+   FOTO ANTERIOR
+================================================== */
 
 function previousSlide(){
 
-  currentSlide--;
+currentSlide--;
 
-  if(currentSlide < 0){
-    currentSlide = 3;
-  }
+if(currentSlide < 0){
 
-  renderCarousel();
+currentSlide =
+carousel.length - 1;
+
+}
+
+renderCarousel();
 
 }
 
 
-setInterval(nextSlide,4000);
+/* CAMBIO AUTOMÁTICO */
+
+setInterval(
+nextSlide,
+4000
+);
 
 
-/* ======================================================
+/* ==================================================
    PRODUCTOS
-====================================================== */
-
-async function loadProducts(){
-
-  const {data,error} =
-    await db
-    .from("products")
-    .select("*")
-    .order("id")
-    .limit(15);
-
-  if(error){
-
-    console.error(error);
-    return;
-
-  }
-
-  products = data || [];
-
-  renderProducts();
-
-}
-
+================================================== */
 
 function renderProducts(category="todos"){
 
-  const container =
-    document.getElementById("products");
+const container =
+document.getElementById("products");
 
-  container.innerHTML = "";
-
-
-  products.forEach(product=>{
-
-    if(
-      category !== "todos" &&
-      product.category !== category
-    ){
-      return;
-    }
+container.innerHTML = "";
 
 
-    const card =
-      document.createElement("div");
+products.forEach(product=>{
 
-    card.className = "product";
+if(
+category !== "todos" &&
+product.category !== category
+){
 
-
-    let imageHTML;
-
-
-    if(product.image_url){
-
-      imageHTML =
-      `<img
-        src="${escapeHTML(product.image_url)}"
-        alt="${escapeHTML(product.name)}">`;
-
-    }else{
-
-      imageHTML =
-      `<div class="no-image">
-        SIN FOTO<br><br>NABORA
-      </div>`;
-
-    }
-
-
-    card.innerHTML = `
-
-      <div class="product-image">
-        ${imageHTML}
-      </div>
-
-      <div class="product-info">
-
-        <div class="category">
-          ${escapeHTML(
-            String(product.category).toUpperCase()
-          )}
-        </div>
-
-        <h3>
-          ${escapeHTML(product.name)}
-        </h3>
-
-        <p class="description">
-          ${escapeHTML(product.description || "")}
-        </p>
-
-        <div class="price">
-          $${Number(product.price).toFixed(2)}
-        </div>
-
-        <button
-          class="cart-button"
-          onclick="addToCart(${product.id})">
-          AÑADIR AL CARRITO
-        </button>
-
-      </div>
-    `;
-
-
-    container.appendChild(card);
-
-  });
+return;
 
 }
 
+
+const card =
+document.createElement("div");
+
+card.className = "product";
+
+
+let photo;
+
+
+if(product.image){
+
+photo =
+`
+<img
+src="${product.image}"
+alt="${product.name}"
+>
+`;
+
+}else{
+
+photo =
+`
+<div class="no-photo">
+SIN FOTO<br><br>
+NABORA
+</div>
+`;
+
+}
+
+
+card.innerHTML = `
+
+<div class="product-photo">
+
+${photo}
+
+</div>
+
+<div class="product-info">
+
+<div class="product-category">
+
+${product.category.toUpperCase()}
+
+</div>
+
+<h3>
+${product.name}
+</h3>
+
+<p class="product-description">
+${product.description}
+</p>
+
+<div class="product-price">
+$${Number(product.price).toFixed(2)}
+</div>
+
+<button
+class="buy"
+onclick="addToCart(${product.id})">
+
+AÑADIR AL CARRITO
+
+</button>
+
+</div>
+
+`;
+
+
+container.appendChild(card);
+
+});
+
+}
+
+
+/* ==================================================
+   FILTROS
+================================================== */
 
 function filterProducts(category,button){
 
-  document
-  .querySelectorAll(".filters button")
-  .forEach(btn=>{
-    btn.classList.remove("active");
-  });
+document
+.querySelectorAll(".filter")
+.forEach(
+b=>b.classList.remove("active")
+);
 
-  button.classList.add("active");
+button.classList.add("active");
 
-  renderProducts(category);
+renderProducts(category);
 
 }
 
 
-/* ======================================================
-   ADMIN
-====================================================== */
+/* ==================================================
+   ADMIN ABRIR
+================================================== */
 
 function openAdmin(){
 
-  document
-  .getElementById("adminModal")
-  .classList.add("show");
+document
+.getElementById("adminModal")
+.classList.add("show");
 
 }
 
+
+/* ==================================================
+   ADMIN CERRAR
+================================================== */
 
 function closeAdmin(){
 
-  document
-  .getElementById("adminModal")
-  .classList.remove("show");
+document
+.getElementById("adminModal")
+.classList.remove("show");
 
 }
 
 
-async function login(){
+/* ==================================================
+   LOGIN
+================================================== */
 
-  const password =
-    document.getElementById("password").value;
+function login(){
+
+const password =
+document.getElementById("password").value;
 
 
-  if(password === "NaboraAdmin2026!"){
+if(password === ADMIN_PASSWORD){
 
-    document
-    .getElementById("login")
-    .style.display = "none";
+document
+.getElementById("login")
+.style.display="none";
 
-    document
-    .getElementById("panel")
-    .classList.add("show");
 
-    await renderCarouselAdmin();
+document
+.getElementById("adminPanel")
+.classList.add("show");
 
-    await renderProductAdmin();
 
-  }else{
+renderCarouselAdmin();
 
-    document
-    .getElementById("loginError")
-    .textContent =
-    "Contraseña incorrecta.";
+renderAdminProducts();
 
-  }
+}else{
+
+document
+.getElementById("loginError")
+.textContent =
+"Contraseña incorrecta.";
+
+}
 
 }
 
 
-/* ======================================================
+/* ==================================================
    ADMIN CARRUSEL
-====================================================== */
+================================================== */
 
-async function renderCarouselAdmin(){
+function renderCarouselAdmin(){
 
-  const container =
-    document.getElementById("carouselAdmin");
+const container =
+document.getElementById(
+"carouselAdmin"
+);
 
-  container.innerHTML = "";
-
-
-  carousel.forEach((slide,index)=>{
-
-    const card =
-      document.createElement("div");
-
-    card.className = "carousel-card";
+container.innerHTML = "";
 
 
-    card.innerHTML = `
+carousel.forEach(
+(image,index)=>{
 
-      <strong>Foto ${index+1}</strong>
+const card =
+document.createElement("div");
 
-      <div class="preview">
-
-        ${
-          slide.image_url
-          ?
-          `<img src="${slide.image_url}">`
-          :
-          "Sin fotografía"
-        }
-
-      </div>
-
-      <input
-        type="file"
-        accept="image/*"
-        onchange="uploadCarousel(${slide.id},event)"
-      >
-
-    `;
+card.className =
+"carousel-card";
 
 
-    container.appendChild(card);
+card.innerHTML = `
 
-  });
+<strong>
+Foto ${index+1}
+</strong>
+
+<div class="preview">
+
+${
+image
+?
+`<img src="${image}">`
+:
+"Sin fotografía"
+}
+
+</div>
+
+<input
+type="file"
+accept="image/*"
+onchange="uploadCarousel(${index},event)"
+>
+
+`;
+
+
+container.appendChild(card);
+
+});
 
 }
 
 
-/* ======================================================
-   SUBIR FOTO CARRUSEL
-====================================================== */
+/* ==================================================
+   CARGAR FOTO CARRUSEL
+================================================== */
 
-async function uploadCarousel(id,event){
+function uploadCarousel(index,event){
 
-  const file =
-    event.target.files[0];
-
-  if(!file) return;
+const file =
+event.target.files[0];
 
 
-  const url =
-    await uploadImage(file,"carousel");
+if(!file){
 
-  if(!url) return;
-
-
-  const {error} =
-    await db
-    .from("carousel")
-    .update({
-      image_url:url
-    })
-    .eq("id",id);
-
-
-  if(error){
-
-    alert("No se pudo guardar la imagen.");
-
-    console.error(error);
-
-    return;
-
-  }
-
-
-  await loadCarousel();
-
-  await renderCarouselAdmin();
-
-  alert("Imagen cargada correctamente.");
+return;
 
 }
 
 
-/* ======================================================
+const reader =
+new FileReader();
+
+
+reader.onload =
+function(e){
+
+carousel[index] =
+e.target.result;
+
+
+saveData();
+
+renderCarousel();
+
+renderCarouselAdmin();
+
+};
+
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* ==================================================
    ADMIN PRODUCTOS
-====================================================== */
+================================================== */
 
-async function renderProductAdmin(){
+function renderAdminProducts(){
 
-  const container =
-    document.getElementById("productAdmin");
+const container =
+document.getElementById(
+"adminProducts"
+);
 
-  container.innerHTML = "";
-
-
-  products.forEach(product=>{
-
-    const box =
-      document.createElement("div");
-
-    box.className = "product-admin";
+container.innerHTML = "";
 
 
-    box.innerHTML = `
+products.forEach(
+product=>{
 
-      <h4>
-        ${escapeHTML(product.name)}
-      </h4>
+const box =
+document.createElement("div");
 
-      <label class="label">
-        Nombre
-      </label>
-
-      <input
-        class="field"
-        id="name-${product.id}"
-        value="${escapeAttribute(product.name)}"
-      >
+box.className =
+"admin-product";
 
 
-      <label class="label">
-        Categoría
-      </label>
+box.innerHTML = `
 
-      <select
-        class="field"
-        id="category-${product.id}">
-
-        <option
-          value="ropa"
-          ${product.category==="ropa"?"selected":""}>
-          Ropa
-        </option>
-
-        <option
-          value="zapatos"
-          ${product.category==="zapatos"?"selected":""}>
-          Zapatos
-        </option>
-
-        <option
-          value="accesorios"
-          ${product.category==="accesorios"?"selected":""}>
-          Accesorios
-        </option>
-
-        <option
-          value="carteras"
-          ${product.category==="carteras"?"selected":""}>
-          Carteras
-        </option>
-
-      </select>
+<h4>
+Producto #${product.id}
+</h4>
 
 
-      <label class="label">
-        Precio
-      </label>
+<label>
+Nombre
+</label>
 
-      <input
-        class="field"
-        type="number"
-        step="0.01"
-        id="price-${product.id}"
-        value="${product.price}"
-      >
+<input
+class="field"
+id="name-${product.id}"
+value="${product.name}"
+>
 
 
-      <label class="label">
-        Descripción
-      </label>
+<label>
+Categoría
+</label>
 
-      <textarea
-        class="field"
-        id="description-${product.id}"
-      >${escapeHTML(product.description || "")}</textarea>
+<select
+class="field"
+id="category-${product.id}"
+>
 
+<option
+value="ropa"
+${product.category==="ropa"?"selected":""}
+>
+Ropa
+</option>
 
-      <label class="label">
-        Imagen actual
-      </label>
+<option
+value="zapatos"
+${product.category==="zapatos"?"selected":""}
+>
+Zapatos
+</option>
 
-      <div class="product-preview">
+<option
+value="accesorios"
+${product.category==="accesorios"?"selected":""}
+>
+Accesorios
+</option>
 
-        ${
-          product.image_url
-          ?
-          `<img src="${product.image_url}">`
-          :
-          "Sin foto"
-        }
+<option
+value="carteras"
+${product.category==="carteras"?"selected":""}
+>
+Carteras
+</option>
 
-      </div>
-
-
-      <br>
-
-      <input
-        type="file"
-        accept="image/*"
-        onchange="uploadProduct(${product.id},event)"
-      >
-
-
-      <div class="admin-actions">
-
-        <button
-          class="save"
-          onclick="saveProduct(${product.id})">
-          GUARDAR CAMBIOS
-        </button>
-
-        <button
-          class="delete"
-          onclick="deleteProduct(${product.id})">
-          ELIMINAR
-        </button>
-
-      </div>
-
-    `;
+</select>
 
 
-    container.appendChild(box);
+<label>
+Precio
+</label>
 
-  });
+<input
+class="field"
+type="number"
+id="price-${product.id}"
+value="${product.price}"
+>
+
+
+<label>
+Descripción
+</label>
+
+<textarea
+class="field"
+id="description-${product.id}"
+>${product.description}</textarea>
+
+
+<label>
+Fotografía
+</label>
+
+<div class="admin-photo">
+
+${
+product.image
+?
+`<img src="${product.image}">`
+:
+"Sin foto"
+}
+
+</div>
+
+<br>
+
+<input
+type="file"
+accept="image/*"
+onchange="uploadProductPhoto(${product.id},event)"
+>
+
+
+<div class="actions">
+
+<button
+class="save"
+onclick="saveProduct(${product.id})"
+>
+GUARDAR CAMBIOS
+</button>
+
+<button
+class="delete"
+onclick="deleteProduct(${product.id})"
+>
+ELIMINAR
+</button>
+
+</div>
+
+`;
+
+
+container.appendChild(box);
+
+});
 
 }
 
 
-/* ======================================================
+/* ==================================================
    GUARDAR PRODUCTO
-====================================================== */
+================================================== */
 
-async function saveProduct(id){
+function saveProduct(id){
 
-  const name =
-    document.getElementById(
-      "name-"+id
-    ).value.trim();
-
-
-  const category =
-    document.getElementById(
-      "category-"+id
-    ).value;
+const product =
+products.find(
+p=>p.id===id
+);
 
 
-  const price =
-    Number(
-      document.getElementById(
-        "price-"+id
-      ).value
-    );
+if(!product){
 
-
-  const description =
-    document.getElementById(
-      "description-"+id
-    ).value.trim();
-
-
-  if(!name){
-
-    alert("Escribe un nombre.");
-
-    return;
-
-  }
-
-
-  const {error} =
-    await db
-    .from("products")
-    .update({
-
-      name,
-      category,
-      price,
-      description
-
-    })
-    .eq("id",id);
-
-
-  if(error){
-
-    alert(
-      "No se pudieron guardar los cambios."
-    );
-
-    console.error(error);
-
-    return;
-
-  }
-
-
-  await loadProducts();
-
-  await renderProductAdmin();
-
-  alert("Producto actualizado.");
+return;
 
 }
 
 
-/* ======================================================
-   SUBIR FOTO PRODUCTO
-====================================================== */
-
-async function uploadProduct(id,event){
-
-  const file =
-    event.target.files[0];
-
-  if(!file) return;
+product.name =
+document.getElementById(
+"name-"+id
+).value;
 
 
-  const url =
-    await uploadImage(file,"products");
+product.category =
+document.getElementById(
+"category-"+id
+).value;
 
 
-  if(!url) return;
+product.price =
+Number(
+document.getElementById(
+"price-"+id
+).value
+);
 
 
-  const {error} =
-    await db
-    .from("products")
-    .update({
-      image_url:url
-    })
-    .eq("id",id);
+product.description =
+document.getElementById(
+"description-"+id
+).value;
 
 
-  if(error){
+saveData();
 
-    alert(
-      "No se pudo guardar la imagen."
-    );
+renderProducts();
 
-    console.error(error);
+renderAdminProducts();
 
-    return;
-
-  }
-
-
-  await loadProducts();
-
-  await renderProductAdmin();
-
-  alert(
-    "Foto del producto cargada correctamente."
-  );
+alert(
+"Producto guardado correctamente."
+);
 
 }
 
 
-/* ======================================================
+/* ==================================================
+   CARGAR FOTO PRODUCTO
+================================================== */
+
+function uploadProductPhoto(id,event){
+
+const file =
+event.target.files[0];
+
+
+if(!file){
+
+return;
+
+}
+
+
+const reader =
+new FileReader();
+
+
+reader.onload =
+function(e){
+
+const product =
+products.find(
+p=>p.id===id
+);
+
+
+if(product){
+
+product.image =
+e.target.result;
+
+saveData();
+
+renderProducts();
+
+renderAdminProducts();
+
+}
+
+};
+
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* ==================================================
    AGREGAR PRODUCTO
-====================================================== */
+================================================== */
 
-async function addProduct(){
+function addProduct(){
 
-  if(products.length >= 15){
+if(products.length >= 15){
 
-    alert(
-      "Ya tienes 15 productos."
-    );
+alert(
+"Ya tienes los 15 productos permitidos."
+);
 
-    return;
-
-  }
-
-
-  const {error} =
-    await db
-    .from("products")
-    .insert({
-
-      name:"Nuevo producto",
-
-      category:"ropa",
-
-      price:0,
-
-      description:
-      "Descripción del producto.",
-
-      image_url:""
-
-    });
-
-
-  if(error){
-
-    alert(
-      "No se pudo agregar el producto."
-    );
-
-    console.error(error);
-
-    return;
-
-  }
-
-
-  await loadProducts();
-
-  await renderProductAdmin();
+return;
 
 }
 
 
-/* ======================================================
-   ELIMINAR PRODUCTO
-====================================================== */
-
-async function deleteProduct(id){
-
-  if(
-    !confirm(
-      "¿Quieres eliminar este producto?"
-    )
-  ){
-    return;
-  }
+const newId =
+Date.now();
 
 
-  const {error} =
-    await db
-    .from("products")
-    .delete()
-    .eq("id",id);
+products.push({
+
+id:newId,
+
+name:"Nuevo producto",
+
+category:"ropa",
+
+price:0,
+
+description:
+"Escribe aquí la descripción del producto.",
+
+image:""
+
+});
 
 
-  if(error){
+saveData();
 
-    alert(
-      "No se pudo eliminar."
-    );
+renderProducts();
 
-    console.error(error);
-
-    return;
-
-  }
-
-
-  await loadProducts();
-
-  await renderProductAdmin();
+renderAdminProducts();
 
 }
 
 
-/* ======================================================
-   SUBIR IMAGEN
-====================================================== */
+/* ==================================================
+   ELIMINAR
+================================================== */
 
-async function uploadImage(file,folder){
+function deleteProduct(id){
 
-  if(!file) return null;
+if(
+!confirm(
+"¿Seguro que quieres eliminar este producto?"
+)
+){
 
-
-  if(file.size > 8 * 1024 * 1024){
-
-    alert(
-      "La imagen supera los 8 MB."
-    );
-
-    return null;
-
-  }
-
-
-  const extension =
-    file.name
-    .split(".")
-    .pop()
-    .toLowerCase();
-
-
-  const fileName =
-    folder +
-    "/" +
-    Date.now() +
-    "-" +
-    Math.random()
-      .toString(36)
-      .substring(2) +
-    "." +
-    extension;
-
-
-  const {error} =
-    await db
-    .storage
-    .from("nabora-images")
-    .upload(
-      fileName,
-      file,
-      {
-        cacheControl:"3600",
-        upsert:false
-      }
-    );
-
-
-  if(error){
-
-    console.error(error);
-
-    alert(
-      "No se pudo subir la imagen. Revisa que exista el bucket nabora-images."
-    );
-
-    return null;
-
-  }
-
-
-  const {data} =
-    db
-    .storage
-    .from("nabora-images")
-    .getPublicUrl(fileName);
-
-
-  return data.publicUrl;
+return;
 
 }
 
 
-/* ======================================================
+products =
+products.filter(
+p=>p.id!==id
+);
+
+
+saveData();
+
+renderProducts();
+
+renderAdminProducts();
+
+}
+
+
+/* ==================================================
+   FOTOS DE CARTERAS
+================================================== */
+
+function loadBagPhoto(number,event){
+
+const file =
+event.target.files[0];
+
+
+if(!file){
+
+return;
+
+}
+
+
+const reader =
+new FileReader();
+
+
+reader.onload =
+function(e){
+
+const container =
+document.getElementById(
+"bagPhoto"+number
+);
+
+
+container.innerHTML =
+`
+<img
+src="${e.target.result}"
+alt="Cartera NABORA"
+>
+`;
+
+
+localStorage.setItem(
+"naboraBag"+number,
+e.target.result
+);
+
+};
+
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* ==================================================
+   CARGAR CARTERAS GUARDADAS
+================================================== */
+
+function loadBags(){
+
+[1,2].forEach(number=>{
+
+const image =
+localStorage.getItem(
+"naboraBag"+number
+);
+
+
+if(image){
+
+document
+.getElementById(
+"bagPhoto"+number
+).innerHTML =
+`
+<img
+src="${image}"
+alt="Cartera NABORA"
+>
+`;
+
+}
+
+});
+
+}
+
+
+/* ==================================================
    CARRITO
-====================================================== */
+================================================== */
 
 function addToCart(id){
 
-  const product =
-    products.find(
-      p => p.id === id
-    );
+const product =
+products.find(
+p=>p.id===id
+);
 
-  if(!product) return;
 
-  cart.push(product);
+if(!product){
 
-  updateCart();
+return;
 
-  openCart();
+}
+
+
+cart.push(product);
+
+updateCart();
+
+openCart();
 
 }
 
 
 function updateCart(){
 
-  document
-  .getElementById("cartCount")
-  .textContent =
-  cart.length;
+const items =
+document.getElementById(
+"cartItems"
+);
+
+const count =
+document.getElementById(
+"cartCount"
+);
 
 
-  const box =
-    document.getElementById("cartItems");
+if(count){
 
-
-  if(cart.length === 0){
-
-    box.innerHTML =
-      "Tu carrito está vacío.";
-
-    document
-    .getElementById("cartTotal")
-    .textContent =
-    "0.00";
-
-    return;
-
-  }
-
-
-  let total = 0;
-
-  box.innerHTML = "";
-
-
-  cart.forEach(item=>{
-
-    total += Number(item.price);
-
-    box.innerHTML += `
-
-      <div class="cart-item">
-
-        <strong>
-          ${escapeHTML(item.name)}
-        </strong>
-
-        <br><br>
-
-        $${Number(item.price).toFixed(2)}
-
-      </div>
-
-    `;
-
-  });
-
-
-  document
-  .getElementById("cartTotal")
-  .textContent =
-  total.toFixed(2);
+count.textContent =
+cart.length;
 
 }
 
+
+if(cart.length===0){
+
+items.innerHTML =
+"Tu carrito está vacío.";
+
+document.getElementById(
+"cartTotal"
+).textContent =
+"0.00";
+
+return;
+
+}
+
+
+let total = 0;
+
+items.innerHTML = "";
+
+
+cart.forEach(item=>{
+
+total += Number(
+item.price
+);
+
+
+items.innerHTML += `
+
+<div class="cart-item">
+
+<strong>
+${item.name}
+</strong>
+
+<br><br>
+
+$${Number(
+item.price
+).toFixed(2)}
+
+</div>
+
+`;
+
+});
+
+
+document.getElementById(
+"cartTotal"
+).textContent =
+total.toFixed(2);
+
+}
+
+
+/* ==================================================
+   ABRIR CARRITO
+================================================== */
 
 function openCart(){
 
-  document
-  .getElementById("cart")
-  .classList.add("open");
+document
+.getElementById("cart")
+.classList.add("open");
 
 }
 
+
+/* ==================================================
+   CERRAR CARRITO
+================================================== */
 
 function closeCart(){
 
-  document
-  .getElementById("cart")
-  .classList.remove("open");
+document
+.getElementById("cart")
+.classList.remove("open");
 
 }
 
 
-/* ======================================================
+/* ==================================================
    NABORA AI
-====================================================== */
+================================================== */
 
 function sendMessage(){
 
-  const input =
-    document.getElementById(
-      "userInput"
-    );
+const input =
+document.getElementById(
+"userInput"
+);
+
+const text =
+input.value.trim();
 
 
-  const text =
-    input.value.trim();
+if(!text){
 
-
-  if(!text) return;
-
-
-  const messages =
-    document.getElementById(
-      "messages"
-    );
-
-
-  messages.innerHTML += `
-
-    <div class="message user">
-      ${escapeHTML(text)}
-    </div>
-
-  `;
-
-
-  input.value = "";
-
-
-  let answer =
-  "✨ Puedo ayudarte a crear un look. Dime la ocasión, los colores que te gustan y el estilo que buscas.";
-
-
-  const q =
-    text.toLowerCase();
-
-
-  if(q.includes("fiesta")){
-
-    answer =
-    "✨ Para una fiesta puedes combinar la falda de hojas de otoño, el top gris, las botas largas con tacón y la cartera de perlas.";
-
-  }
-
-
-  else if(q.includes("casual")){
-
-    answer =
-    "🤎 Para un look casual puedes combinar la chaqueta de cuero vegano, el pantalón de tela, las gafas negras y las botas cortas.";
-
-  }
-
-
-  else if(q.includes("otoño")){
-
-    answer =
-    "🍂 Para otoño puedes utilizar tonos marrones, beige, gris, blanco y negro. Añade botas y una bufanda de seda para completar el look.";
-
-  }
-
-
-  else if(q.includes("cartera")){
-
-    answer =
-    "👜 NABORA tiene una cartera de piedras marrones de $250 y una cartera de perlas con cuero vegano de $350.";
-
-  }
-
-
-  setTimeout(()=>{
-
-    messages.innerHTML += `
-
-      <div class="message bot">
-        ${answer}
-      </div>
-
-    `;
-
-    messages.scrollTop =
-      messages.scrollHeight;
-
-  },500);
+return;
 
 }
 
 
-/* ======================================================
-   SEGURIDAD HTML
-====================================================== */
+const messages =
+document.getElementById(
+"messages"
+);
 
-function escapeHTML(text){
 
-  return String(text)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+messages.innerHTML += `
+
+<div class="message user">
+${text}
+</div>
+
+`;
+
+
+input.value = "";
+
+
+let answer =
+"✨ Puedo ayudarte a crear un outfit. Dime para qué ocasión lo necesitas.";
+
+
+const q =
+text.toLowerCase();
+
+
+if(q.includes("fiesta")){
+
+answer =
+"✨ Para una fiesta puedes combinar el top gris con estampado de hojas, las botas largas con tacón y la cartera de perlas.";
 
 }
 
 
-function escapeAttribute(text){
+if(q.includes("otoño")){
 
-  return escapeHTML(text);
+answer =
+"🍂 Para otoño puedes combinar tonos marrones, gris, blanco y negro. Añade botas y una bufanda de seda para completar el look.";
 
 }
 
 
-/* ======================================================
-   ARRANCAR
-====================================================== */
+if(q.includes("cartera")){
 
-init();
+answer =
+"👜 NABORA tiene una cartera de piedras marrones de $250 y una cartera de perlas con cuero vegano de $350.";
+
+}
+
+
+if(q.includes("casual")){
+
+answer =
+"🤎 Para un look casual prueba la chaqueta de cuero vegano, el pantalón de tela, las botas cortas y las gafas negras.";
+
+}
+
+
+setTimeout(()=>{
+
+messages.innerHTML += `
+
+<div class="message bot">
+${answer}
+</div>
+
+`;
+
+messages.scrollTop =
+messages.scrollHeight;
+
+},500);
+
+}
+
+
+/* ==================================================
+   INICIAR
+================================================== */
+
+loadData();
+
+renderCarousel();
+
+renderProducts();
+
+loadBags();
 
 </script>
 
