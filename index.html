@@ -1,64 +1,1107 @@
-async function sendMessage() {
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NABORA | Moda & Carteras</title>
+<meta name="description" content="NABORA - Moda y carteras con estilo. Tu asistente personal de moda con IA.">
 
-    const input = document.getElementById("userInput");
-    const text = input.value.trim();
-
-    if (!text) return;
-
-    addMessage(text, "user");
-
-    input.value = "";
-
-    addMessage("✨ Estoy preparando tu look...", "bot");
-
-    try {
-
-        const response = await fetch(
-            "https://nabora-ai.lizzzzzzzzzzzznabiiiiiiiiiiiii.workers.dev/",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    message: text
-                })
-            }
-        );
-
-        const data = await response.json();
-
-        const chat = document.getElementById("chat");
-
-        const messages = chat.querySelectorAll(".bot");
-
-        const lastMessage = messages[messages.length - 1];
-
-        if (data.answer) {
-
-            lastMessage.textContent = data.answer;
-
-        } else {
-
-            lastMessage.textContent =
-                "Lo siento, no pude conectarme con NABORA.";
-
-            console.error(data);
-        }
-
-    } catch (error) {
-
-        const chat = document.getElementById("chat");
-
-        const messages = chat.querySelectorAll(".bot");
-
-        const lastMessage = messages[messages.length - 1];
-
-        lastMessage.textContent =
-            "⚠️ No pude conectar con NABORA. Revisa la conexión con Cloudflare.";
-
-        console.error(error);
-    }
+<style>
+/* ============================================
+   VARIABLES DE COLOR (tomadas del logo)
+   ============================================ */
+:root {
+  --nabora-fondo: #F5EFE6;
+  --nabora-crema: #FAF6F0;
+  --nabora-negro: #1A1A1A;
+  --nabora-acento: #8B7355;
+  --nabora-dorado: #C9A961;
+  --nabora-blanco: #FFFFFF;
+  --nabora-gris: #E8E0D5;
+  --nabora-texto-suave: #6B6259;
 }
+
+/* ============================================
+   RESET Y BASE
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background: var(--nabora-fondo);
+  color: var(--nabora-negro);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ============================================
+   HEADER / NAVEGACIÓN
+   ============================================ */
+.header {
+  position: sticky;
+  top: 0;
+  background: var(--nabora-crema);
+  z-index: 1000;
+  border-bottom: 1px solid var(--nabora-gris);
+  padding: 12px 20px;
+  transition: box-shadow 0.3s;
+}
+
+.header.scrolled {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  height: 55px;
+  width: auto;
+}
+
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.logo-text .nombre {
+  font-size: 22px;
+  letter-spacing: 5px;
+  font-weight: 400;
+}
+
+.logo-text .slogan {
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--nabora-texto-suave);
+  margin-top: 2px;
+}
+
+/* Navegación */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav a {
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--nabora-negro);
+  position: relative;
+  transition: color 0.3s;
+}
+
+.nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--nabora-acento);
+  transition: width 0.3s;
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+.nav a:hover {
+  color: var(--nabora-acento);
+}
+
+/* Menú hamburguesa (móvil) */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: var(--nabora-negro);
+}
+
+/* ============================================
+   HERO / CARRUSEL
+   ============================================ */
+.hero {
+  position: relative;
+  height: 85vh;
+  min-height: 500px;
+  max-height: 750px;
+  overflow: hidden;
+  background: var(--nabora-negro);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+  background-size: cover;
+  background-position: center;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* Overlay oscuro para que el texto se lea */
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.15) 0%,
+    rgba(0,0,0,0.35) 60%,
+    rgba(0,0,0,0.55) 100%
+  );
+}
+
+.slide-content {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: var(--nabora-blanco);
+  z-index: 2;
+  width: 90%;
+  max-width: 600px;
+  animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.slide-content h1 {
+  font-size: clamp(28px, 5vw, 52px);
+  font-weight: 400;
+  letter-spacing: 4px;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+.slide-content p {
+  font-size: clamp(14px, 2vw, 18px);
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+  opacity: 0.95;
+}
+
+.btn-principal {
+  display: inline-block;
+  padding: 14px 40px;
+  background: var(--nabora-crema);
+  color: var(--nabora-negro);
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border: 1px solid var(--nabora-crema);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.btn-principal:hover {
+  background: transparent;
+  color: var(--nabora-crema);
+}
+
+/* Indicadores del carrusel */
+.hero-dots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 5;
+}
+
+.hero-dots button {
+  width: 30px;
+  height: 3px;
+  background: rgba(255,255,255,0.4);
+  transition: background 0.3s;
+}
+
+.hero-dots button.active {
+  background: var(--nabora-blanco);
+}
+
+/* ============================================
+   SECCIONES GENERALES
+   ============================================ */
+.section {
+  padding: 70px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 400;
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--nabora-texto-suave);
+  margin-bottom: 45px;
+  text-transform: uppercase;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 1px;
+  background: var(--nabora-acento);
+  margin: 18px auto 0;
+}
+
+/* ============================================
+   GALERÍA DE MODELOS / LOOKS
+   ============================================ */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.look-card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  background: var(--nabora-gris);
+  cursor: pointer;
+}
+
+.look-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.look-card:hover img {
+  transform: scale(1.06);
+}
+
+.look-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 55%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  color: var(--nabora-blanco);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.look-card:hover .overlay {
+  opacity: 1;
+}
+
+.look-card .overlay h3 {
+  font-size: 16px;
+  letter-spacing: 2px;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.look-card .overlay span {
+  font-size: 12px;
+  letter-spacing: 2px;
+  opacity: 0.85;
+}
+
+/* ============================================
+   IDEAS POR OCASIÓN (TABS)
+   ============================================ */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 10px 24px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--nabora-texto-suave);
+  border: 1px solid var(--nabora-gris);
+  background: var(--nabora-blanco);
+  transition: all 0.3s;
+}
+
+.tab.active,
+.tab:hover {
+  background: var(--nabora-negro);
+  color: var(--nabora-blanco);
+  border-color: var(--nabora-negro);
+}
+
+.tab-content {
+  display: none;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.tab-content.active {
+  display: grid;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.idea-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--nabora-gris);
+}
+
+.idea-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+
+.idea-card:hover img {
+  transform: scale(1.08);
+}
+
+.idea-card .etiqueta {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--nabora-crema);
+  color: var(--nabora-negro);
+  padding: 5px 12px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ============================================
+   CARTERAS
+   ============================================ */
+.carteras-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.cartera-card {
+  background: var(--nabora-blanco);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.cartera-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+}
+
+.cartera-img {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--nabora-gris);
+}
+
+.cartera-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+
+.cartera-card:hover .cartera-img img {
+  transform: scale(1.05);
+}
+
+.cartera-info {
+  padding: 14px;
+  text-align: center;
+}
+
+.cartera-info h3 {
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.cartera-precio {
+  font-size: 16px;
+  color: var(--nabora-acento);
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.cartera-tallas {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.talla {
+  border: 1px solid var(--nabora-gris);
+  padding: 3px 10px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--nabora-texto-suave);
+  transition: all 0.2s;
+}
+
+.talla:hover {
+  background: var(--nabora-negro);
+  color: var(--nabora-blanco);
+  border-color: var(--nabora-negro);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  background: var(--nabora-negro);
+  color: var(--nabora-crema);
+  padding: 50px 20px 24px;
+  text-align: center;
+}
+
+.footer-logo {
+  font-size: 26px;
+  letter-spacing: 6px;
+  margin-bottom: 8px;
+}
+
+.footer-slogan {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--nabora-dorado);
+  margin-bottom: 30px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.footer-links a {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+  color: var(--nabora-dorado);
+}
+
+.footer-copy {
+  font-size: 11px;
+  letter-spacing: 1px;
+  opacity: 0.5;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ============================================
+   CHAT FLOTANTE
+   ============================================ */
+.chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--nabora-negro);
+  color: var(--nabora-blanco);
+  font-size: 26px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  z-index: 9999;
+  transition: transform 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-toggle:hover {
+  transform: scale(1.08);
+}
+
+.chat-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--nabora-dorado);
+  color: var(--nabora-negro);
+  font-size: 12px;
+  font-weight: bold;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-window {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 370px;
+  max-width: calc(100vw - 40px);
+  height: 560px;
+  max-height: calc(100vh - 120px);
+  background: var(--nabora-blanco);
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9998;
+}
+
+.chat-window.open {
+  display: flex;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.chat-header {
+  background: var(--nabora-negro);
+  color: var(--nabora-blanco);
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--nabora-fondo);
+  color: var(--nabora-negro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+
+.chat-status {
+  margin: 0;
+  font-size: 11px;
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4ade80;
+}
+
+.chat-close {
+  color: var(--nabora-blanco);
+  font-size: 26px;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background: var(--nabora-fondo);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+.message.bot  { justify-content: flex-start; }
+.message.user { justify-content: flex-end; }
+
+.bubble {
+  max-width: 78%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.message.bot .bubble {
+  background: var(--nabora-blanco);
+  color: var(--nabora-negro);
+  border-bottom-left-radius: 4px;
+}
+
+.message.user .bubble {
+  background: var(--nabora-negro);
+  color: var(--nabora-blanco);
+  border-bottom-right-radius: 4px;
+}
+
+.typing {
+  display: flex;
+  gap: 4px;
+  padding: 12px 16px;
+}
+
+.typing span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--nabora-acento);
+  animation: bounce 1.4s infinite;
+}
+
+.typing span:nth-child(2) { animation-delay: 0.2s; }
+.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%           { transform: translateY(-6px); opacity: 1; }
+}
+
+.quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.quick-replies button {
+  background: transparent;
+  border: 1px solid var(--nabora-acento);
+  color: var(--nabora-acento);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.quick-replies button:hover {
+  background: var(--nabora-acento);
+  color: var(--nabora-blanco);
+}
+
+.chat-input-area {
+  display: flex;
+  padding: 12px;
+  background: var(--nabora-blanco);
+  border-top: 1px solid var(--nabora-gris);
+  gap: 8px;
+}
+
+#userInput {
+  flex: 1;
+  border: 1px solid var(--nabora-gris);
+  border-radius: 24px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  background: var(--nabora-fondo);
+}
+
+#userInput:focus {
+  border-color: var(--nabora-acento);
+}
+
+.send-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--nabora-negro);
+  color: var(--nabora-blanco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.send-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (min-width: 768px) {
+  .galeria { grid-template-columns: repeat(4, 1fr); }
+  .tab-content { grid-template-columns: repeat(3, 1fr); }
+  .carteras-grid { grid-template-columns: repeat(4, 1fr); }
+  .menu-toggle { display: none; }
+}
+
+@media (max-width: 767px) {
+  .menu-toggle { display: block; }
+  
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--nabora-crema);
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    transition: right 0.35s ease;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+    z-index: 1001;
+  }
+  
+  .nav.open {
+    right: 0;
+  }
+  
+  .nav a {
+    font-size: 16px;
+    letter-spacing: 3px;
+  }
+  
+  .logo-text .nombre { font-size: 18px; letter-spacing: 4px; }
+  .logo-text .slogan { font-size: 7px; letter-spacing: 2px; }
+  .logo-img { height: 45px; }
+  
+  .hero { height: 75vh; min-height: 450px; }
+  
+  .section { padding: 50px 16px; }
+  
+  /* Chat pantalla completa en móvil */
+  .chat-window {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    bottom: 0;
+    right: 0;
+    border-radius: 0;
+  }
+  
+  .chat-toggle {
+    bottom: 15px;
+    right: 15px;
+    width: 55px;
+    height: 55px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     HEADER
+     ============================================ -->
+<header class="header" id="header">
+  <div class="header-inner">
+    
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <img src="logo.png" alt="NABORA" class="logo-img" 
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="logo-text" style="display:none;">
+        <span class="nombre">NABORA</span>
+        <span class="slogan">MODA & CARTERAS</span>
+      </div>
+      <div class="logo-text">
+        <span class="nombre">NABORA</span>
+        <span class="slogan">MODA & CARTERAS</span>
+      </div>
+    </a>
+
+    <!-- Navegación -->
+    <nav class="nav" id="nav">
+      <a href="#inicio">Inicio</a>
+      <a href="#looks">Colección</a>
+      <a href="#ideas">Ideas</a>
+      <a href="#carteras">Carteras</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <!-- Botón hamburguesa móvil -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Menú">☰</button>
+  </div>
+</header>
+
+<!-- ============================================
+     HERO / CARRUSEL
+     ============================================ -->
+<section class="hero" id="inicio">
+  
+  <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600');">
+    <div class="slide-content">
+      <h1>NUEVA COLECCIÓN</h1>
+      <p>Otoño · Invierno 2025</p>
+      <a href="#looks" class="btn-principal">Ver Colección</a>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600');">
+    <div class="slide-content">
+      <h1>ELEGANCIA COTIDIANA</h1>
+      <p>Looks que te acompañan</p>
+      <a href="#ideas" class="btn-principal">Descubrir</a>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1600');">
+    <div class="slide-content">
+      <h1>CARTERAS NABORA</h1>
+      <p>El detalle que completa tu look</p>
+      <a href="#carteras" class="btn-principal">Ver Carteras</a>
+    </div>
+  </div>
+
+  <!-- Indicadores -->
+  <div class="hero-dots" id="heroDots">
+    <button class="active" onclick="irASlide(0)"></button>
+    <button onclick="irASlide(1)"></button>
+    <button onclick="irASlide(2)"></button>
+  </div>
+</section>
+
+<!-- ============================================
+     GALERÍA DE LOOKS
+     ============================================ -->
+<section class="section" id="looks">
+  <h2 class="section-title">Colección</h2>
+  <p class="section-subtitle">Los favoritos de la temporada</p>
+
+  <div class="galeria">
+    <div class="look-card">
+      <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600" alt="Look 1" loading="lazy">
+      <div class="overlay">
+        <h3>Blazer Beige</h3>
+        <span>$89.000</span>
+      </div>
+    </div>
+    <div class="look-card">
+      <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" alt="Look 2" loading="lazy">
+      <div class="overlay">
+        <h3>Vestido Negro</h3>
+        <span>$120.000</span>
+      </div>
+    </div>
+    <div class="look-card">
+      <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600" alt="Look 3" loading="lazy">
+      <div class="overlay">
+        <h3>Look Casual</h3>
+        <span>$65.000</span>
+      </div>
+    </div>
+    <div class="look-card">
+      <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600" alt="Look 4" loading="lazy">
+      <div class="overlay">
+        <h3>Conjunto Otoño</h3>
+        <span>$95.000</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     IDEAS POR OCASIÓN
+     ============================================ -->
+<section class="section" id="ideas">
+  <h2 class="section-title">Ideas para Ti</h2>
+  <p class="section-subtitle">Inspiración para cada momento</p>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" onclick="cambiarTab(event, 'diario')">Diario</button>
+    <button class="tab" onclick="cambiarTab(event, 'fiesta')">Fiesta</button>
+    <button class="tab" onclick="cambiarTab(event, 'otono')">Otoño</button>
+  </div>
+
+  <!-- Contenido Diario -->
+  <div class="tab-content active" id="diario">
+    <div class="idea-card">
+      <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600" alt="Diario 1" loading="lazy">
+      <span class="etiqueta">Casual</span>
+    </div>
+    <div class="idea-card">
+      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600" alt="Diario 2" loading="lazy">
+      <span class="etiqueta">Oficina</span>
+    </div>
+    <div class="idea-card">
+      <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600" alt="Diario 3" loading="lazy">
+      <span class="etiqueta">Fin de semana</span>
+    </div>
+  </div>
+
+  <!-- Contenido Fiesta -->
+  <div class="tab-content" id="fiesta">
+    <div class="idea-card">
+      <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600" alt="Fiesta 1" loading="lazy">
+      <span class="etiqueta">Cóctel</span>
+    </div>
+    <div class="idea-card">
+      <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600" alt="Fiesta 2" loading="lazy">
+      <span class="etiqueta">Noche</span>
+    </div>
+    <div class="idea-card">
+      <img src="https://images.unsplash.com/photo-1583937443566-6fe1a1c6e400?w=600" alt="Fiesta 3" loading="lazy">
+      <span class="etiqueta">Gala</span>
+    </div>
+  </div>
+
+  <!-- Contenido Otoño -->
+  <div class="tab-content" id="otono">
+    <div class="idea-card">
+      <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600" alt="Otoño 1" loading="lazy">
+      <span class="etiqueta">Gabardina</span>
+    </div>
+    <div class="idea-card">
+      <img src="https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=600" alt="Otoño 2" loading="lazy">
+      <span class="etiqueta">Punto</span>
+    </div>
+    <div class="idea-card">
+      <img src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=600" alt="Otoño 3" loading="lazy">
+      <span class="etiqueta">Botines</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CARTERAS
+     ============================================ -->
+<section class="section" id="carteras">
+  <h2 class="section-title">Carteras</h2>
+  <p class="section-subtitle">El detalle que completa tu estilo</p>
+
+  <div class="carteras-grid">
+    
+    <div class="cartera-card">
+      <div class="cartera-img">
+        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600" alt="Cartera 1" loading="lazy">
+      </div>
+      <div class="cartera-info">
+        <h3>Milano</h3>
+        <p class="cartera-precio">$75.000</p>
+        <div class="cartera-tallas">
+          <span class="talla">Única</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cartera-card">
+      <div class="cartera-img">
+        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600" alt="Cartera 2" loading="lazy">
+      </div>
+      <div class="cartera-info">
+        <h3>París</h3>
+        <p class="cartera-precio">$92.000</p>
+        <div class="cartera-tallas">
+          <span class="talla">Única</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cartera-card">
+      <div class="cartera-img">
+        <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?w=600" alt="Cartera 3" loading="lazy">
+      </div>
+      <div class="cartera-info">
+        <h3>Roma</h3>
+        <p class="cartera-precio">$68.000</p>
+        <div class="cartera-tallas">
+          <span class="talla">Única</span>
+        </div>
+      </div>
