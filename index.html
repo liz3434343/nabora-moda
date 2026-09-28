@@ -111,18 +111,20 @@ header{
         rgba(30,20,15,.28)
     );
     color:white;
+    padding:20px;
 }
 
 .slide-content h1{
     font-size:58px;
-    letter-spacing:8px;
+    letter-spacing:6px;
     text-shadow:0 2px 8px rgba(0,0,0,.4);
+    max-width:1000px;
 }
 
 .slide-content p{
-    font-size:20px;
-    margin-top:10px;
-    letter-spacing:2px;
+    font-size:22px;
+    margin-top:14px;
+    letter-spacing:4px;
 }
 
 .dots{
@@ -507,6 +509,7 @@ footer{
 }
 
 @media(max-width:850px){
+
     .products-grid{
         grid-template-columns:repeat(2,1fr);
     }
@@ -522,9 +525,11 @@ footer{
     .slide-content h1{
         font-size:40px;
     }
+
 }
 
 @media(max-width:600px){
+
     header{
         position:relative;
     }
@@ -550,11 +555,13 @@ footer{
     }
 
     .slide-content h1{
-        font-size:32px;
+        font-size:30px;
+        letter-spacing:3px;
     }
 
     .slide-content p{
-        font-size:15px;
+        font-size:16px;
+        letter-spacing:2px;
     }
 
     section{
@@ -568,6 +575,7 @@ footer{
     .admin-login{
         flex-direction:column;
     }
+
 }
 </style>
 </head>
@@ -575,1555 +583,2024 @@ footer{
 <body>
 
 <header>
-    <div class="nav">
 
-        <div class="logo">NABORA</div>
+<div class="nav">
 
-        <div class="nav-links">
-            <button onclick="filterProducts('todos')">Todos</button>
-            <button onclick="filterProducts('ropa')">Ropa</button>
-            <button onclick="filterProducts('zapatos')">Zapatos</button>
-            <button onclick="filterProducts('accesorios')">Accesorios</button>
-            <button onclick="filterProducts('carteras')">Carteras</button>
-        </div>
+<div class="logo">
+NABORA
+</div>
 
-        <div>
-            <button class="cart-btn" onclick="openCart()">
-                🛍️ <span id="cartCount">0</span>
-            </button>
+<div class="nav-links">
 
-            <button class="admin-btn" onclick="openAdmin()">
-                ⚙️
-            </button>
-        </div>
+<button onclick="filterProducts('todos')">
+Todos
+</button>
 
-    </div>
+<button onclick="filterProducts('ropa')">
+Ropa
+</button>
+
+<button onclick="filterProducts('zapatos')">
+Zapatos
+</button>
+
+<button onclick="filterProducts('accesorios')">
+Accesorios
+</button>
+
+<button onclick="filterProducts('carteras')">
+Carteras
+</button>
+
+</div>
+
+<div>
+
+<button class="cart-btn" onclick="openCart()">
+🛍️ <span id="cartCount">0</span>
+</button>
+
+<button class="admin-btn" onclick="openAdmin()">
+⚙️
+</button>
+
+</div>
+
+</div>
+
 </header>
+
 
 <main>
 
 <section class="hero">
 
-    <div class="carousel">
+<div class="carousel">
 
-        <div class="slide active" id="slide0">
-            <div class="slide-content">
-                <h1>NABORA</h1>
-                <p>COLECCIÓN OTOÑO 2026</p>
-            </div>
-        </div>
+<div class="slide active" id="slide0">
 
-        <div class="slide" id="slide1">
-            <div class="slide-content">
-                <h1>OTOÑO</h1>
-                <p>ELEGANCIA EN CADA DETALLE</p>
-            </div>
-        </div>
+<div class="slide-content">
 
-        <div class="slide" id="slide2">
-            <div class="slide-content">
-                <h1>NABORA</h1>
-                <p>DESCUBRE TU ESTILO</p>
-            </div>
-        </div>
+<h1>COLECCIÓN NABORA</h1>
 
-        <div class="slide" id="slide3">
-            <div class="slide-content">
-                <h1>2026</h1>
-                <p>MODA QUE TE REPRESENTA</p>
-            </div>
-        </div>
+<p>DE OTOÑO 2026</p>
 
-        <div class="dots" id="dots"></div>
+</div>
 
-    </div>
+</div>
+
+
+<div class="slide" id="slide1">
+
+<div class="slide-content">
+
+<h1>OTOÑO</h1>
+
+<p>ELEGANCIA EN CADA DETALLE</p>
+
+</div>
+
+</div>
+
+
+<div class="slide" id="slide2">
+
+<div class="slide-content">
+
+<h1>NABORA</h1>
+
+<p>DESCUBRE TU ESTILO</p>
+
+</div>
+
+</div>
+
+
+<div class="slide" id="slide3">
+
+<div class="slide-content">
+
+<h1>2026</h1>
+
+<p>MODA QUE TE REPRESENTA</p>
+
+</div>
+
+</div>
+
+
+<div class="dots" id="dots"></div>
+
+</div>
 
 </section>
+
 
 <section id="products">
 
-    <div class="section-title">
-        <h2>COLECCIÓN</h2>
-        <p>Descubre nuestra selección de otoño</p>
-    </div>
+<div class="section-title">
 
-    <div class="categories">
-        <button class="category-btn active" onclick="filterProducts('todos',this)">
-            TODOS
-        </button>
+<h2>COLECCIÓN</h2>
 
-        <button class="category-btn" onclick="filterProducts('ropa',this)">
-            ROPA
-        </button>
+<p>
+Descubre nuestra selección de otoño
+</p>
 
-        <button class="category-btn" onclick="filterProducts('zapatos',this)">
-            ZAPATOS
-        </button>
+</div>
 
-        <button class="category-btn" onclick="filterProducts('accesorios',this)">
-            ACCESORIOS
-        </button>
 
-        <button class="category-btn" onclick="filterProducts('carteras',this)">
-            CARTERAS
-        </button>
-    </div>
+<div class="categories">
 
-    <div class="products-grid" id="productsGrid"></div>
+<button
+class="category-btn active"
+onclick="filterProducts('todos',this)">
+TODOS
+</button>
+
+<button
+class="category-btn"
+onclick="filterProducts('ropa',this)">
+ROPA
+</button>
+
+<button
+class="category-btn"
+onclick="filterProducts('zapatos',this)">
+ZAPATOS
+</button>
+
+<button
+class="category-btn"
+onclick="filterProducts('accesorios',this)">
+ACCESORIOS
+</button>
+
+<button
+class="category-btn"
+onclick="filterProducts('carteras',this)">
+CARTERAS
+</button>
+
+</div>
+
+
+<div
+class="products-grid"
+id="productsGrid">
+</div>
 
 </section>
+
 
 <section class="bags">
 
-    <div class="bags-inner">
+<div class="bags-inner">
 
-        <div class="section-title">
-            <h2>DETALLES NABORA</h2>
-            <p>Pequeños detalles que hacen especial cada look</p>
-        </div>
+<div class="section-title">
 
-        <div class="bag-grid">
+<h2>DETALLES NABORA</h2>
 
-            <div class="bag-card">
-                <div class="bag-icon">👜</div>
-                <h3>Diseño exclusivo</h3>
-                <p>Detalles seleccionados para completar tu estilo.</p>
-            </div>
+<p>
+Pequeños detalles que hacen especial cada look
+</p>
 
-            <div class="bag-card">
-                <div class="bag-icon">✨</div>
-                <h3>Elegancia</h3>
-                <p>Una colección pensada para destacar.</p>
-            </div>
+</div>
 
-            <div class="bag-card">
-                <div class="bag-icon">🦋</div>
-                <h3>NABORA</h3>
-                <p>Tu estilo, tu transformación.</p>
-            </div>
 
-        </div>
+<div class="bag-grid">
 
-    </div>
+<div class="bag-card">
+
+<div class="bag-icon">
+👜
+</div>
+
+<h3>
+Diseño exclusivo
+</h3>
+
+<p>
+Detalles seleccionados para completar tu estilo.
+</p>
+
+</div>
+
+
+<div class="bag-card">
+
+<div class="bag-icon">
+✨
+</div>
+
+<h3>
+Elegancia
+</h3>
+
+<p>
+Una colección pensada para destacar.
+</p>
+
+</div>
+
+
+<div class="bag-card">
+
+<div class="bag-icon">
+🦋
+</div>
+
+<h3>
+NABORA
+</h3>
+
+<p>
+Tu estilo, tu transformación.
+</p>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
+
 <section class="ai-section">
 
-    <div class="ai-inner">
+<div class="ai-inner">
 
-        <div class="ai-title">
-            <h2>✨ NABORA AI</h2>
-            <p>Cuéntame qué estilo buscas y te ayudo a crear tu look.</p>
-        </div>
+<div class="ai-title">
 
-        <div class="ai-chat">
+<h2>
+✨ NABORA AI
+</h2>
 
-            <div class="messages" id="messages">
+<p>
+Cuéntame qué estilo buscas y te ayudo a crear tu look.
+</p>
 
-                <div class="message bot">
-                    ¡Hola! ✨ Soy NABORA AI. Dime qué tipo de look quieres y te recomendaré productos de nuestra colección.
-                </div>
+</div>
 
-            </div>
 
-            <div class="ai-form">
+<div class="ai-chat">
 
-                <input
-                    id="aiInput"
-                    type="text"
-                    placeholder="Ej: quiero un look elegante..."
-                    onkeydown="if(event.key==='Enter') sendMessage()"
-                >
+<div class="messages" id="messages">
 
-                <button onclick="sendMessage()">Enviar</button>
+<div class="message bot">
 
-            </div>
+¡Hola! ✨ Soy NABORA AI.
+Dime qué tipo de look quieres y te recomendaré productos de nuestra colección.
 
-        </div>
+</div>
 
-    </div>
+</div>
+
+
+<div class="ai-form">
+
+<input
+id="aiInput"
+type="text"
+placeholder="Ej: quiero un look elegante..."
+onkeydown="if(event.key==='Enter') sendMessage()"
+>
+
+<button onclick="sendMessage()">
+Enviar
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 </main>
 
+
 <footer>
-    <div class="logo">NABORA</div>
-    <p style="margin-top:10px;">Colección Otoño 2026</p>
-    <p style="margin-top:8px;font-size:13px;">© 2026 NABORA. Todos los derechos reservados.</p>
+
+<div class="logo">
+NABORA
+</div>
+
+<p style="margin-top:10px;">
+Colección Otoño 2026
+</p>
+
+<p style="margin-top:8px;font-size:13px;">
+© 2026 NABORA. Todos los derechos reservados.
+</p>
+
 </footer>
 
 
 <!-- CARRITO -->
 
-<div class="cart-modal" id="cartModal">
+<div
+class="cart-modal"
+id="cartModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <button class="close" onclick="closeCart()">×</button>
+<button
+class="close"
+onclick="closeCart()">
+×
+</button>
 
-        <h2>🛍️ Tu carrito</h2>
+<h2>
+🛍️ Tu carrito
+</h2>
 
-        <div id="cartItems" style="margin-top:20px;"></div>
+<div
+id="cartItems"
+style="margin-top:20px;">
+</div>
 
-        <div class="total">
-            Total: $<span id="cartTotal">0</span>
-        </div>
+<div class="total">
 
-        <button
-            class="admin-action"
-            style="width:100%;margin-top:20px;"
-            onclick="checkout()">
-            FINALIZAR COMPRA
-        </button>
+Total: $
+<span id="cartTotal">0</span>
 
-    </div>
+</div>
+
+<button
+class="admin-action"
+style="width:100%;margin-top:20px;"
+onclick="checkout()">
+
+FINALIZAR COMPRA
+
+</button>
+
+</div>
 
 </div>
 
 
 <!-- ADMIN -->
 
-<div class="admin-modal" id="adminModal">
+<div
+class="admin-modal"
+id="adminModal">
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <button class="close" onclick="closeAdmin()">×</button>
+<button
+class="close"
+onclick="closeAdmin()">
+×
+</button>
 
-        <h2>⚙️ Administración NABORA</h2>
-
-        <div id="loginArea">
-
-            <p style="margin-top:10px;">
-                Introduce la contraseña para administrar las fotos.
-            </p>
-
-            <div class="admin-login">
-
-                <input
-                    type="password"
-                    id="adminPassword"
-                    placeholder="Contraseña"
-                >
-
-                <button onclick="loginAdmin()">
-                    ENTRAR
-                </button>
-
-            </div>
-
-        </div>
+<h2>
+⚙️ Administración NABORA
+</h2>
 
 
-        <div class="admin-panel" id="adminPanel">
+<div id="loginArea">
 
-            <div class="admin-section">
-
-                <h3>📸 Fotos del carrusel</h3>
-
-                <div class="upload-row">
-
-                    <div class="upload-box">
-                        <strong>Foto 1</strong>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onchange="uploadCarousel(0,this)"
-                        >
-                        <div id="carouselPreview0"></div>
-                    </div>
-
-                    <div class="upload-box">
-                        <strong>Foto 2</strong>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onchange="uploadCarousel(1,this)"
-                        >
-                        <div id="carouselPreview1"></div>
-                    </div>
-
-                    <div class="upload-box">
-                        <strong>Foto 3</strong>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onchange="uploadCarousel(2,this)"
-                        >
-                        <div id="carouselPreview2"></div>
-                    </div>
-
-                    <div class="upload-box">
-                        <strong>Foto 4</strong>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onchange="uploadCarousel(3,this)"
-                        >
-                        <div id="carouselPreview3"></div>
-                    </div>
-
-                </div>
-
-            </div>
+<p style="margin-top:10px;">
+Introduce la contraseña para administrar las fotos.
+</p>
 
 
-            <div class="admin-section">
+<div class="admin-login">
 
-                <h3>👗 Fotos de productos</h3>
+<input
+type="password"
+id="adminPassword"
+placeholder="Contraseña"
+>
 
-                <div id="adminProducts"></div>
+<button onclick="loginAdmin()">
+ENTRAR
+</button>
 
-            </div>
+</div>
 
-        </div>
+</div>
 
-    </div>
+
+<div
+class="admin-panel"
+id="adminPanel">
+
+
+<div class="admin-section">
+
+<h3>
+📸 Fotos del carrusel
+</h3>
+
+
+<div class="upload-row">
+
+
+<div class="upload-box">
+
+<strong>
+Foto 1
+</strong>
+
+<input
+type="file"
+accept="image/*"
+onchange="uploadCarousel(0,this)"
+>
+
+<div id="carouselPreview0"></div>
+
+</div>
+
+
+<div class="upload-box">
+
+<strong>
+Foto 2
+</strong>
+
+<input
+type="file"
+accept="image/*"
+onchange="uploadCarousel(1,this)"
+>
+
+<div id="carouselPreview1"></div>
+
+</div>
+
+
+<div class="upload-box">
+
+<strong>
+Foto 3
+</strong>
+
+<input
+type="file"
+accept="image/*"
+onchange="uploadCarousel(2,this)"
+>
+
+<div id="carouselPreview2"></div>
+
+</div>
+
+
+<div class="upload-box">
+
+<strong>
+Foto 4
+</strong>
+
+<input
+type="file"
+accept="image/*"
+onchange="uploadCarousel(3,this)"
+>
+
+<div id="carouselPreview3"></div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="admin-section">
+
+<h3>
+👗 Fotos de productos
+</h3>
+
+<div id="adminProducts"></div>
+
+</div>
+
+
+</div>
+
+</div>
 
 </div>
 
 
 <script>
 
-const ADMIN_PASSWORD = "NaboraAdmin2026!";
+const ADMIN_PASSWORD =
+"NaboraAdmin2026!";
 
-const PRODUCTS_KEY = "nabora_products";
+const PRODUCTS_KEY =
+"nabora_products";
 
 let products = [];
 
 let cart = [];
 
-let currentCategory = "todos";
+let currentCategory =
+"todos";
 
 let currentSlide = 0;
 
 
-/* PRODUCTOS */
-
 const defaultProducts = [
 
-    {
-        id:"p1",
-        name:"Poliéster blanco",
-        category:"ropa",
-        price:20,
-        description:"Pieza blanca elegante y versátil para crear looks sofisticados.",
-        image:""
-    },
+{
+id:"p1",
+name:"Poliéster blanco",
+category:"ropa",
+price:20,
+description:"Pieza blanca elegante y versátil para crear looks sofisticados.",
+image:""
+},
 
-    {
-        id:"p2",
-        name:"Bufanda de seda",
-        category:"accesorios",
-        price:20,
-        description:"Bufanda ligera de seda con un acabado elegante y sofisticado.",
-        image:""
-    },
+{
+id:"p2",
+name:"Bufanda de seda",
+category:"accesorios",
+price:20,
+description:"Bufanda ligera de seda con un acabado elegante y sofisticado.",
+image:""
+},
 
-    {
-        id:"p3",
-        name:"Top marrón con hojas de otoño",
-        category:"ropa",
-        price:35,
-        description:"Top moderno en tono marrón con estampado inspirado en las hojas de otoño.",
-        image:""
-    },
+{
+id:"p3",
+name:"Top marrón con hojas de otoño",
+category:"ropa",
+price:35,
+description:"Top moderno en tono marrón con estampado inspirado en las hojas de otoño.",
+image:""
+},
 
-    {
-        id:"p4",
-        name:"Botas largas con tacón",
-        category:"zapatos",
-        price:75,
-        description:"Botas largas con tacón ideales para un look elegante de otoño.",
-        image:""
-    },
+{
+id:"p4",
+name:"Botas largas con tacón",
+category:"zapatos",
+price:75,
+description:"Botas largas con tacón ideales para un look elegante de otoño.",
+image:""
+},
 
-    {
-        id:"p5",
-        name:"Gafas negras",
-        category:"accesorios",
-        price:20,
-        description:"Un accesorio clásico y moderno para completar cualquier look.",
-        image:""
-    },
+{
+id:"p5",
+name:"Gafas negras",
+category:"accesorios",
+price:20,
+description:"Un accesorio clásico y moderno para completar cualquier look.",
+image:""
+},
 
-    {
-        id:"p6",
-        name:"Cartera de perlas con cuero vegano",
-        category:"carteras",
-        price:350,
-        description:"Diseño exclusivo con detalles de perlas y cuero vegano.",
-        image:""
-    }
+{
+id:"p6",
+name:"Cartera de perlas con cuero vegano",
+category:"carteras",
+price:350,
+description:"Diseño exclusivo con detalles de perlas y cuero vegano.",
+image:""
+},
+
+{
+id:"p7",
+name:"Falda marrón de otoño",
+category:"ropa",
+price:45,
+description:"Falda elegante en tono marrón, perfecta para crear looks sofisticados de otoño.",
+image:""
+}
 
 ];
 
 
-/* CARGAR PRODUCTOS */
-
 function loadProducts(){
 
-    const saved = localStorage.getItem(PRODUCTS_KEY);
+const saved =
+localStorage.getItem(PRODUCTS_KEY);
 
-    if(saved){
+if(saved){
 
-        try{
-            products = JSON.parse(saved);
-        }catch(e){
-            products = [...defaultProducts];
-        }
+try{
 
-    }else{
+products =
+JSON.parse(saved);
 
-        products = [...defaultProducts];
+}catch(e){
 
-        saveProducts();
+products =
+[...defaultProducts];
 
-    }
+}
+
+}else{
+
+products =
+[...defaultProducts];
+
+saveProducts();
+
+}
+
+
+/* AGREGA LA FALDA SI YA EXISTÍA LA VERSIÓN ANTERIOR */
+
+const skirt =
+defaultProducts.find(
+p=>p.id === "p7"
+);
+
+const alreadyExists =
+products.some(
+p=>p.id === "p7"
+);
+
+if(!alreadyExists){
+
+products.push(skirt);
+
+saveProducts();
+
+}
 
 }
 
 
 function saveProducts(){
 
-    localStorage.setItem(
-        PRODUCTS_KEY,
-        JSON.stringify(products)
-    );
+localStorage.setItem(
+PRODUCTS_KEY,
+JSON.stringify(products)
+);
 
 }
 
 
-/* INDEXED DB */
-
 let db;
+
 
 function openDatabase(){
 
-    return new Promise((resolve,reject)=>{
+return new Promise(
+(resolve,reject)=>{
 
-        const request = indexedDB.open(
-            "NABORA_DATABASE",
-            1
-        );
+const request =
+indexedDB.open(
+"NABORA_DATABASE",
+1
+);
 
-        request.onupgradeneeded = function(event){
+request.onupgradeneeded =
+function(event){
 
-            const database = event.target.result;
+const database =
+event.target.result;
 
-            if(!database.objectStoreNames.contains("images")){
+if(
+!database.objectStoreNames.contains("images")
+){
 
-                database.createObjectStore(
-                    "images"
-                );
+database.createObjectStore(
+"images"
+);
 
-            }
+}
 
-        };
+};
 
-        request.onsuccess = function(event){
 
-            db = event.target.result;
+request.onsuccess =
+function(event){
 
-            resolve();
+db =
+event.target.result;
 
-        };
+resolve();
 
-        request.onerror = function(){
+};
 
-            reject(request.error);
 
-        };
+request.onerror =
+function(){
 
-    });
+reject(request.error);
+
+};
+
+});
 
 }
 
 
 function saveImage(key,blob){
 
-    return new Promise((resolve,reject)=>{
+return new Promise(
+(resolve,reject)=>{
 
-        const transaction =
-            db.transaction(["images"],"readwrite");
+const transaction =
+db.transaction(
+["images"],
+"readwrite"
+);
 
-        const store =
-            transaction.objectStore("images");
+const store =
+transaction.objectStore(
+"images"
+);
 
-        const request =
-            store.put(blob,key);
+const request =
+store.put(blob,key);
 
-        request.onsuccess = ()=>resolve();
+request.onsuccess =
+()=>resolve();
 
-        request.onerror =
-            ()=>reject(request.error);
+request.onerror =
+()=>reject(request.error);
 
-    });
+});
 
 }
 
 
 function getImage(key){
 
-    return new Promise((resolve,reject)=>{
+return new Promise(
+(resolve,reject)=>{
 
-        const transaction =
-            db.transaction(["images"],"readonly");
+const transaction =
+db.transaction(
+["images"],
+"readonly"
+);
 
-        const store =
-            transaction.objectStore("images");
+const store =
+transaction.objectStore(
+"images"
+);
 
-        const request =
-            store.get(key);
+const request =
+store.get(key);
 
-        request.onsuccess = function(){
+request.onsuccess =
+function(){
 
-            resolve(request.result || null);
+resolve(
+request.result || null
+);
 
-        };
+};
 
-        request.onerror =
-            ()=>reject(request.error);
+request.onerror =
+()=>reject(request.error);
 
-    });
+});
 
 }
 
 
 function removeImage(key){
 
-    return new Promise((resolve,reject)=>{
+return new Promise(
+(resolve,reject)=>{
 
-        const transaction =
-            db.transaction(["images"],"readwrite");
+const transaction =
+db.transaction(
+["images"],
+"readwrite"
+);
 
-        const store =
-            transaction.objectStore("images");
+const store =
+transaction.objectStore(
+"images"
+);
 
-        const request =
-            store.delete(key);
+const request =
+store.delete(key);
 
-        request.onsuccess = ()=>resolve();
+request.onsuccess =
+()=>resolve();
 
-        request.onerror =
-            ()=>reject(request.error);
+request.onerror =
+()=>reject(request.error);
 
-    });
+});
 
 }
 
-
-/* COMPRESIÓN DE IMÁGENES */
 
 function compressImage(file){
 
-    return new Promise((resolve,reject)=>{
+return new Promise(
+(resolve,reject)=>{
 
-        const reader = new FileReader();
+const reader =
+new FileReader();
 
-        reader.onload = function(event){
+reader.onload =
+function(event){
 
-            const img = new Image();
+const img =
+new Image();
 
-            img.onload = function(){
+img.onload =
+function(){
 
-                const maxWidth = 1400;
+const maxWidth =
+1400;
 
-                let width = img.width;
-                let height = img.height;
+let width =
+img.width;
 
-                if(width > maxWidth){
+let height =
+img.height;
 
-                    height =
-                        height * maxWidth / width;
+if(width > maxWidth){
 
-                    width = maxWidth;
+height =
+height * maxWidth / width;
 
-                }
-
-                const canvas =
-                    document.createElement("canvas");
-
-                canvas.width = width;
-                canvas.height = height;
-
-                const ctx =
-                    canvas.getContext("2d");
-
-                ctx.fillStyle = "#ffffff";
-
-                ctx.fillRect(
-                    0,
-                    0,
-                    width,
-                    height
-                );
-
-                ctx.drawImage(
-                    img,
-                    0,
-                    0,
-                    width,
-                    height
-                );
-
-                canvas.toBlob(
-                    blob=>resolve(blob),
-                    "image/jpeg",
-                    .88
-                );
-
-            };
-
-            img.onerror =
-                ()=>reject(new Error("Imagen inválida"));
-
-            img.src = event.target.result;
-
-        };
-
-        reader.onerror =
-            ()=>reject(reader.error);
-
-        reader.readAsDataURL(file);
-
-    });
+width =
+maxWidth;
 
 }
 
+const canvas =
+document.createElement(
+"canvas"
+);
 
-/* IMÁGENES */
+canvas.width =
+width;
+
+canvas.height =
+height;
+
+const ctx =
+canvas.getContext(
+"2d"
+);
+
+ctx.fillStyle =
+"#ffffff";
+
+ctx.fillRect(
+0,
+0,
+width,
+height
+);
+
+ctx.drawImage(
+img,
+0,
+0,
+width,
+height
+);
+
+canvas.toBlob(
+blob=>resolve(blob),
+"image/jpeg",
+.88
+);
+
+};
+
+img.onerror =
+()=>reject(
+new Error("Imagen inválida")
+);
+
+img.src =
+event.target.result;
+
+};
+
+reader.onerror =
+()=>reject(reader.error);
+
+reader.readAsDataURL(file);
+
+}
+
 
 async function loadImages(){
 
-    for(const product of products){
+for(
+const product of products
+){
 
-        try{
+try{
 
-            const blob =
-                await getImage("product_"+product.id);
+const blob =
+await getImage(
+"product_"+product.id
+);
 
-            if(blob){
+if(blob){
 
-                product.image =
-                    URL.createObjectURL(blob);
+product.image =
+URL.createObjectURL(blob);
 
-            }else{
+}else{
 
-                product.image = "";
+product.image = "";
 
-            }
+}
 
-        }catch(error){
+}catch(error){
 
-            console.error(error);
+console.error(error);
 
-        }
+}
 
-    }
+}
 
-    renderProducts();
+renderProducts();
 
-    renderAdminProducts();
+renderAdminProducts();
 
-    await renderCarousel();
+await renderCarousel();
 
 }
 
 
-/* CARRUSEL */
+async function uploadCarousel(
+index,
+input
+){
 
-async function uploadCarousel(index,input){
+const file =
+input.files[0];
 
-    const file =
-        input.files[0];
+if(!file)return;
 
-    if(!file)return;
+try{
 
-    try{
+const blob =
+await compressImage(file);
 
-        const blob =
-            await compressImage(file);
+await saveImage(
+"carousel_"+index,
+blob
+);
 
-        await saveImage(
-            "carousel_"+index,
-            blob
-        );
+await renderCarousel();
 
-        await renderCarousel();
+await renderAdminPreviews();
 
-        await renderAdminPreviews();
+alert(
+"Foto subida correctamente ✨"
+);
 
-        alert("Foto subida correctamente ✨");
+}catch(error){
 
-    }catch(error){
+console.error(error);
 
-        console.error(error);
+alert(
+"No se pudo subir la foto."
+);
 
-        alert("No se pudo subir la foto.");
-
-    }
+}
 
 }
 
 
-async function deleteCarousel(index){
+async function deleteCarousel(
+index
+){
 
-    await removeImage(
-        "carousel_"+index
-    );
+await removeImage(
+"carousel_"+index
+);
 
-    await renderCarousel();
+await renderCarousel();
 
-    await renderAdminPreviews();
+await renderAdminPreviews();
 
 }
 
 
 async function renderCarousel(){
 
-    for(let i=0;i<4;i++){
+for(let i=0;i<4;i++){
 
-        const slide =
-            document.getElementById("slide"+i);
+const slide =
+document.getElementById(
+"slide"+i
+);
 
-        const blob =
-            await getImage("carousel_"+i);
+const blob =
+await getImage(
+"carousel_"+i
+);
 
-        if(blob){
+if(blob){
 
-            const oldImage =
-                slide.dataset.objectUrl;
+const oldImage =
+slide.dataset.objectUrl;
 
-            if(oldImage){
+if(oldImage){
 
-                URL.revokeObjectURL(oldImage);
-
-            }
-
-            const url =
-                URL.createObjectURL(blob);
-
-            slide.dataset.objectUrl =
-                url;
-
-            slide.style.backgroundImage =
-                `url("${url}")`;
-
-            slide.querySelector(".slide-content").style.display =
-                "none";
-
-        }else{
-
-            slide.style.backgroundImage =
-                "";
-
-            slide.querySelector(".slide-content").style.display =
-                "flex";
-
-        }
-
-    }
+URL.revokeObjectURL(
+oldImage
+);
 
 }
 
+const url =
+URL.createObjectURL(
+blob
+);
 
-/* PRODUCTOS */
+slide.dataset.objectUrl =
+url;
+
+slide.style.backgroundImage =
+`url("${url}")`;
+
+slide.querySelector(
+".slide-content"
+).style.display =
+"none";
+
+}else{
+
+slide.style.backgroundImage =
+"";
+
+slide.querySelector(
+".slide-content"
+).style.display =
+"flex";
+
+}
+
+}
+
+}
+
 
 function renderProducts(){
 
-    const grid =
-        document.getElementById("productsGrid");
+const grid =
+document.getElementById(
+"productsGrid"
+);
 
-    if(!grid)return;
+if(!grid)return;
 
-    const filtered =
-        currentCategory === "todos"
-        ? products
-        : products.filter(
-            p=>p.category === currentCategory
-        );
+const filtered =
+currentCategory === "todos"
+? products
+: products.filter(
+p=>p.category === currentCategory
+);
 
-    grid.innerHTML = "";
+grid.innerHTML = "";
 
-    filtered.forEach(product=>{
+filtered.forEach(
+product=>{
 
-        const card =
-            document.createElement("div");
+const card =
+document.createElement(
+"div"
+);
 
-        card.className =
-            "product-card";
+card.className =
+"product-card";
 
-        let imageHTML = "";
+let imageHTML = "";
 
-        if(product.image){
+if(product.image){
 
-            imageHTML =
-                `<img src="${product.image}" alt="${escapeHTML(product.name)}">`;
+imageHTML =
+`
+<img
+src="${product.image}"
+alt="${escapeHTML(product.name)}"
+>
+`;
 
-        }else{
+}else{
 
-            imageHTML =
-                `<div class="no-image">
-                    <div>
-                        <strong>NABORA</strong><br>
-                        COLECCIÓN OTOÑO 2026
-                    </div>
-                </div>`;
+imageHTML =
+`
+<div class="no-image">
 
-        }
+<div>
 
-        card.innerHTML = `
+<strong>NABORA</strong>
 
-            <div class="product-image">
-                ${imageHTML}
-            </div>
+<br>
 
-            <div class="product-info">
+COLECCIÓN OTOÑO 2026
 
-                <h3>${escapeHTML(product.name)}</h3>
+</div>
 
-                <p>
-                    ${escapeHTML(product.description)}
-                </p>
-
-                <div class="price">
-                    $${product.price.toFixed(2)}
-                </div>
-
-                <button
-                    class="add-btn"
-                    onclick="addToCart('${product.id}')">
-
-                    AÑADIR AL CARRITO
-
-                </button>
-
-            </div>
-        `;
-
-        grid.appendChild(card);
-
-    });
+</div>
+`;
 
 }
 
 
-function filterProducts(category,button){
+card.innerHTML = `
 
-    currentCategory =
-        category;
+<div class="product-image">
 
-    document
-        .querySelectorAll(".category-btn")
-        .forEach(btn=>{
-            btn.classList.remove("active");
-        });
+${imageHTML}
 
-    if(button){
+</div>
 
-        button.classList.add("active");
 
-    }else{
+<div class="product-info">
 
-        document
-            .querySelectorAll(".category-btn")
-            .forEach(btn=>{
+<h3>
+${escapeHTML(product.name)}
+</h3>
 
-                if(
-                    btn.textContent
-                    .trim()
-                    .toLowerCase()
-                    === category
-                ){
+<p>
+${escapeHTML(product.description)}
+</p>
 
-                    btn.classList.add("active");
+<div class="price">
+$${product.price.toFixed(2)}
+</div>
 
-                }
+<button
+class="add-btn"
+onclick="addToCart('${product.id}')">
 
-            });
+AÑADIR AL CARRITO
 
-    }
+</button>
 
-    renderProducts();
+</div>
+
+`;
+
+grid.appendChild(card);
+
+});
+
+}
+
+
+function filterProducts(
+category,
+button
+){
+
+currentCategory =
+category;
+
+document
+.querySelectorAll(
+".category-btn"
+)
+.forEach(
+btn=>{
+btn.classList.remove(
+"active"
+);
+});
+
+
+if(button){
+
+button.classList.add(
+"active"
+);
+
+}else{
+
+document
+.querySelectorAll(
+".category-btn"
+)
+.forEach(
+btn=>{
+
+if(
+btn.textContent
+.trim()
+.toLowerCase()
+=== category
+){
+
+btn.classList.add(
+"active"
+);
+
+}
+
+});
+
+}
+
+renderProducts();
 
 }
 
 
 function escapeHTML(text){
 
-    const div =
-        document.createElement("div");
+const div =
+document.createElement(
+"div"
+);
 
-    div.textContent =
-        text;
+div.textContent =
+text;
 
-    return div.innerHTML;
+return div.innerHTML;
 
 }
 
 
-/* CARRITO */
-
 function addToCart(id){
 
-    const product =
-        products.find(
-            p=>p.id===id
-        );
+const product =
+products.find(
+p=>p.id === id
+);
 
-    if(!product)return;
+if(!product)return;
 
-    cart.push(product);
+cart.push(product);
 
-    updateCart();
+updateCart();
 
-    alert(
-        `${product.name} fue añadido al carrito 🛍️`
-    );
+alert(
+`${product.name} fue añadido al carrito 🛍️`
+);
 
 }
 
 
 function updateCart(){
 
-    document.getElementById("cartCount").textContent =
-        cart.length;
+document.getElementById(
+"cartCount"
+).textContent =
+cart.length;
 
-    renderCart();
+renderCart();
 
 }
 
 
 function renderCart(){
 
-    const container =
-        document.getElementById("cartItems");
+const container =
+document.getElementById(
+"cartItems"
+);
 
-    const totalElement =
-        document.getElementById("cartTotal");
+const totalElement =
+document.getElementById(
+"cartTotal"
+);
 
-    if(!container)return;
+if(!container)return;
 
-    if(cart.length===0){
+if(cart.length === 0){
 
-        container.innerHTML =
-            "<p>Tu carrito está vacío.</p>";
+container.innerHTML =
+"<p>Tu carrito está vacío.</p>";
 
-        totalElement.textContent =
-            "0.00";
+totalElement.textContent =
+"0.00";
 
-        return;
+return;
 
-    }
+}
 
-    let total = 0;
+let total = 0;
 
-    container.innerHTML = "";
+container.innerHTML = "";
 
-    cart.forEach((product,index)=>{
+cart.forEach(
+(product,index)=>{
 
-        total += product.price;
+total += product.price;
 
-        const item =
-            document.createElement("div");
+const item =
+document.createElement(
+"div"
+);
 
-        item.className =
-            "cart-item";
+item.className =
+"cart-item";
 
-        item.innerHTML = `
+item.innerHTML = `
 
-            <div>
-                <strong>
-                    ${escapeHTML(product.name)}
-                </strong>
+<div>
 
-                <div>
-                    $${product.price.toFixed(2)}
-                </div>
-            </div>
+<strong>
+${escapeHTML(product.name)}
+</strong>
 
-            <button onclick="removeFromCart(${index})">
-                Eliminar
-            </button>
+<div>
+$${product.price.toFixed(2)}
+</div>
 
-        `;
+</div>
 
-        container.appendChild(item);
+<button
+onclick="removeFromCart(${index})">
 
-    });
+Eliminar
 
-    totalElement.textContent =
-        total.toFixed(2);
+</button>
+
+`;
+
+container.appendChild(item);
+
+});
+
+totalElement.textContent =
+total.toFixed(2);
 
 }
 
 
 function removeFromCart(index){
 
-    cart.splice(index,1);
+cart.splice(index,1);
 
-    updateCart();
+updateCart();
 
 }
 
 
 function openCart(){
 
-    document.getElementById("cartModal").style.display =
-        "flex";
+document.getElementById(
+"cartModal"
+).style.display =
+"flex";
 
 }
 
 
 function closeCart(){
 
-    document.getElementById("cartModal").style.display =
-        "none";
+document.getElementById(
+"cartModal"
+).style.display =
+"none";
 
 }
 
 
 function checkout(){
 
-    if(cart.length===0){
+if(cart.length === 0){
 
-        alert("Tu carrito está vacío.");
+alert(
+"Tu carrito está vacío."
+);
 
-        return;
+return;
 
-    }
+}
 
-    alert(
-        "Gracias por comprar en NABORA ✨\n\nTu pedido ha sido preparado."
-    );
+alert(
+"Gracias por comprar en NABORA ✨\n\nTu pedido ha sido preparado."
+);
 
 }
 
 
-/* ADMIN */
-
 function openAdmin(){
 
-    document.getElementById("adminModal").style.display =
-        "flex";
+document.getElementById(
+"adminModal"
+).style.display =
+"flex";
 
 }
 
 
 function closeAdmin(){
 
-    document.getElementById("adminModal").style.display =
-        "none";
+document.getElementById(
+"adminModal"
+).style.display =
+"none";
 
 }
 
 
 function loginAdmin(){
 
-    const password =
-        document.getElementById("adminPassword").value;
+const password =
+document.getElementById(
+"adminPassword"
+).value;
 
-    if(password === ADMIN_PASSWORD){
+if(
+password === ADMIN_PASSWORD
+){
 
-        document.getElementById("loginArea").style.display =
-            "none";
+document.getElementById(
+"loginArea"
+).style.display =
+"none";
 
-        document.getElementById("adminPanel").style.display =
-            "block";
+document.getElementById(
+"adminPanel"
+).style.display =
+"block";
 
-        renderAdminProducts();
+renderAdminProducts();
 
-        renderAdminPreviews();
+renderAdminPreviews();
 
-    }else{
+}else{
 
-        alert("Contraseña incorrecta.");
-
-    }
+alert(
+"Contraseña incorrecta."
+);
 
 }
 
+}
 
-/* ADMIN PRODUCTOS */
 
 function renderAdminProducts(){
 
-    const container =
-        document.getElementById("adminProducts");
+const container =
+document.getElementById(
+"adminProducts"
+);
 
-    if(!container)return;
+if(!container)return;
 
-    container.innerHTML = "";
+container.innerHTML = "";
 
-    products.forEach(product=>{
+products.forEach(
+product=>{
 
-        const box =
-            document.createElement("div");
+const box =
+document.createElement(
+"div"
+);
 
-        box.className =
-            "admin-product";
+box.className =
+"admin-product";
 
-        box.innerHTML = `
+box.innerHTML = `
 
-            <strong>
-                ${escapeHTML(product.name)}
-            </strong>
+<strong>
+${escapeHTML(product.name)}
+</strong>
 
-            <p style="margin-bottom:10px;">
-                Categoría: ${escapeHTML(product.category)}
-                <br>
-                Precio: $${product.price}
-            </p>
+<p style="margin-bottom:10px;">
 
-            <input
-                type="file"
-                accept="image/*"
-                onchange="uploadProduct('${product.id}',this)"
-            >
+Categoría:
+${escapeHTML(product.category)}
 
-            <div id="productPreview_${product.id}"></div>
+<br>
 
-        `;
+Precio:
+$${product.price}
 
-        container.appendChild(box);
+</p>
 
-    });
+<input
+type="file"
+accept="image/*"
+onchange="uploadProduct('${product.id}',this)"
+>
 
-    renderProductPreviews();
+<div
+id="productPreview_${product.id}">
+</div>
+
+`;
+
+container.appendChild(box);
+
+});
+
+renderProductPreviews();
 
 }
 
 
-async function uploadProduct(id,input){
+async function uploadProduct(
+id,
+input
+){
 
-    const file =
-        input.files[0];
+const file =
+input.files[0];
 
-    if(!file)return;
+if(!file)return;
 
-    try{
+try{
 
-        const blob =
-            await compressImage(file);
+const blob =
+await compressImage(file);
 
-        await saveImage(
-            "product_"+id,
-            blob
-        );
+await saveImage(
+"product_"+id,
+blob
+);
 
-        const product =
-            products.find(
-                p=>p.id===id
-            );
+const product =
+products.find(
+p=>p.id === id
+);
 
-        if(product){
+if(product){
 
-            if(product.image){
+if(product.image){
 
-                try{
-                    URL.revokeObjectURL(
-                        product.image
-                    );
-                }catch(e){}
+try{
 
-            }
+URL.revokeObjectURL(
+product.image
+);
 
-            product.image =
-                URL.createObjectURL(blob);
+}catch(e){}
 
-        }
+}
 
-        saveProducts();
+product.image =
+URL.createObjectURL(
+blob
+);
 
-        renderProducts();
+}
 
-        renderAdminProducts();
+saveProducts();
 
-        alert("Foto del producto subida correctamente ✨");
+renderProducts();
 
-    }catch(error){
+renderAdminProducts();
 
-        console.error(error);
+alert(
+"Foto del producto subida correctamente ✨"
+);
 
-        alert("No se pudo subir la foto.");
+}catch(error){
 
-    }
+console.error(error);
+
+alert(
+"No se pudo subir la foto."
+);
+
+}
 
 }
 
 
 async function renderProductPreviews(){
 
-    for(const product of products){
+for(
+const product of products
+){
 
-        const container =
-            document.getElementById(
-                "productPreview_"+product.id
-            );
+const container =
+document.getElementById(
+"productPreview_"+product.id
+);
 
-        if(!container)continue;
+if(!container)continue;
 
-        container.innerHTML = "";
+container.innerHTML = "";
 
-        const blob =
-            await getImage(
-                "product_"+product.id
-            );
+const blob =
+await getImage(
+"product_"+product.id
+);
 
-        if(blob){
+if(blob){
 
-            const url =
-                URL.createObjectURL(blob);
+const url =
+URL.createObjectURL(
+blob
+);
 
-            const img =
-                document.createElement("img");
+const img =
+document.createElement(
+"img"
+);
 
-            img.className =
-                "preview";
+img.className =
+"preview";
 
-            img.src =
-                url;
+img.src =
+url;
 
-            container.appendChild(img);
+container.appendChild(
+img
+);
 
-        }
+}
 
-    }
+}
 
 }
 
 
 async function renderAdminPreviews(){
 
-    for(let i=0;i<4;i++){
+for(let i=0;i<4;i++){
 
-        const container =
-            document.getElementById(
-                "carouselPreview"+i
-            );
+const container =
+document.getElementById(
+"carouselPreview"+i
+);
 
-        if(!container)continue;
+if(!container)continue;
 
-        container.innerHTML = "";
+container.innerHTML = "";
 
-        const blob =
-            await getImage(
-                "carousel_"+i
-            );
+const blob =
+await getImage(
+"carousel_"+i
+);
 
-        if(blob){
+if(blob){
 
-            const url =
-                URL.createObjectURL(blob);
+const url =
+URL.createObjectURL(
+blob
+);
 
-            container.innerHTML = `
+container.innerHTML = `
 
-                <img
-                    class="preview"
-                    src="${url}"
-                    alt="Carrusel ${i+1}"
-                >
+<img
+class="preview"
+src="${url}"
+alt="Carrusel ${i+1}"
+>
 
-                <button
-                    class="admin-action"
-                    style="margin-top:8px;"
-                    onclick="deleteCarousel(${i})">
+<button
+class="admin-action"
+style="margin-top:8px;"
+onclick="deleteCarousel(${i})">
 
-                    Eliminar foto
+Eliminar foto
 
-                </button>
+</button>
 
-            `;
+`;
 
-        }
+}
 
-    }
+}
 
 }
 
 
-/* CARRUSEL AUTOMÁTICO */
-
 function createDots(){
 
-    const dots =
-        document.getElementById("dots");
+const dots =
+document.getElementById(
+"dots"
+);
 
-    dots.innerHTML = "";
+dots.innerHTML = "";
 
-    for(let i=0;i<4;i++){
+for(let i=0;i<4;i++){
 
-        const dot =
-            document.createElement("button");
+const dot =
+document.createElement(
+"button"
+);
 
-        dot.className =
-            "dot";
+dot.className =
+"dot";
 
-        if(i===0)
-            dot.classList.add("active");
+if(i === 0)
+dot.classList.add(
+"active"
+);
 
-        dot.onclick =
-            ()=>showSlide(i);
+dot.onclick =
+()=>showSlide(i);
 
-        dots.appendChild(dot);
+dots.appendChild(
+dot
+);
 
-    }
+}
 
 }
 
 
 function showSlide(index){
 
-    currentSlide =
-        index;
-
-    document
-        .querySelectorAll(".slide")
-        .forEach(
-            slide=>slide.classList.remove("active")
-        );
-
-    document
-        .getElementById("slide"+index)
-        .classList.add("active");
-
-    document
-        .querySelectorAll(".dot")
-        .forEach(
-            dot=>dot.classList.remove("active")
-        );
-
-    const dots =
-        document.querySelectorAll(".dot");
-
-    if(dots[index])
-        dots[index].classList.add("active");
-
-}
-
-
-setInterval(()=>{
-
-    currentSlide =
-        (currentSlide+1)%4;
-
-    showSlide(currentSlide);
-
-},5000);
-
-
-/* NABORA AI */
-
-function sendMessage(){
-
-    const input =
-        document.getElementById("aiInput");
-
-    const text =
-        input.value.trim();
-
-    if(!text)return;
-
-    addMessage(
-        text,
-        "user"
-    );
-
-    input.value = "";
-
-    addMessage(
-        "✨ Estoy preparando tu look...",
-        "bot"
-    );
-
-    setTimeout(()=>{
-
-        const lower =
-            text.toLowerCase();
-
-        let recommendations = [];
-
-        if(
-            lower.includes("zapato") ||
-            lower.includes("bota")
-        ){
-
-            recommendations =
-                products.filter(
-                    p=>p.category==="zapatos"
-                );
-
-        }else if(
-            lower.includes("cartera") ||
-            lower.includes("bolso")
-        ){
-
-            recommendations =
-                products.filter(
-                    p=>p.category==="carteras"
-                );
-
-        }else if(
-            lower.includes("accesorio") ||
-            lower.includes("gafa") ||
-            lower.includes("bufanda")
-        ){
-
-            recommendations =
-                products.filter(
-                    p=>p.category==="accesorios"
-                );
-
-        }else if(
-            lower.includes("marrón") ||
-            lower.includes("marron") ||
-            lower.includes("ropa") ||
-            lower.includes("top")
-        ){
-
-            recommendations =
-                products.filter(
-                    p=>p.category==="ropa"
-                );
-
-        }else{
-
-            recommendations =
-                products.slice(0,3);
-
-        }
-
-        let response =
-            "✨ Te recomiendo: ";
-
-        recommendations.forEach(
-            (p,index)=>{
-
-                response +=
-                    `${p.name} ($${p.price})`;
-
-                if(
-                    index <
-                    recommendations.length-1
-                ){
-
-                    response += ", ";
-
-                }
-
-            }
-        );
-
-        response +=
-            ". Son opciones perfectas para crear un look NABORA de otoño. 🦋";
-
-        const messages =
-            document.getElementById("messages");
-
-        const lastBot =
-            messages.lastElementChild;
-
-        if(
-            lastBot &&
-            lastBot.classList.contains("bot")
-        ){
-
-            lastBot.textContent =
-                response;
-
-        }else{
-
-            addMessage(
-                response,
-                "bot"
-            );
-
-        }
-
-    },800);
-
-}
-
-
-function addMessage(text,type){
-
-    const messages =
-        document.getElementById("messages");
-
-    const message =
-        document.createElement("div");
-
-    message.className =
-        `message ${type}`;
-
-    message.textContent =
-        text;
-
-    messages.appendChild(message);
-
-    messages.scrollTop =
-        messages.scrollHeight;
-
-}
-
-
-/* CERRAR MODALES AL HACER CLICK FUERA */
-
-window.addEventListener(
-    "click",
-    function(event){
-
-        const cartModal =
-            document.getElementById("cartModal");
-
-        const adminModal =
-            document.getElementById("adminModal");
-
-        if(event.target === cartModal){
-
-            closeCart();
-
-        }
-
-        if(event.target === adminModal){
-
-            closeAdmin();
-
-        }
-
-    }
+currentSlide =
+index;
+
+document
+.querySelectorAll(
+".slide"
+)
+.forEach(
+slide=>
+slide.classList.remove(
+"active"
+)
+);
+
+document
+.getElementById(
+"slide"+index
+)
+.classList.add(
+"active"
 );
 
 
-/* INICIO */
+document
+.querySelectorAll(
+".dot"
+)
+.forEach(
+dot=>
+dot.classList.remove(
+"active"
+)
+);
+
+const dots =
+document.querySelectorAll(
+".dot"
+);
+
+if(dots[index])
+dots[index].classList.add(
+"active"
+);
+
+}
+
+
+setInterval(
+()=>{
+
+currentSlide =
+(currentSlide+1)%4;
+
+showSlide(
+currentSlide
+);
+
+},
+5000
+);
+
+
+function sendMessage(){
+
+const input =
+document.getElementById(
+"aiInput"
+);
+
+const text =
+input.value.trim();
+
+if(!text)return;
+
+addMessage(
+text,
+"user"
+);
+
+input.value = "";
+
+addMessage(
+"✨ Estoy preparando tu look...",
+"bot"
+);
+
+
+setTimeout(
+()=>{
+
+const lower =
+text.toLowerCase();
+
+let recommendations = [];
+
+
+if(
+lower.includes("zapato") ||
+lower.includes("bota")
+){
+
+recommendations =
+products.filter(
+p=>p.category === "zapatos"
+);
+
+}else if(
+lower.includes("cartera") ||
+lower.includes("bolso")
+){
+
+recommendations =
+products.filter(
+p=>p.category === "carteras"
+);
+
+}else if(
+lower.includes("accesorio") ||
+lower.includes("gafa") ||
+lower.includes("bufanda")
+){
+
+recommendations =
+products.filter(
+p=>p.category === "accesorios"
+);
+
+}else if(
+lower.includes("marrón") ||
+lower.includes("marron") ||
+lower.includes("ropa") ||
+lower.includes("top") ||
+lower.includes("falda")
+){
+
+recommendations =
+products.filter(
+p=>p.category === "ropa"
+);
+
+}else{
+
+recommendations =
+products.slice(0,3);
+
+}
+
+
+let response =
+"✨ Te recomiendo: ";
+
+
+recommendations.forEach(
+(p,index)=>{
+
+response +=
+`${p.name} ($${p.price})`;
+
+if(
+index <
+recommendations.length-1
+){
+
+response += ", ";
+
+}
+
+}
+);
+
+
+response +=
+". Son opciones perfectas para crear un look NABORA de otoño. 🦋";
+
+
+const messages =
+document.getElementById(
+"messages"
+);
+
+const lastBot =
+messages.lastElementChild;
+
+
+if(
+lastBot &&
+lastBot.classList.contains(
+"bot"
+)
+){
+
+lastBot.textContent =
+response;
+
+}else{
+
+addMessage(
+response,
+"bot"
+);
+
+}
+
+},
+800
+);
+
+}
+
+
+function addMessage(
+text,
+type
+){
+
+const messages =
+document.getElementById(
+"messages"
+);
+
+const message =
+document.createElement(
+"div"
+);
+
+message.className =
+`message ${type}`;
+
+message.textContent =
+text;
+
+messages.appendChild(
+message
+);
+
+messages.scrollTop =
+messages.scrollHeight;
+
+}
+
+
+window.addEventListener(
+"click",
+function(event){
+
+const cartModal =
+document.getElementById(
+"cartModal"
+);
+
+const adminModal =
+document.getElementById(
+"adminModal"
+);
+
+if(
+event.target === cartModal
+){
+
+closeCart();
+
+}
+
+if(
+event.target === adminModal
+){
+
+closeAdmin();
+
+}
+
+}
+);
+
 
 async function init(){
 
-    loadProducts();
+loadProducts();
 
-    createDots();
+createDots();
 
-    showSlide(0);
+showSlide(0);
 
-    try{
+try{
 
-        await openDatabase();
+await openDatabase();
 
-        await loadImages();
+await loadImages();
 
-    }catch(error){
+}catch(error){
 
-        console.error(error);
+console.error(error);
 
-        renderProducts();
+renderProducts();
 
-        renderAdminProducts();
+renderAdminProducts();
 
-    }
+}
 
-    updateCart();
+updateCart();
 
 }
 
